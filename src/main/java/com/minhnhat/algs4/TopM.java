@@ -17,7 +17,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code TopM} class provides a client that reads a sequence of

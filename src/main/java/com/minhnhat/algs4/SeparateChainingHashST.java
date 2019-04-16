@@ -8,7 +8,7 @@
  * 
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code SeparateChainingHashST} class represents a symbol table of generic

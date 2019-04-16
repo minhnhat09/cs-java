@@ -8,7 +8,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code AssignmentProblem} class represents a data type for computing

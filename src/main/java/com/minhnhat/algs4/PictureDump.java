@@ -14,7 +14,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 import java.awt.Color;
 

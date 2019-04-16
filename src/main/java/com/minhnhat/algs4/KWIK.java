@@ -35,7 +35,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code KWIK} class provides a {@link SuffixArray} client for computing

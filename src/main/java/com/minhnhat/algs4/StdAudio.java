@@ -13,7 +13,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 import javax.sound.sampled.Clip;
 

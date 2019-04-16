@@ -16,7 +16,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code DoublingRatio} class provides a client for measuring

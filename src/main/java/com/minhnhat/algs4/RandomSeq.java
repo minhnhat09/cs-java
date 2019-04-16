@@ -14,7 +14,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code RandomSeq} class is a client that prints out a pseudorandom

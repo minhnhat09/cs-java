@@ -21,7 +21,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code Heap} class provides a static methods for heapsorting

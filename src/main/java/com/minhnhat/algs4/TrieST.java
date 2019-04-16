@@ -18,7 +18,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code TrieST} class represents an symbol table of key-value

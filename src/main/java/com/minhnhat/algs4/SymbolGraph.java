@@ -41,7 +41,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code SymbolGraph} class represents an undirected graph, where the

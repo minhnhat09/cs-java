@@ -6,7 +6,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 import java.util.Comparator;
 import java.util.Iterator;

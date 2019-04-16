@@ -20,7 +20,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code BinaryDump} class provides a client for displaying the contents

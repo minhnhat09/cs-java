@@ -30,7 +30,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code DeDup} class provides a client for reading in a sequence of

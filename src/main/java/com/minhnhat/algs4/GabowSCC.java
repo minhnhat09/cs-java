@@ -21,7 +21,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 /**
  *  The {@code GabowSCC} class represents a data type for 
  *  determining the strong components in a digraph.

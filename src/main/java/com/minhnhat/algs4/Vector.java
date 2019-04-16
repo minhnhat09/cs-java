@@ -24,7 +24,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code Vector} class represents a <em>d</em>-dimensional Euclidean vector.

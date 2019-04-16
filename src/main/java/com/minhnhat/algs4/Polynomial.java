@@ -19,7 +19,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+package com.minhnhat.algs4;
 
 /**
  *  The {@code Polynomial} class represents a polynomial with integer
