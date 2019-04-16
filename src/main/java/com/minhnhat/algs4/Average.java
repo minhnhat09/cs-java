@@ -43,8 +43,8 @@ public class Average {
         double sum = 0.0;    // sum of input values
 
         // read data and compute statistics
-        while (!edu.princeton.cs.algs4.StdIn.isEmpty()) {
-            double value = edu.princeton.cs.algs4.StdIn.readDouble();
+        while (!StdIn.isEmpty()) {
+            double value = StdIn.readDouble();
             sum += value;
             count++;
         }
@@ -53,7 +53,7 @@ public class Average {
         double average = sum / count;
 
         // print results
-        edu.princeton.cs.algs4.StdOut.println("Average is " + average);
+        StdOut.println("Average is " + average);
     }
 }
 
