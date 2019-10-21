@@ -1,4 +1,4 @@
-package com.minhnhat.element;
+package com.minhnhat.element.strings;
 
 import java.util.ArrayList;
 import java.util.List;
