@@ -1,4 +1,4 @@
-package com.minhnhat.element;
+package com.minhnhat.element.sorting;
 
 import java.util.ArrayList;
 import java.util.Collections;

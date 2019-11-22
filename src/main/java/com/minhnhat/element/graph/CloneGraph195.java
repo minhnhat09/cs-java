@@ -1,4 +1,4 @@
-package com.minhnhat.element;
+package com.minhnhat.element.graph;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.minhnhat.element;
+package com.minhnhat.element.graph;
 
 import java.nio.charset.CharsetEncoder;
 import java.util.LinkedList;
