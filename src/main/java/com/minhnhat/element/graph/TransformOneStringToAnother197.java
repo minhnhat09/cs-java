@@ -24,7 +24,7 @@ public class TransformOneStringToAnother197 {
       }
       String str = f.candidateString;
       for (int i = 0; i < str.length(); i++) {
-        String strStart = i == 0 ? "" : str.substring(O, i);
+        String strStart = i == 0 ? "" : str.substring(0, i);
         String strEnd = i + 1 < str.length() ? str.substring(i + 1) : "";
         for (int j = 0; j < 26; j++) {
           String modStr = strStart + (char) ('a' + j) + strEnd;
