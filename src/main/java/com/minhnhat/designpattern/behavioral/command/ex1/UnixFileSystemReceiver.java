@@ -16,5 +16,4 @@ public class UnixFileSystemReceiver implements FileSystemReceiver {
   public void closeFile() {
     System.out.println("Closing file in unix OS");
   }
-
 }

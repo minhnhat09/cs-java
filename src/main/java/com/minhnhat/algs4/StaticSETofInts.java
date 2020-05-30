@@ -1,27 +1,24 @@
-/******************************************************************************
- *  Compilation:  javac StaticSetOfInts.java
- *  Execution:    none
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * StaticSetOfInts.java Execution: none Dependencies: StdOut.java
  *
- *  Data type to store a set of integers.
+ * <p>Data type to store a set of integers.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Arrays;
 
 /**
- * The {@code StaticSETofInts} class represents a set of integers.
- * It supports searching for a given integer is in the set. It accomplishes
- * this by keeping the set of integers in a sorted array and using
- * binary search to find the given integer.
- * <p>
- * The <em>rank</em> and <em>contains</em> operations take
- * logarithmic time in the worst case.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code StaticSETofInts} class represents a set of integers. It supports searching for a given
+ * integer is in the set. It accomplishes this by keeping the set of integers in a sorted array and
+ * using binary search to find the given integer.
+ *
+ * <p>The <em>rank</em> and <em>contains</em> operations take logarithmic time in the worst case.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section
+ * 1.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -39,8 +36,7 @@ public class StaticSETofInts {
 
     // defensive copy
     a = new int[keys.length];
-    for (int i = 0; i < keys.length; i++)
-      a[i] = keys[i];
+    for (int i = 0; i < keys.length; i++) a[i] = keys[i];
 
     // sort the integers
     Arrays.sort(a);
@@ -62,12 +58,12 @@ public class StaticSETofInts {
   }
 
   /**
-   * Returns either the index of the search key in the sorted array
-   * (if the key is in the set) or -1 (if the key is not in the set).
+   * Returns either the index of the search key in the sorted array (if the key is in the set) or -1
+   * (if the key is not in the set).
    *
    * @param key the search key
-   * @return the number of keys in this set less than the key (if the key is in the set)
-   * or -1 (if the key is not in the set).
+   * @return the number of keys in this set less than the key (if the key is in the set) or -1 (if
+   *     the key is not in the set).
    */
   public int rank(int key) {
     int lo = 0;
@@ -83,26 +79,24 @@ public class StaticSETofInts {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

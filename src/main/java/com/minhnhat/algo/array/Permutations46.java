@@ -19,23 +19,22 @@ public class Permutations46 {
       nextElements.remove(i);
       elements.remove(elements.size() - 1);
       dfs(result, temp, nextElements);
-      temp.remove(temp.size()-1);
+      temp.remove(temp.size() - 1);
     }
   }
 
   public static void main(String[] args) {
-    System.out.println(permute(new int[]{1,2,3}));
+    System.out.println(permute(new int[] {1, 2, 3}));
   }
 
   public static List<List<Integer>> permute(int[] nums) {
     List<List<Integer>> result = new ArrayList<>();
 
     List<Integer> intList = new ArrayList<>();
-    for (int i : nums)
-    {
+    for (int i : nums) {
       intList.add(i);
     }
     dfs(result, new ArrayList<>(), intList);
-    return  result;
+    return result;
   }
 }

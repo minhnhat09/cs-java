@@ -1,58 +1,48 @@
-/******************************************************************************
- *  Compilation:  javac GlobalMincut.java
- *  Execution:    java  GlobalMincut filename.txt
- *  Dependencies: EdgeWeightedGraph.java Edge.java UF.java 
- *                IndexMaxPQ.java FlowNetwork.java FlowEdge.java 
- *                FordFulkerson.java In.java StdOut.java
- *  Data files:   https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
- *                https://algs4.cs.princeton.edu/43mst/mediumEWG.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * GlobalMincut.java Execution: java GlobalMincut filename.txt Dependencies: EdgeWeightedGraph.java
+ * Edge.java UF.java IndexMaxPQ.java FlowNetwork.java FlowEdge.java FordFulkerson.java In.java
+ * StdOut.java Data files: https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
+ * https://algs4.cs.princeton.edu/43mst/mediumEWG.txt
  *
- *  Computes a minimum cut using Stoer-Wagner's algorithm.
+ * <p>Computes a minimum cut using Stoer-Wagner's algorithm.
  *
- *  % java GlobalMincut tinyEWG.txt 
- *    Min cut: 5 
- *    Min cut weight = 0.9500000000000001
+ * <p>% java GlobalMincut tinyEWG.txt Min cut: 5 Min cut weight = 0.9500000000000001
  *
- *  % java GlobalMincut mediumEWG.txt 
- *    Min cut: 25 60 63 96 199 237 
- *    Min cut weight = 0.14021
+ * <p>% java GlobalMincut mediumEWG.txt Min cut: 25 60 63 96 199 237 Min cut weight = 0.14021
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code GlobalMincut} class represents a data type for computing a
- * <em>global minimum cut</em> in an edge-weighted graph where the edge
- * weights are nonnegative. A <em>cut</em> is a partition of the set
- * of vertices of a graph into two nonempty subsets. An edge that has one
- * endpoint in each subset of a cut is a <em>crossing edge</em>. The weight
- * of a cut is the sum of the weights of its crossing edges.
- * A <em>global minimum cut</em> is a cut for which the weight is not
- * larger than the weight of any other cut.
- * <p>
- * The {@code weight()} method returns the weight of the minimum cut and the
- * {@code cut(int v)} method determines if a vertex {@code v} is on the first or
- * on the second subset of vertices of the minimum cut.
- * <p>
- * This is an implementation of <em>Stoer–Wagner's algorithm</em> using an index
- * priority queue and the union-find data type in order to simplify dealing with
- * contracting edges. Precisely, the index priority queue is an instance of
- * {@link IndexMaxPQ} which is based on a binary heap. As a consequence, the
- * constructor takes <em>O</em>(<em>V</em> (<em>V</em> + <em> E</em> ) log <em>
- * V </em>) time and <em>O</em>(<em>V</em>) extra space (not including the
- * graph), where <em>V</em> is the number of vertices and <em>E</em> is the
- * number of edges. However, this time can be reduced to <em>O</em>(<em>V E</em>
- * + <em> V<sup>2</sup></em> log <em>V</em>) by using an index priority queue
- * implemented using Fibonacci heaps.
- * <p>
- * Afterwards, the {@code weight()} and {@code cut(int v)} methods take constant
- * time.
- * <p>
- * For additional documentation, see
+ * The {@code GlobalMincut} class represents a data type for computing a <em>global minimum cut</em>
+ * in an edge-weighted graph where the edge weights are nonnegative. A <em>cut</em> is a partition
+ * of the set of vertices of a graph into two nonempty subsets. An edge that has one endpoint in
+ * each subset of a cut is a <em>crossing edge</em>. The weight of a cut is the sum of the weights
+ * of its crossing edges. A <em>global minimum cut</em> is a cut for which the weight is not larger
+ * than the weight of any other cut.
+ *
+ * <p>The {@code weight()} method returns the weight of the minimum cut and the {@code cut(int v)}
+ * method determines if a vertex {@code v} is on the first or on the second subset of vertices of
+ * the minimum cut.
+ *
+ * <p>This is an implementation of <em>Stoer–Wagner's algorithm</em> using an index priority queue
+ * and the union-find data type in order to simplify dealing with contracting edges. Precisely, the
+ * index priority queue is an instance of {@link IndexMaxPQ} which is based on a binary heap. As a
+ * consequence, the constructor takes <em>O</em>(<em>V</em> (<em>V</em> + <em> E</em> ) log <em> V
+ * </em>) time and <em>O</em>(<em>V</em>) extra space (not including the graph), where <em>V</em> is
+ * the number of vertices and <em>E</em> is the number of edges. However, this time can be reduced
+ * to <em>O</em>(<em>V E</em> + <em> V<sup>2</sup></em> log <em>V</em>) by using an index priority
+ * queue implemented using Fibonacci heaps.
+ *
+ * <p>Afterwards, the {@code weight()} and {@code cut(int v)} methods take constant time.
+ *
+ * <p>For additional documentation, see
+ *
  * <ul>
- * <li>M. Stoer and F. Wagner (1997). A simple min-cut algorithm. <em>Journal of
- * the ACM </em>, 44(4):585-591.
+ *   <li>M. Stoer and F. Wagner (1997). A simple min-cut algorithm. <em>Journal of the ACM </em>,
+ *       44(4):585-591.
  * </ul>
  *
  * @author Marcelo Silva
@@ -71,15 +61,14 @@ public class GlobalMincut {
   private int V;
 
   /**
-   * This helper class represents the <em>cut-of-the-phase</em>. The
-   * cut-of-the-phase is a <em>minimum s-t-cut</em> in the current graph,
-   * where {@code s} and {@code t} are the two vertices added last in the
-   * phase.
+   * This helper class represents the <em>cut-of-the-phase</em>. The cut-of-the-phase is a
+   * <em>minimum s-t-cut</em> in the current graph, where {@code s} and {@code t} are the two
+   * vertices added last in the phase.
    */
   private class CutPhase {
     private double weight; // the weight of the minimum s-t cut
-    private int s;         // the vertex s
-    private int t;         // the vertex t
+    private int s; // the vertex s
+    private int t; // the vertex t
 
     public CutPhase(double weight, int s, int t) {
       this.weight = weight;
@@ -92,8 +81,8 @@ public class GlobalMincut {
    * Computes a minimum cut of an edge-weighted graph.
    *
    * @param G the edge-weighted graph
-   * @throws IllegalArgumentException if the number of vertices of {@code G}
-   *                                  is less than {@code 2} or if anny edge weight is negative
+   * @throws IllegalArgumentException if the number of vertices of {@code G} is less than {@code 2}
+   *     or if anny edge weight is negative
    */
   public GlobalMincut(EdgeWeightedGraph G) {
     V = G.V();
@@ -106,8 +95,8 @@ public class GlobalMincut {
    * Validates the edge-weighted graph.
    *
    * @param G the edge-weighted graph
-   * @throws IllegalArgumentException if the number of vertices of {@code G}
-   *                                  is less than {@code 2} or if any edge weight is negative
+   * @throws IllegalArgumentException if the number of vertices of {@code G} is less than {@code 2}
+   *     or if any edge weight is negative
    */
   private void validate(EdgeWeightedGraph G) {
     if (G.V() < 2) throw new IllegalArgumentException("number of vertices of G is less than 2");
@@ -126,16 +115,14 @@ public class GlobalMincut {
   }
 
   /**
-   * Returns {@code true} if the vertex {@code v} is on the first subset of
-   * vertices of the minimum cut; or {@code false} if the vertex {@code v} is
-   * on the second subset.
+   * Returns {@code true} if the vertex {@code v} is on the first subset of vertices of the minimum
+   * cut; or {@code false} if the vertex {@code v} is on the second subset.
    *
    * @param v the vertex to check
-   * @return {@code true} if the vertex {@code v} is on the first subset of
-   * vertices of the minimum cut; or {@code false} if the vertex
-   * {@code v} is on the second subset.
-   * @throws IllegalArgumentException unless vertex {@code v} is between
-   *                                  {@code 0} and {@code (G.V() - 1)}
+   * @return {@code true} if the vertex {@code v} is on the first subset of vertices of the minimum
+   *     cut; or {@code false} if the vertex {@code v} is on the second subset.
+   * @throws IllegalArgumentException unless vertex {@code v} is between {@code 0} and {@code (G.V()
+   *     - 1)}
    */
   public boolean cut(int v) {
     validateVertex(v);
@@ -143,12 +130,11 @@ public class GlobalMincut {
   }
 
   /**
-   * Makes a cut for the current edge-weighted graph by partitioning its set
-   * of vertices into two nonempty subsets. The vertices connected to the
-   * vertex {@code t} belong to the first subset. Other vertices not connected
-   * to {@code t} belong to the second subset.
+   * Makes a cut for the current edge-weighted graph by partitioning its set of vertices into two
+   * nonempty subsets. The vertices connected to the vertex {@code t} belong to the first subset.
+   * Other vertices not connected to {@code t} belong to the second subset.
    *
-   * @param t  the vertex {@code t}
+   * @param t the vertex {@code t}
    * @param uf the union-find data type
    */
   private void makeCut(int t, UF uf) {
@@ -158,9 +144,8 @@ public class GlobalMincut {
   }
 
   /**
-   * Computes a minimum cut of the edge-weighted graph. Precisely, it computes
-   * the lightest of the cuts-of-the-phase which yields the desired minimum
-   * cut.
+   * Computes a minimum cut of the edge-weighted graph. Precisely, it computes the lightest of the
+   * cuts-of-the-phase which yields the desired minimum cut.
    *
    * @param G the edge-weighted graph
    * @param a the starting vertex
@@ -183,16 +168,15 @@ public class GlobalMincut {
   }
 
   /**
-   * Returns the cut-of-the-phase. The cut-of-the-phase is a minimum s-t-cut
-   * in the current graph, where {@code s} and {@code t} are the two vertices
-   * added last in the phase. This algorithm is known in the literature as
-   * <em>maximum adjacency search</em> or <em>maximum cardinality search</em>.
+   * Returns the cut-of-the-phase. The cut-of-the-phase is a minimum s-t-cut in the current graph,
+   * where {@code s} and {@code t} are the two vertices added last in the phase. This algorithm is
+   * known in the literature as <em>maximum adjacency search</em> or <em>maximum cardinality
+   * search</em>.
    *
-   * @param G      the edge-weighted graph
-   * @param marked the array of contracted vertices, where {@code marked[v]}
-   *               is {@code true} if the vertex {@code v} was already
-   *               contracted; or {@code false} otherwise
-   * @param cp     the previous cut-of-the-phase
+   * @param G the edge-weighted graph
+   * @param marked the array of contracted vertices, where {@code marked[v]} is {@code true} if the
+   *     vertex {@code v} was already contracted; or {@code false} otherwise
+   * @param cp the previous cut-of-the-phase
    * @return the cut-of-the-phase
    */
   private CutPhase minCutPhase(EdgeWeightedGraph G, boolean[] marked, CutPhase cp) {
@@ -218,14 +202,14 @@ public class GlobalMincut {
   }
 
   /**
-   * Contracts the edges incidents on the vertices {@code s} and {@code t} of
-   * the given edge-weighted graph.
+   * Contracts the edges incidents on the vertices {@code s} and {@code t} of the given
+   * edge-weighted graph.
    *
    * @param G the edge-weighted graph
    * @param s the vertex {@code s}
    * @param t the vertex {@code t}
-   * @return a new edge-weighted graph for which the edges incidents on the
-   * vertices {@code s} and {@code t} were contracted
+   * @return a new edge-weighted graph for which the edges incidents on the vertices {@code s} and
+   *     {@code t} were contracted
    */
   private EdgeWeightedGraph contractEdge(EdgeWeightedGraph G, int s, int t) {
     EdgeWeightedGraph H = new EdgeWeightedGraph(G.V());
@@ -278,7 +262,6 @@ public class GlobalMincut {
       throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
   }
 
-
   /**
    * Unit tests the {@code GlobalMincut} data type.
    *
@@ -297,26 +280,24 @@ public class GlobalMincut {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

@@ -11,8 +11,7 @@ public class TreeNode {
     this.val = val;
   }
 
-  public TreeNode() {
-  }
+  public TreeNode() {}
 
   public static void dfs(TreeNode treeNode) {
     Stack<TreeNode> stackTreeNode = new Stack<>();
@@ -120,8 +119,6 @@ public class TreeNode {
     return l;
   }
 
-
-
   public static void main(String[] args) {
     TreeNode node = new TreeNode(5);
     node.insertBinary(4);
@@ -178,6 +175,4 @@ public class TreeNode {
   public void setVal(int val) {
     this.val = val;
   }
-
-
 }

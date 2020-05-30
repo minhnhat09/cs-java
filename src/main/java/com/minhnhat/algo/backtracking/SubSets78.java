@@ -9,7 +9,7 @@ public class SubSets78 {
   public static List<List<Integer>> powerSets = new ArrayList<>();
   public static List<Integer> subSets = new ArrayList<>();
 
-  public static  void backtrack(List<Integer> nums, int start) {
+  public static void backtrack(List<Integer> nums, int start) {
     powerSets.add(new ArrayList<>(subSets));
     for (int i = start; i < nums.size(); i++) {
       subSets.add(nums.get(i));
@@ -18,10 +18,9 @@ public class SubSets78 {
     }
   }
 
-
   public static List<List<Integer>> subsets(int[] nums) {
     List<Integer> integers = Arrays.stream(nums).boxed().collect(Collectors.toList());
-    backtrack(integers,0);
+    backtrack(integers, 0);
     return powerSets;
   }
 

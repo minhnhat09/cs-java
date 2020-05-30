@@ -1,39 +1,32 @@
-/******************************************************************************
- *  Compilation:  javac Counter.java
- *  Execution:    java Counter n trials
- *  Dependencies: StdRandom.java StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * Counter.java Execution: java Counter n trials Dependencies: StdRandom.java StdOut.java
  *
- *  A mutable data type for an integer counter.
+ * <p>A mutable data type for an integer counter.
  *
- *  The test clients create n counters and performs trials increment
- *  operations on random counters.
+ * <p>The test clients create n counters and performs trials increment operations on random
+ * counters.
  *
- * java Counter 6 600000
- *  100140 counter0
- *  100273 counter1
- *  99848 counter2
- *  100129 counter3
- *  99973 counter4
- *  99637 counter5
+ * <p>java Counter 6 600000 100140 counter0 100273 counter1 99848 counter2 100129 counter3 99973
+ * counter4 99637 counter5
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
  * The {@code Counter} class is a mutable data type to encapsulate a counter.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section
+ * 1.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class Counter implements Comparable<Counter> {
 
-  private final String name;     // counter name
-  private int count = 0;         // current value
+  private final String name; // counter name
+  private int count = 0; // current value
 
   /**
    * Initializes a new counter starting at 0, with the given id.
@@ -44,9 +37,7 @@ public class Counter implements Comparable<Counter> {
     name = id;
   }
 
-  /**
-   * Increments the counter by 1.
-   */
+  /** Increments the counter by 1. */
   public void increment() {
     count++;
   }
@@ -73,12 +64,9 @@ public class Counter implements Comparable<Counter> {
    * Compares this counter to the specified counter.
    *
    * @param that the other counter
-   * @return {@code 0} if the value of this counter equals
-   * the value of that counter; a negative integer if
-   * the value of this counter is less than the value of
-   * that counter; and a positive integer if the value
-   * of this counter is greater than the value of that
-   * counter
+   * @return {@code 0} if the value of this counter equals the value of that counter; a negative
+   *     integer if the value of this counter is less than the value of that counter; and a positive
+   *     integer if the value of this counter is greater than the value of that counter
    */
   @Override
   public int compareTo(Counter that) {
@@ -87,10 +75,9 @@ public class Counter implements Comparable<Counter> {
     else return 0;
   }
 
-
   /**
-   * Reads two command-line integers n and trials; creates n counters;
-   * increments trials counters at random; and prints results.
+   * Reads two command-line integers n and trials; creates n counters; increments trials counters at
+   * random; and prints results.
    *
    * @param args the command-line arguments
    */
@@ -116,26 +103,24 @@ public class Counter implements Comparable<Counter> {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

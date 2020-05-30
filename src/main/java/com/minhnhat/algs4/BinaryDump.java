@@ -1,39 +1,31 @@
-/******************************************************************************
- *  Compilation:  javac BinaryDump.java
- *  Execution:    java BinaryDump n < file
- *  Dependencies: BinaryStdIn.java
- *  Data file:    https://introcs.cs.princeton.edu/stdlib/abra.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * BinaryDump.java Execution: java BinaryDump n < file Dependencies: BinaryStdIn.java Data file:
+ * https://introcs.cs.princeton.edu/stdlib/abra.txt
  *
- *  Reads in a binary file and writes out the bits, n per line.
+ * <p>Reads in a binary file and writes out the bits, n per line.
  *
- *  % more abra.txt 
- *  ABRACADABRA!
+ * <p>% more abra.txt ABRACADABRA!
  *
- *  % java BinaryDump 16 < abra.txt
- *  0100000101000010
- *  0101001001000001
- *  0100001101000001
- *  0100010001000001
- *  0100001001010010
- *  0100000100100001
- *  96 bits
+ * <p>% java BinaryDump 16 < abra.txt 0100000101000010 0101001001000001 0100001101000001
+ * 0100010001000001 0100001001010010 0100000100100001 96 bits
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code BinaryDump} class provides a client for displaying the contents
- * of a binary file in binary.
- * <p>
- * For more full-featured versions, see the Unix utilities
- * {@code od} (octal dump) and {@code hexdump} (hexadecimal dump).
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/55compression">Section 5.5</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- * <p>
- * See also {@link HexDump} and {@link PictureDump}.
+ * The {@code BinaryDump} class provides a client for displaying the contents of a binary file in
+ * binary.
+ *
+ * <p>For more full-featured versions, see the Unix utilities {@code od} (octal dump) and {@code
+ * hexdump} (hexadecimal dump).
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/55compression">Section 5.5</a> of <i>Algorithms, 4th
+ * Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ * <p>See also {@link HexDump} and {@link PictureDump}.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -41,15 +33,12 @@ package com.minhnhat.algs4;
 public class BinaryDump {
 
   // Do not instantiate.
-  private BinaryDump() {
-  }
+  private BinaryDump() {}
 
   /**
-   * Reads in a sequence of bytes from standard input and writes
-   * them to standard output in binary, k bits per line,
-   * where k is given as a command-line integer (defaults
-   * to 16 if no integer is specified); also writes the number
-   * of bits.
+   * Reads in a sequence of bytes from standard input and writes them to standard output in binary,
+   * k bits per line, where k is given as a command-line integer (defaults to 16 if no integer is
+   * specified); also writes the number of bits.
    *
    * @param args the command-line arguments
    */
@@ -73,26 +62,24 @@ public class BinaryDump {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

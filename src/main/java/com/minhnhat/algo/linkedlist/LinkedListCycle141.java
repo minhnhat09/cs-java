@@ -10,16 +10,13 @@ public class LinkedListCycle141 {
         fast = fast.next.next;
         System.out.println("slow: " + slow.val);
         System.out.println("fast: " + fast.val);
-        if(slow == fast){
+        if (slow == fast) {
           return true;
         }
-
       }
     }
     return false;
   }
-
-
 
   public static void main(String[] args) {
     ListNode n = new ListNode(1);
@@ -30,6 +27,3 @@ public class LinkedListCycle141 {
     hasCycle(n);
   }
 }
-
-
-

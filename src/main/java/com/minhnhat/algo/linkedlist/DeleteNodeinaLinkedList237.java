@@ -2,6 +2,7 @@ package com.minhnhat.algo.linkedlist;
 
 public class DeleteNodeinaLinkedList237 {
   public ListNode head;
+
   public void deleteNode(ListNode node) {
     System.out.println(this.head.val);
     if (this.head == null || this.head.next == null) {
@@ -21,11 +22,5 @@ public class DeleteNodeinaLinkedList237 {
     this.head = head;
   }
 
-  public static void main(String[] args) {
-
-  }
-
-
-
-
+  public static void main(String[] args) {}
 }

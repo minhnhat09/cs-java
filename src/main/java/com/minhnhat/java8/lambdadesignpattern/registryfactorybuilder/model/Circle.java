@@ -15,8 +15,6 @@ public class Circle {
 
   @Override
   public String toString() {
-    return "Circle{" +
-            "color=" + color +
-            '}';
+    return "Circle{" + "color=" + color + '}';
   }
 }

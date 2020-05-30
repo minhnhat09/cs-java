@@ -1,36 +1,31 @@
-/******************************************************************************
- *  Compilation:  javac EdgeWeightedDigraph.java
- *  Execution:    java EdgeWeightedDigraph digraph.txt
- *  Dependencies: Bag.java DirectedEdge.java
- *  Data files:   https://algs4.cs.princeton.edu/44st/tinyEWD.txt
- *                https://algs4.cs.princeton.edu/44st/mediumEWD.txt
- *                https://algs4.cs.princeton.edu/44st/largeEWD.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * EdgeWeightedDigraph.java Execution: java EdgeWeightedDigraph digraph.txt Dependencies: Bag.java
+ * DirectedEdge.java Data files: https://algs4.cs.princeton.edu/44st/tinyEWD.txt
+ * https://algs4.cs.princeton.edu/44st/mediumEWD.txt
+ * https://algs4.cs.princeton.edu/44st/largeEWD.txt
  *
- *  An edge-weighted digraph, implemented using adjacency lists.
+ * <p>An edge-weighted digraph, implemented using adjacency lists.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code EdgeWeightedDigraph} class represents a edge-weighted
- * digraph of vertices named 0 through <em>V</em> - 1, where each
- * directed edge is of type {@link DirectedEdge} and has a real-valued weight.
- * It supports the following two primary operations: add a directed edge
- * to the digraph and iterate over all of edges incident from a given vertex.
- * It also provides
- * methods for returning the number of vertices <em>V</em> and the number
- * of edges <em>E</em>. Parallel edges and self-loops are permitted.
- * <p>
- * This implementation uses an adjacency-lists representation, which
- * is a vertex-indexed array of {@link Bag} objects.
- * All operations take constant time (in the worst case) except
- * iterating over the edges incident from a given vertex, which takes
- * time proportional to the number of such edges.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code EdgeWeightedDigraph} class represents a edge-weighted digraph of vertices named 0
+ * through <em>V</em> - 1, where each directed edge is of type {@link DirectedEdge} and has a
+ * real-valued weight. It supports the following two primary operations: add a directed edge to the
+ * digraph and iterate over all of edges incident from a given vertex. It also provides methods for
+ * returning the number of vertices <em>V</em> and the number of edges <em>E</em>. Parallel edges
+ * and self-loops are permitted.
+ *
+ * <p>This implementation uses an adjacency-lists representation, which is a vertex-indexed array of
+ * {@link Bag} objects. All operations take constant time (in the worst case) except iterating over
+ * the edges incident from a given vertex, which takes time proportional to the number of such
+ * edges.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/44sp">Section
+ * 4.4</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -38,10 +33,10 @@ package com.minhnhat.algs4;
 public class EdgeWeightedDigraph {
   private static final String NEWLINE = System.getProperty("line.separator");
 
-  private final int V;                // number of vertices in this digraph
-  private int E;                      // number of edges in this digraph
-  private Bag<DirectedEdge>[] adj;    // adj[v] = adjacency list for vertex v
-  private int[] indegree;             // indegree[v] = indegree of vertex v
+  private final int V; // number of vertices in this digraph
+  private int E; // number of edges in this digraph
+  private Bag<DirectedEdge>[] adj; // adj[v] = adjacency list for vertex v
+  private int[] indegree; // indegree[v] = indegree of vertex v
 
   /**
    * Initializes an empty edge-weighted digraph with {@code V} vertices and 0 edges.
@@ -50,13 +45,13 @@ public class EdgeWeightedDigraph {
    * @throws IllegalArgumentException if {@code V < 0}
    */
   public EdgeWeightedDigraph(int V) {
-    if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+    if (V < 0)
+      throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
     this.V = V;
     this.E = 0;
     this.indegree = new int[V];
     adj = (Bag<DirectedEdge>[]) new Bag[V];
-    for (int v = 0; v < V; v++)
-      adj[v] = new Bag<DirectedEdge>();
+    for (int v = 0; v < V; v++) adj[v] = new Bag<DirectedEdge>();
   }
 
   /**
@@ -69,7 +64,8 @@ public class EdgeWeightedDigraph {
    */
   public EdgeWeightedDigraph(int V, int E) {
     this(V);
-    if (E < 0) throw new IllegalArgumentException("Number of edges in a Digraph must be nonnegative");
+    if (E < 0)
+      throw new IllegalArgumentException("Number of edges in a Digraph must be nonnegative");
     for (int i = 0; i < E; i++) {
       int v = StdRandom.uniform(V);
       int w = StdRandom.uniform(V);
@@ -80,11 +76,9 @@ public class EdgeWeightedDigraph {
   }
 
   /**
-   * Initializes an edge-weighted digraph from the specified input stream.
-   * The format is the number of vertices <em>V</em>,
-   * followed by the number of edges <em>E</em>,
-   * followed by <em>E</em> pairs of vertices and edge weights,
-   * with each entry separated by whitespace.
+   * Initializes an edge-weighted digraph from the specified input stream. The format is the number
+   * of vertices <em>V</em>, followed by the number of edges <em>E</em>, followed by <em>E</em>
+   * pairs of vertices and edge weights, with each entry separated by whitespace.
    *
    * @param in the input stream
    * @throws IllegalArgumentException if the endpoints of any edge are not in prescribed range
@@ -112,8 +106,7 @@ public class EdgeWeightedDigraph {
   public EdgeWeightedDigraph(EdgeWeightedDigraph G) {
     this(G.V());
     this.E = G.E();
-    for (int v = 0; v < G.V(); v++)
-      this.indegree[v] = G.indegree(v);
+    for (int v = 0; v < G.V(); v++) this.indegree[v] = G.indegree(v);
     for (int v = 0; v < G.V(); v++) {
       // reverse so that adjacency list is in same order as original
       Stack<DirectedEdge> reverse = new Stack<DirectedEdge>();
@@ -154,8 +147,7 @@ public class EdgeWeightedDigraph {
    * Adds the directed edge {@code e} to this edge-weighted digraph.
    *
    * @param e the edge
-   * @throws IllegalArgumentException unless endpoints of edge are between {@code 0}
-   *                                  and {@code V-1}
+   * @throws IllegalArgumentException unless endpoints of edge are between {@code 0} and {@code V-1}
    */
   public void addEdge(DirectedEdge e) {
     int v = e.from();
@@ -166,7 +158,6 @@ public class EdgeWeightedDigraph {
     indegree[w]++;
     E++;
   }
-
 
   /**
    * Returns the directed edges incident from vertex {@code v}.
@@ -181,8 +172,8 @@ public class EdgeWeightedDigraph {
   }
 
   /**
-   * Returns the number of directed edges incident from vertex {@code v}.
-   * This is known as the <em>outdegree</em> of vertex {@code v}.
+   * Returns the number of directed edges incident from vertex {@code v}. This is known as the
+   * <em>outdegree</em> of vertex {@code v}.
    *
    * @param v the vertex
    * @return the outdegree of vertex {@code v}
@@ -194,8 +185,8 @@ public class EdgeWeightedDigraph {
   }
 
   /**
-   * Returns the number of directed edges incident to vertex {@code v}.
-   * This is known as the <em>indegree</em> of vertex {@code v}.
+   * Returns the number of directed edges incident to vertex {@code v}. This is known as the
+   * <em>indegree</em> of vertex {@code v}.
    *
    * @param v the vertex
    * @return the indegree of vertex {@code v}
@@ -207,9 +198,8 @@ public class EdgeWeightedDigraph {
   }
 
   /**
-   * Returns all directed edges in this edge-weighted digraph.
-   * To iterate over the edges in this edge-weighted digraph, use foreach notation:
-   * {@code for (DirectedEdge e : G.edges())}.
+   * Returns all directed edges in this edge-weighted digraph. To iterate over the edges in this
+   * edge-weighted digraph, use foreach notation: {@code for (DirectedEdge e : G.edges())}.
    *
    * @return all edges in this edge-weighted digraph, as an iterable
    */
@@ -226,8 +216,8 @@ public class EdgeWeightedDigraph {
   /**
    * Returns a string representation of this edge-weighted digraph.
    *
-   * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
-   * followed by the <em>V</em> adjacency lists of edges
+   * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>, followed
+   *     by the <em>V</em> adjacency lists of edges
    */
   public String toString() {
     StringBuilder s = new StringBuilder();
@@ -252,29 +242,26 @@ public class EdgeWeightedDigraph {
     EdgeWeightedDigraph G = new EdgeWeightedDigraph(in);
     StdOut.println(G);
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

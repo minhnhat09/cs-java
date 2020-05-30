@@ -1,47 +1,40 @@
-/******************************************************************************
- *  Compilation:  javac MergeX.java
- *  Execution:    java MergeX < input.txt
- *  Dependencies: StdOut.java StdIn.java
- *  Data files:   https://algs4.cs.princeton.edu/22mergesort/tiny.txt
- *                https://algs4.cs.princeton.edu/22mergesort/words3.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * MergeX.java Execution: java MergeX < input.txt Dependencies: StdOut.java StdIn.java Data files:
+ * https://algs4.cs.princeton.edu/22mergesort/tiny.txt
+ * https://algs4.cs.princeton.edu/22mergesort/words3.txt
  *
- *  Sorts a sequence of strings from standard input using an
- *  optimized version of mergesort.
+ * <p>Sorts a sequence of strings from standard input using an optimized version of mergesort.
  *
- *  % more tiny.txt
- *  S O R T E X A M P L E
+ * <p>% more tiny.txt S O R T E X A M P L E
  *
- *  % java MergeX < tiny.txt
- *  A E E L M O P R S T X                 [ one string per line ]
+ * <p>% java MergeX < tiny.txt A E E L M O P R S T X [ one string per line ]
  *
- *  % more words3.txt
- *  bed bug dad yes zoo ... all bad yet
+ * <p>% more words3.txt bed bug dad yes zoo ... all bad yet
  *
- *  % java MergeX < words3.txt
- *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
+ * <p>% java MergeX < words3.txt all bad bed bug dad ... yes yet zoo [ one string per line ]
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Comparator;
 
 /**
- * The {@code MergeX} class provides static methods for sorting an
- * array using an optimized version of mergesort.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/22mergesort">Section 2.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code MergeX} class provides static methods for sorting an array using an optimized version
+ * of mergesort.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/22mergesort">Section
+ * 2.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class MergeX {
-  private static final int CUTOFF = 7;  // cutoff to insertion sort
+  private static final int CUTOFF = 7; // cutoff to insertion sort
 
   // This class should not be instantiated.
-  private MergeX() {
-  }
+  private MergeX() {}
 
   private static void merge(Comparable[] src, Comparable[] dst, int lo, int mid, int hi) {
 
@@ -53,7 +46,7 @@ public class MergeX {
     for (int k = lo; k <= hi; k++) {
       if (i > mid) dst[k] = src[j++];
       else if (j > hi) dst[k] = src[i++];
-      else if (less(src[j], src[i])) dst[k] = src[j++];   // to ensure stability
+      else if (less(src[j], src[i])) dst[k] = src[j++]; // to ensure stability
       else dst[k] = src[i++];
     }
 
@@ -99,14 +92,13 @@ public class MergeX {
   // sort from a[lo] to a[hi] using insertion sort
   private static void insertionSort(Comparable[] a, int lo, int hi) {
     for (int i = lo; i <= hi; i++)
-      for (int j = i; j > lo && less(a[j], a[j - 1]); j--)
-        exch(a, j, j - 1);
+      for (int j = i; j > lo && less(a[j], a[j - 1]); j--) exch(a, j, j - 1);
   }
 
-
-  /*******************************************************************
-   *  Utility methods.
-   *******************************************************************/
+  /**
+   * ***************************************************************** Utility methods.
+   * *****************************************************************
+   */
 
   // exchange a[i] and a[j]
   private static void exch(Object[] a, int i, int j) {
@@ -125,15 +117,15 @@ public class MergeX {
     return comparator.compare(a, b) < 0;
   }
 
-
-  /*******************************************************************
-   *  Version that takes Comparator as argument.
-   *******************************************************************/
+  /**
+   * ***************************************************************** Version that takes Comparator
+   * as argument. *****************************************************************
+   */
 
   /**
    * Rearranges the array in ascending order, using the provided order.
    *
-   * @param a          the array to be sorted
+   * @param a the array to be sorted
    * @param comparator the comparator that defines the total order
    */
   public static void sort(Object[] a, Comparator comparator) {
@@ -142,7 +134,8 @@ public class MergeX {
     assert isSorted(a, comparator);
   }
 
-  private static void merge(Object[] src, Object[] dst, int lo, int mid, int hi, Comparator comparator) {
+  private static void merge(
+      Object[] src, Object[] dst, int lo, int mid, int hi, Comparator comparator) {
 
     // precondition: src[lo .. mid] and src[mid+1 .. hi] are sorted subarrays
     assert isSorted(src, lo, mid, comparator);
@@ -159,7 +152,6 @@ public class MergeX {
     // postcondition: dst[lo .. hi] is sorted subarray
     assert isSorted(dst, lo, hi, comparator);
   }
-
 
   private static void sort(Object[] src, Object[] dst, int lo, int hi, Comparator comparator) {
     // if (hi <= lo) return;
@@ -183,21 +175,20 @@ public class MergeX {
   // sort from a[lo] to a[hi] using insertion sort
   private static void insertionSort(Object[] a, int lo, int hi, Comparator comparator) {
     for (int i = lo; i <= hi; i++)
-      for (int j = i; j > lo && less(a[j], a[j - 1], comparator); j--)
-        exch(a, j, j - 1);
+      for (int j = i; j > lo && less(a[j], a[j - 1], comparator); j--) exch(a, j, j - 1);
   }
 
-
-  /***************************************************************************
-   *  Check if array is sorted - useful for debugging.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Check if array is
+   * sorted - useful for debugging.
+   * *************************************************************************
+   */
   private static boolean isSorted(Comparable[] a) {
     return isSorted(a, 0, a.length - 1);
   }
 
   private static boolean isSorted(Comparable[] a, int lo, int hi) {
-    for (int i = lo + 1; i <= hi; i++)
-      if (less(a[i], a[i - 1])) return false;
+    for (int i = lo + 1; i <= hi; i++) if (less(a[i], a[i - 1])) return false;
     return true;
   }
 
@@ -206,8 +197,7 @@ public class MergeX {
   }
 
   private static boolean isSorted(Object[] a, int lo, int hi, Comparator comparator) {
-    for (int i = lo + 1; i <= hi; i++)
-      if (less(a[i], a[i - 1], comparator)) return false;
+    for (int i = lo + 1; i <= hi; i++) if (less(a[i], a[i - 1], comparator)) return false;
     return true;
   }
 
@@ -219,9 +209,8 @@ public class MergeX {
   }
 
   /**
-   * Reads in a sequence of strings from standard input; mergesorts them
-   * (using an optimized version of mergesort);
-   * and prints them to standard output in ascending order.
+   * Reads in a sequence of strings from standard input; mergesorts them (using an optimized version
+   * of mergesort); and prints them to standard output in ascending order.
    *
    * @param args the command-line arguments
    */
@@ -232,26 +221,24 @@ public class MergeX {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

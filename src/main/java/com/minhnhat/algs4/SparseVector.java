@@ -1,37 +1,34 @@
-/******************************************************************************
- *  Compilation:  javac SparseVector.java
- *  Execution:    java SparseVector
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * SparseVector.java Execution: java SparseVector Dependencies: StdOut.java
  *
- *  A sparse vector, implementing using a symbol table.
+ * <p>A sparse vector, implementing using a symbol table.
  *
- *  [Not clear we need the instance variable N except for error checking.]
+ * <p>[Not clear we need the instance variable N except for error checking.]
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code SparseVector} class represents a <em>d</em>-dimensional mathematical vector.
- * Vectors are mutable: their values can be changed after they are created.
- * It includes methods for addition, subtraction,
- * dot product, scalar product, unit vector, and Euclidean norm.
- * <p>
- * The implementation is a symbol table of indices and values for which the vector
- * coordinates are nonzero. This makes it efficient when most of the vector coordindates
- * are zero.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- * See also {@link Vector} for an immutable (dense) vector data type.
+ * The {@code SparseVector} class represents a <em>d</em>-dimensional mathematical vector. Vectors
+ * are mutable: their values can be changed after they are created. It includes methods for
+ * addition, subtraction, dot product, scalar product, unit vector, and Euclidean norm.
+ *
+ * <p>The implementation is a symbol table of indices and values for which the vector coordinates
+ * are nonzero. This makes it efficient when most of the vector coordindates are zero.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of <i>Algorithms, 4th
+ * Edition</i> by Robert Sedgewick and Kevin Wayne. See also {@link Vector} for an immutable (dense)
+ * vector data type.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class SparseVector {
-  private int d;                   // dimension
-  private ST<Integer, Double> st;  // the vector, represented by index-value pairs
+  private int d; // dimension
+  private ST<Integer, Double> st; // the vector, represented by index-value pairs
 
   /**
    * Initializes a d-dimensional zero vector.
@@ -46,7 +43,7 @@ public class SparseVector {
   /**
    * Sets the ith coordinate of this vector to the specified value.
    *
-   * @param i     the index
+   * @param i the index
    * @param value the new value
    * @throws IllegalArgumentException unless i is between 0 and d-1
    */
@@ -111,15 +108,12 @@ public class SparseVector {
 
     // iterate over the vector with the fewest nonzeros
     if (this.st.size() <= that.st.size()) {
-      for (int i : this.st.keys())
-        if (that.st.contains(i)) sum += this.get(i) * that.get(i);
+      for (int i : this.st.keys()) if (that.st.contains(i)) sum += this.get(i) * that.get(i);
     } else {
-      for (int i : that.st.keys())
-        if (this.st.contains(i)) sum += this.get(i) * that.get(i);
+      for (int i : that.st.keys()) if (this.st.contains(i)) sum += this.get(i) * that.get(i);
     }
     return sum;
   }
-
 
   /**
    * Returns the inner product of this vector with the specified array.
@@ -130,21 +124,18 @@ public class SparseVector {
    */
   public double dot(double[] that) {
     double sum = 0.0;
-    for (int i : st.keys())
-      sum += that[i] * this.get(i);
+    for (int i : st.keys()) sum += that[i] * this.get(i);
     return sum;
   }
 
   /**
-   * Returns the magnitude of this vector.
-   * This is also known as the L2 norm or the Euclidean norm.
+   * Returns the magnitude of this vector. This is also known as the L2 norm or the Euclidean norm.
    *
    * @return the magnitude of this vector
    */
   public double magnitude() {
     return Math.sqrt(this.dot(this));
   }
-
 
   /**
    * Returns the Euclidean norm of this vector.
@@ -179,16 +170,16 @@ public class SparseVector {
   public SparseVector plus(SparseVector that) {
     if (this.d != that.d) throw new IllegalArgumentException("Vector lengths disagree");
     SparseVector c = new SparseVector(d);
-    for (int i : this.st.keys()) c.put(i, this.get(i));                // c = this
-    for (int i : that.st.keys()) c.put(i, that.get(i) + c.get(i));     // c = c + that
+    for (int i : this.st.keys()) c.put(i, this.get(i)); // c = this
+    for (int i : that.st.keys()) c.put(i, that.get(i) + c.get(i)); // c = c + that
     return c;
   }
 
   /**
    * Returns a string representation of this vector.
    *
-   * @return a string representation of this vector, which consists of the
-   * the vector entries, separates by commas, enclosed in parentheses
+   * @return a string representation of this vector, which consists of the the vector entries,
+   *     separates by commas, enclosed in parentheses
    */
   public String toString() {
     StringBuilder s = new StringBuilder();
@@ -197,7 +188,6 @@ public class SparseVector {
     }
     return s.toString();
   }
-
 
   /**
    * Unit tests the {@code SparseVector} data type.
@@ -218,29 +208,26 @@ public class SparseVector {
     StdOut.println("a dot b = " + a.dot(b));
     StdOut.println("a + b   = " + a.plus(b));
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

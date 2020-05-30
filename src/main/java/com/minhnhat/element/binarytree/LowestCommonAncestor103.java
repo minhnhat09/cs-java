@@ -11,13 +11,13 @@ public class LowestCommonAncestor103 {
     }
   }
 
-  public static BinaryTreeNode<Integer> LCA(BinaryTreeNode<Integer> tree, BinaryTreeNode<Integer> node0,
-      BinaryTreeNode<Integer> node1) {
+  public static BinaryTreeNode<Integer> LCA(
+      BinaryTreeNode<Integer> tree, BinaryTreeNode<Integer> node0, BinaryTreeNode<Integer> node1) {
     return LCAHelper(tree, node0, node1).ancestor;
   }
 
-  private static Status LCAHelper(BinaryTreeNode<Integer> tree, BinaryTreeNode<Integer> node0,
-      BinaryTreeNode<Integer> node1) {
+  private static Status LCAHelper(
+      BinaryTreeNode<Integer> tree, BinaryTreeNode<Integer> node0, BinaryTreeNode<Integer> node1) {
     if (tree == null) {
       return new Status(0, null);
     }
@@ -30,10 +30,11 @@ public class LowestCommonAncestor103 {
     if (rightResult.numTargetNodes == 2) {
       return rightResult;
     }
-    int numTargetNodes = leftResult.numTargetNodes + rightResult.numTargetNodes + (tree == node0 ? 1 : 0)
-        + (tree == node1 ? 1 : 0);
+    int numTargetNodes =
+        leftResult.numTargetNodes
+            + rightResult.numTargetNodes
+            + (tree == node0 ? 1 : 0)
+            + (tree == node1 ? 1 : 0);
     return new Status(numTargetNodes, numTargetNodes == 2 ? tree : null);
-
   }
-
 }

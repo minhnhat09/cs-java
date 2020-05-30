@@ -21,6 +21,4 @@ public class AddDigits258 {
 
     return num;
   }
-
-
 }

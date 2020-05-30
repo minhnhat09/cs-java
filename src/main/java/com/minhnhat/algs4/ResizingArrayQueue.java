@@ -1,51 +1,43 @@
-/******************************************************************************
- *  Compilation:  javac ResizingArrayQueue.java
- *  Execution:    java ResizingArrayQueue < input.txt
- *  Dependencies: StdIn.java StdOut.java
- *  Data files:   https://algs4.cs.princeton.edu/13stacks/tobe.txt  
+/**
+ * **************************************************************************** Compilation: javac
+ * ResizingArrayQueue.java Execution: java ResizingArrayQueue < input.txt Dependencies: StdIn.java
+ * StdOut.java Data files: https://algs4.cs.princeton.edu/13stacks/tobe.txt
  *
- *  Queue implementation with a resizing array.
+ * <p>Queue implementation with a resizing array.
  *
- *  % java ResizingArrayQueue < tobe.txt 
- *  to be or not to be (2 left on queue)
+ * <p>% java ResizingArrayQueue < tobe.txt to be or not to be (2 left on queue)
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * The {@code ResizingArrayQueue} class represents a first-in-first-out (FIFO)
- * queue of generic items.
- * It supports the usual <em>enqueue</em> and <em>dequeue</em>
- * operations, along with methods for peeking at the first item,
- * testing if the queue is empty, and iterating through
- * the items in FIFO order.
- * <p>
- * This implementation uses a resizing array, which double the underlying array
- * when it is full and halves the underlying array when it is one-quarter full.
- * The <em>enqueue</em> and <em>dequeue</em> operations take constant amortized time.
- * The <em>size</em>, <em>peek</em>, and <em>is-empty</em> operations takes
- * constant time in the worst case.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code ResizingArrayQueue} class represents a first-in-first-out (FIFO) queue of generic
+ * items. It supports the usual <em>enqueue</em> and <em>dequeue</em> operations, along with methods
+ * for peeking at the first item, testing if the queue is empty, and iterating through the items in
+ * FIFO order.
+ *
+ * <p>This implementation uses a resizing array, which double the underlying array when it is full
+ * and halves the underlying array when it is one-quarter full. The <em>enqueue</em> and
+ * <em>dequeue</em> operations take constant amortized time. The <em>size</em>, <em>peek</em>, and
+ * <em>is-empty</em> operations takes constant time in the worst case.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section
+ * 1.3</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class ResizingArrayQueue<Item> implements Iterable<Item> {
-  private Item[] q;       // queue elements
-  private int n;          // number of elements on queue
-  private int first;      // index of first element of queue
-  private int last;       // index of next available slot
+  private Item[] q; // queue elements
+  private int n; // number of elements on queue
+  private int first; // index of first element of queue
+  private int last; // index of next available slot
 
-
-  /**
-   * Initializes an empty queue.
-   */
+  /** Initializes an empty queue. */
   public ResizingArrayQueue() {
     q = (Item[]) new Object[2];
     n = 0;
@@ -90,9 +82,9 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
    */
   public void enqueue(Item item) {
     // double size of array if necessary and recopy to front of array
-    if (n == q.length) resize(2 * q.length);   // double size of array if necessary
-    q[last++] = item;                        // add item
-    if (last == q.length) last = 0;          // wrap-around
+    if (n == q.length) resize(2 * q.length); // double size of array if necessary
+    q[last++] = item; // add item
+    if (last == q.length) last = 0; // wrap-around
     n++;
   }
 
@@ -105,10 +97,10 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
   public Item dequeue() {
     if (isEmpty()) throw new NoSuchElementException("Queue underflow");
     Item item = q[first];
-    q[first] = null;                            // to avoid loitering
+    q[first] = null; // to avoid loitering
     n--;
     first++;
-    if (first == q.length) first = 0;           // wrap-around
+    if (first == q.length) first = 0; // wrap-around
     // shrink size of array if necessary
     if (n > 0 && n == q.length / 4) resize(q.length / 2);
     return item;
@@ -124,7 +116,6 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
     if (isEmpty()) throw new NoSuchElementException("Queue underflow");
     return q[first];
   }
-
 
   /**
    * Returns an iterator that iterates over the items in this queue in FIFO order.
@@ -169,29 +160,26 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
     }
     StdOut.println("(" + queue.size() + " left on queue)");
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

@@ -20,12 +20,14 @@ public class Shipment {
 
   public static void main(String[] args) {
     List<Shipment> l = new ArrayList<>();
-    calculateOnShipments(l, new Function<Shipment, Double>() {
-      @Override
-      public Double apply(Shipment shipment) {
-        return shipment.calculateWeight();
-      }
-    });
+    calculateOnShipments(
+        l,
+        new Function<Shipment, Double>() {
+          @Override
+          public Double apply(Shipment shipment) {
+            return shipment.calculateWeight();
+          }
+        });
 
     calculateOnShipments(l, s -> s.calculateWeight());
     calculateOnShipments(l, Shipment::calculateWeight);

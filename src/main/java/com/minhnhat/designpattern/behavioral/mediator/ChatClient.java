@@ -14,8 +14,5 @@ public class ChatClient {
     mediator.addUser(user4);
 
     minh.send("Hi All");
-
   }
-
 }
-

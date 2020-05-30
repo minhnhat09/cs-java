@@ -1,21 +1,18 @@
-/******************************************************************************
- *  Compilation:  javac Date.java
- *  Execution:    java Date
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * Date.java Execution: java Date Dependencies: StdOut.java
  *
- *  An immutable data type for dates.
+ * <p>An immutable data type for dates.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code Date} class is an immutable data type to encapsulate a
- * date (day, month, and year).
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Date} class is an immutable data type to encapsulate a date (day, month, and year).
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section
+ * 1.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -23,16 +20,16 @@ package com.minhnhat.algs4;
 public class Date implements Comparable<Date> {
   private static final int[] DAYS = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-  private final int month;   // month (between 1 and 12)
-  private final int day;     // day   (between 1 and DAYS[month]
-  private final int year;    // year
+  private final int month; // month (between 1 and 12)
+  private final int day; // day   (between 1 and DAYS[month]
+  private final int year; // year
 
   /**
    * Initializes a new date from the month, day, and year.
    *
    * @param month the month (between 1 and 12)
-   * @param day   the day (between 1 and 28-31, depending on the month)
-   * @param year  the year
+   * @param day the day (between 1 and 28-31, depending on the month)
+   * @param year the year
    * @throws IllegalArgumentException if this date is invalid
    */
   public Date(int month, int day, int year) {
@@ -86,7 +83,6 @@ public class Date implements Comparable<Date> {
     return year;
   }
 
-
   // is the given date valid?
   private static boolean isValid(int m, int d, int y) {
     if (m < 1 || m > 12) return false;
@@ -136,10 +132,9 @@ public class Date implements Comparable<Date> {
   /**
    * Compares two dates chronologically.
    *
-   * @return the value {@code 0} if the argument date is equal to this date;
-   * a negative integer if this date is chronologically less than
-   * the argument date; and a positive ineger if this date is chronologically
-   * after the argument date
+   * @return the value {@code 0} if the argument date is equal to this date; a negative integer if
+   *     this date is chronologically less than the argument date; and a positive ineger if this
+   *     date is chronologically after the argument date
    */
   @Override
   public int compareTo(Date that) {
@@ -208,7 +203,6 @@ public class Date implements Comparable<Date> {
     StdOut.println(today.isAfter(today));
     StdOut.println(today.next().isAfter(today));
 
-
     Date birthday = new Date(10, 16, 1971);
     StdOut.println(birthday);
     for (int i = 0; i < 10; i++) {
@@ -216,29 +210,26 @@ public class Date implements Comparable<Date> {
       StdOut.println(birthday);
     }
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

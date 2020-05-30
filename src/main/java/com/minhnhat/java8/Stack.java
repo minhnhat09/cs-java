@@ -35,13 +35,11 @@ public class Stack {
   }
 
   public Object pop() throws ArrayIndexOutOfBoundsException {
-    if (size == 0)
-      throw new EmptyStackException();
+    if (size == 0) throw new EmptyStackException();
     return elements[--size];
   }
 
   private void ensureCapacity() {
-    if (elements.length == size)
-      elements = Arrays.copyOf(elements, 2 * size + 1);
+    if (elements.length == size) elements = Arrays.copyOf(elements, 2 * size + 1);
   }
 }

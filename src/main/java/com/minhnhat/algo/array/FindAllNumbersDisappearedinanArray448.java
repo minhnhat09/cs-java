@@ -11,7 +11,7 @@ public class FindAllNumbersDisappearedinanArray448 {
 
   public static List<Integer> findDisappearedNumbers(int[] nums) {
     List<Integer> l = new ArrayList<>();
-    for (int i = 1; i < nums.length+1; i++) {
+    for (int i = 1; i < nums.length + 1; i++) {
       boolean iInNums = false;
       for (int n : nums) {
         if (i == n) {
@@ -24,5 +24,4 @@ public class FindAllNumbersDisappearedinanArray448 {
     }
     return l;
   }
-
 }

@@ -8,10 +8,10 @@ public class FirstUniqueCharacterinaString387 {
     if (s.length() == 1) {
       return 0;
     }
-    List<Character> lr= new ArrayList<>();
+    List<Character> lr = new ArrayList<>();
     for (int i = 0; i < s.length(); i++) {
       boolean repeat = false;
-      for (int j = i+1; j < s.length(); j++) {
+      for (int j = i + 1; j < s.length(); j++) {
         if (s.charAt(i) == s.charAt(j)) {
           repeat = true;
           lr.add(s.charAt(i));

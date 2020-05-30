@@ -20,13 +20,16 @@ public class SortingCore {
     };
 
     public static void sortByGPA(List<Student> students) {
-      Collections.sort(students, Collections.reverseOrder(new Comparator<Student>() {
+      Collections.sort(
+          students,
+          Collections.reverseOrder(
+              new Comparator<Student>() {
 
-        @Override
-        public int compare(Student arg0, Student arg1) {
-          return Double.compare(arg0.gradePointAverage, arg1.gradePointAverage);
-        }
-      }));
+                @Override
+                public int compare(Student arg0, Student arg1) {
+                  return Double.compare(arg0.gradePointAverage, arg1.gradePointAverage);
+                }
+              }));
     }
 
     public static void sortByName(List<Student> students) {

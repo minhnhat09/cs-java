@@ -1,17 +1,15 @@
-/******************************************************************************
- *  Compilation:  javac BinaryOut.java
- *  Execution:    java BinaryOut
- *  Dependencies: none
+/**
+ * **************************************************************************** Compilation: javac
+ * BinaryOut.java Execution: java BinaryOut Dependencies: none
  *
- *  Write binary data to an output stream, either one 1-bit boolean,
- *  one 8-bit char, one 32-bit int, one 64-bit double, one 32-bit float,
- *  or one 64-bit long at a time. The output stream can be standard
- *  output, a file, an OutputStream or a Socket.
+ * <p>Write binary data to an output stream, either one 1-bit boolean, one 8-bit char, one 32-bit
+ * int, one 64-bit double, one 32-bit float, or one 64-bit long at a time. The output stream can be
+ * standard output, a file, an OutputStream or a Socket.
  *
- *  The bytes written are not aligned.
+ * <p>The bytes written are not aligned.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.io.BufferedOutputStream;
@@ -21,31 +19,27 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 /**
- * <i>Binary output</i>. This class provides methods for converting
- * primtive type variables ({@code boolean}, {@code byte}, {@code char},
- * {@code int}, {@code long}, {@code float}, and {@code double})
- * to sequences of bits and writing them to an output stream.
- * The output stream can be standard output, a file, an OutputStream or a Socket.
- * Uses big-endian (most-significant byte first).
- * <p>
- * The client must {@code flush()} the output stream when finished writing bits.
- * <p>
- * The client should not intermix calls to {@code BinaryOut} with calls
- * to {@code Out}; otherwise unexpected behavior will result.
+ * <i>Binary output</i>. This class provides methods for converting primtive type variables ({@code
+ * boolean}, {@code byte}, {@code char}, {@code int}, {@code long}, {@code float}, and {@code
+ * double}) to sequences of bits and writing them to an output stream. The output stream can be
+ * standard output, a file, an OutputStream or a Socket. Uses big-endian (most-significant byte
+ * first).
+ *
+ * <p>The client must {@code flush()} the output stream when finished writing bits.
+ *
+ * <p>The client should not intermix calls to {@code BinaryOut} with calls to {@code Out}; otherwise
+ * unexpected behavior will result.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public final class BinaryOut {
 
-  private BufferedOutputStream out;  // the output stream
-  private int buffer;                // 8-bit buffer of bits to write out
-  private int n;                     // number of bits remaining in buffer
+  private BufferedOutputStream out; // the output stream
+  private int buffer; // 8-bit buffer of bits to write out
+  private int n; // number of bits remaining in buffer
 
-
-  /**
-   * Initializes a binary output stream from standard output.
-   */
+  /** Initializes a binary output stream from standard output. */
   public BinaryOut() {
     out = new BufferedOutputStream(System.out);
   }
@@ -86,7 +80,6 @@ public final class BinaryOut {
       e.printStackTrace();
     }
   }
-
 
   /**
    * Writes the specified bit to the binary output stream.
@@ -142,8 +135,8 @@ public final class BinaryOut {
   }
 
   /**
-   * Flushes the binary output stream, padding 0s if number of bits written so far
-   * is not a multiple of 8.
+   * Flushes the binary output stream, padding 0s if number of bits written so far is not a multiple
+   * of 8.
    */
   public void flush() {
     clearBuffer();
@@ -155,8 +148,7 @@ public final class BinaryOut {
   }
 
   /**
-   * Flushes and closes the binary output stream.
-   * Once it is closed, bits can no longer be written.
+   * Flushes and closes the binary output stream. Once it is closed, bits can no longer be written.
    */
   public void close() {
     flush();
@@ -166,7 +158,6 @@ public final class BinaryOut {
       e.printStackTrace();
     }
   }
-
 
   /**
    * Writes the specified bit to the binary output stream.
@@ -218,7 +209,6 @@ public final class BinaryOut {
       writeBit(bit);
     }
   }
-
 
   /**
    * Writes the 64-bit double to the binary output stream.
@@ -300,14 +290,11 @@ public final class BinaryOut {
    * Writes the string of 8-bit characters to the binary output stream.
    *
    * @param s the {@code String} to write
-   * @throws IllegalArgumentException if any character in the string is not
-   *                                  between 0 and 255
+   * @throws IllegalArgumentException if any character in the string is not between 0 and 255
    */
   public void write(String s) {
-    for (int i = 0; i < s.length(); i++)
-      write(s.charAt(i));
+    for (int i = 0; i < s.length(); i++) write(s.charAt(i));
   }
-
 
   /**
    * Writes the string of r-bit characters to the binary output stream.
@@ -315,18 +302,15 @@ public final class BinaryOut {
    * @param s the {@code String} to write
    * @param r the number of relevants bits in each character
    * @throws IllegalArgumentException unless r is between 1 and 16
-   * @throws IllegalArgumentException if any character in the string is not
-   *                                  between 0 and 2<sup>r</sup> - 1
+   * @throws IllegalArgumentException if any character in the string is not between 0 and
+   *     2<sup>r</sup> - 1
    */
   public void write(String s, int r) {
-    for (int i = 0; i < s.length(); i++)
-      write(s.charAt(i), r);
+    for (int i = 0; i < s.length(); i++) write(s.charAt(i), r);
   }
 
-
   /**
-   * Test client. Read bits from standard input and write to the file
-   * specified on command line.
+   * Test client. Read bits from standard input and write to the file specified on command line.
    *
    * @param args the command-line arguments
    */
@@ -344,29 +328,26 @@ public final class BinaryOut {
     }
     out.flush();
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

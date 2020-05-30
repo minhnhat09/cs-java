@@ -9,8 +9,8 @@ public class SetMismatch645 {
     Arrays.sort(nums);
     int[] n = new int[2];
     for (int i = 0; i < nums.length; i++) {
-      if(i+1 != nums[i] && n[1]==0) {
-        n[1] = i+1;
+      if (i + 1 != nums[i] && n[1] == 0) {
+        n[1] = i + 1;
       }
       if (m.get(nums[i]) == null) {
         m.put(nums[i], 1);
@@ -25,6 +25,6 @@ public class SetMismatch645 {
   }
 
   public static void main(String[] args) {
-    System.out.println(Arrays.toString(findErrorNums(new int[]{1,5,3,2,2,7,6,4,8,9})));
+    System.out.println(Arrays.toString(findErrorNums(new int[] {1, 5, 3, 2, 2, 7, 6, 4, 8, 9})));
   }
 }

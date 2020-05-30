@@ -15,7 +15,6 @@ public class FilesExample {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   public static void fileInfo() {
@@ -50,7 +49,6 @@ public class FilesExample {
         // As File instances
         File[] files = file.listFiles();
       }
-
     }
   }
 }

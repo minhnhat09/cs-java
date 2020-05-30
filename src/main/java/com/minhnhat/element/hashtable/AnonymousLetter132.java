@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AnonymousLetter132 {
-  public static boolean isLetterConstructibleFromMagazine(String letterText, String magazineTexString) {
+  public static boolean isLetterConstructibleFromMagazine(
+      String letterText, String magazineTexString) {
     Map<Character, Integer> charFrequencyForLetter = new HashMap<>();
     for (int i = 0; i < letterText.length(); i++) {
       char c = letterText.charAt(i);

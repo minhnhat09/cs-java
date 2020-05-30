@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TeamPhotoDay1148 {
-
-
-}
+public class TeamPhotoDay1148 {}
 
 class Player implements Comparable<Player> {
   public Integer height;
@@ -36,7 +33,7 @@ class Team {
     List<Player> aSorted = A.sortPlayersByHeight();
     List<Player> bSorted = B.sortPlayersByHeight();
     for (int i = 0; i < aSorted.size() && i < bSorted.size(); i++) {
-      if (aSorted.get(i).compareTo(bSorted.get(i))>=0) {
+      if (aSorted.get(i).compareTo(bSorted.get(i)) >= 0) {
         return false;
       }
     }

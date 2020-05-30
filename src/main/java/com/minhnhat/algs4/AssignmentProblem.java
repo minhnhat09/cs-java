@@ -1,32 +1,30 @@
-/******************************************************************************
- *  Compilation:  javac AssignmentProblem.java
- *  Execution:    java AssignmentProblem n
- *  Dependencies: DijkstraSP.java DirectedEdge.java
+/**
+ * **************************************************************************** Compilation: javac
+ * AssignmentProblem.java Execution: java AssignmentProblem n Dependencies: DijkstraSP.java
+ * DirectedEdge.java
  *
- *  Solve an n-by-n assignment problem in n^3 log n time using the
- *  successive shortest path algorithm.
+ * <p>Solve an n-by-n assignment problem in n^3 log n time using the successive shortest path
+ * algorithm.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code AssignmentProblem} class represents a data type for computing
- * an optimal solution to an <em>n</em>-by-<em>n</em> <em>assignment problem</em>.
- * The assignment problem is to find a minimum weight matching in an
- * edge-weighted complete bipartite graph.
- * <p>
- * The data type supplies methods for determining the optimal solution
- * and the corresponding dual solution.
- * <p>
- * This implementation uses the <em>successive shortest paths algorithm</em>.
- * The order of growth of the running time in the worst case is
- * O(<em>n</em>^3 log <em>n</em>) to solve an <em>n</em>-by-<em>n</em>
- * instance.
- * <p>
- * For additional documentation, see
- * <a href="https://algs4.cs.princeton.edu/65reductions">Section 6.5</a>
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code AssignmentProblem} class represents a data type for computing an optimal solution to
+ * an <em>n</em>-by-<em>n</em> <em>assignment problem</em>. The assignment problem is to find a
+ * minimum weight matching in an edge-weighted complete bipartite graph.
+ *
+ * <p>The data type supplies methods for determining the optimal solution and the corresponding dual
+ * solution.
+ *
+ * <p>This implementation uses the <em>successive shortest paths algorithm</em>. The order of growth
+ * of the running time in the worst case is O(<em>n</em>^3 log <em>n</em>) to solve an
+ * <em>n</em>-by-<em>n</em> instance.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/65reductions">Section 6.5</a> <i>Algorithms, 4th Edition</i>
+ * by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -35,13 +33,13 @@ public class AssignmentProblem {
   private static final double FLOATING_POINT_EPSILON = 1E-14;
   private static final int UNMATCHED = -1;
 
-  private int n;              // number of rows and columns
-  private double[][] weight;  // the n-by-n cost matrix
-  private double minWeight;   // minimum value of any weight
-  private double[] px;        // px[i] = dual variable for row i
-  private double[] py;        // py[j] = dual variable for col j
-  private int[] xy;           // xy[i] = j means i-j is a match
-  private int[] yx;           // yx[j] = i means i-j is a match
+  private int n; // number of rows and columns
+  private double[][] weight; // the n-by-n cost matrix
+  private double minWeight; // minimum value of any weight
+  private double[] px; // px[i] = dual variable for row i
+  private double[] py; // py[j] = dual variable for col j
+  private int[] xy; // xy[i] = j means i-j is a match
+  private int[] yx; // yx[j] = i means i-j is a match
 
   /**
    * Determines an optimal solution to the assignment problem.
@@ -71,10 +69,8 @@ public class AssignmentProblem {
     // initial matching is empty
     xy = new int[n];
     yx = new int[n];
-    for (int i = 0; i < n; i++)
-      xy[i] = UNMATCHED;
-    for (int j = 0; j < n; j++)
-      yx[j] = UNMATCHED;
+    for (int i = 0; i < n; i++) xy[i] = UNMATCHED;
+    for (int j = 0; j < n; j++) yx[j] = UNMATCHED;
 
     // add n edges to matching
     for (int k = 0; k < n; k++) {
@@ -92,12 +88,10 @@ public class AssignmentProblem {
     EdgeWeightedDigraph G = new EdgeWeightedDigraph(2 * n + 2);
     int s = 2 * n, t = 2 * n + 1;
     for (int i = 0; i < n; i++) {
-      if (xy[i] == UNMATCHED)
-        G.addEdge(new DirectedEdge(s, i, 0.0));
+      if (xy[i] == UNMATCHED) G.addEdge(new DirectedEdge(s, i, 0.0));
     }
     for (int j = 0; j < n; j++) {
-      if (yx[j] == UNMATCHED)
-        G.addEdge(new DirectedEdge(n + j, t, py[j]));
+      if (yx[j] == UNMATCHED) G.addEdge(new DirectedEdge(n + j, t, py[j]));
     }
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
@@ -119,10 +113,8 @@ public class AssignmentProblem {
     }
 
     // update dual variables
-    for (int i = 0; i < n; i++)
-      px[i] += spt.distTo(i);
-    for (int j = 0; j < n; j++)
-      py[j] += spt.distTo(n + j);
+    for (int i = 0; i < n; i++) px[i] += spt.distTo(i);
+    for (int j = 0; j < n; j++) py[j] += spt.distTo(n + j);
   }
 
   // reduced cost of i-j
@@ -183,22 +175,23 @@ public class AssignmentProblem {
   public double weight() {
     double total = 0.0;
     for (int i = 0; i < n; i++) {
-      if (xy[i] != UNMATCHED)
-        total += weight[i][xy[i]];
+      if (xy[i] != UNMATCHED) total += weight[i][xy[i]];
     }
     return total;
   }
 
   private void validate(int i) {
-    if (i < 0 || i >= n) throw new IllegalArgumentException("index is not between 0 and " + (n - 1) + ": " + i);
+    if (i < 0 || i >= n)
+      throw new IllegalArgumentException("index is not between 0 and " + (n - 1) + ": " + i);
   }
 
-
-  /**************************************************************************
+  /**
+   * ************************************************************************
    *
-   *  The code below is solely for testing correctness of the data type.
+   * <p>The code below is solely for testing correctness of the data type.
    *
-   **************************************************************************/
+   * <p>************************************************************************
+   */
 
   // check that dual variables are feasible
   private boolean isDualFeasible() {
@@ -263,10 +256,8 @@ public class AssignmentProblem {
   }
 
   /**
-   * Unit tests the {@code AssignmentProblem} data type.
-   * Takes a command-line argument n; creates a random n-by-n matrix;
-   * solves the n-by-n assignment problem; and prints the optimal
-   * solution.
+   * Unit tests the {@code AssignmentProblem} data type. Takes a command-line argument n; creates a
+   * random n-by-n matrix; solves the n-by-n assignment problem; and prints the optimal solution.
    *
    * @param args the command-line arguments
    */
@@ -277,7 +268,7 @@ public class AssignmentProblem {
     double[][] weight = new double[n][n];
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        weight[i][j] = StdRandom.uniform(900) + 100;  // 3 digits
+        weight[i][j] = StdRandom.uniform(900) + 100; // 3 digits
       }
     }
 
@@ -290,37 +281,32 @@ public class AssignmentProblem {
     if (n >= 20) return;
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        if (j == assignment.sol(i))
-          StdOut.printf("*%.0f ", weight[i][j]);
-        else
-          StdOut.printf(" %.0f ", weight[i][j]);
+        if (j == assignment.sol(i)) StdOut.printf("*%.0f ", weight[i][j]);
+        else StdOut.printf(" %.0f ", weight[i][j]);
       }
       StdOut.println();
     }
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

@@ -31,7 +31,8 @@ public class CousinsinBinaryTree993 {
 
   public static boolean sameParent(TreeNode node, int x, int y) {
     if (node.right != null && node.left != null) {
-      if ((node.left.val == x && node.right.val == y) || node.left.val == y && node.right.val == x) {
+      if ((node.left.val == x && node.right.val == y)
+          || node.left.val == y && node.right.val == x) {
         return true;
       }
       return sameParent(node.right, x, y) || sameParent(node.left, x, y);

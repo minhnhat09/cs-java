@@ -15,17 +15,14 @@ public class KClosestPointstoOrigin973 {
 
   public static int[][] kClosest(int[][] points, int K) {
     Map<int[], Double> mapPoints = new LinkedHashMap<>();
-    Arrays.stream(points).forEach(
+    Arrays.stream(points)
+        .forEach(
             p -> {
-              mapPoints.put(p,
-                      Double.valueOf(Math.sqrt(
-                              Arrays.stream(p)
-                                      .map(e -> e * e).sum())));
+              mapPoints.put(p, Double.valueOf(Math.sqrt(Arrays.stream(p).map(e -> e * e).sum())));
               ;
-            }
-    );
-    List<int[]> keys = mapPoints.entrySet()
-            .stream()
+            });
+    List<int[]> keys =
+        mapPoints.entrySet().stream()
             .sorted(Map.Entry.comparingByValue())
             .limit(Long.valueOf(K))
             .map(Map.Entry::getKey)
@@ -33,7 +30,4 @@ public class KClosestPointstoOrigin973 {
 
     return keys.toArray(new int[keys.size()][]);
   }
-
-
-
 }

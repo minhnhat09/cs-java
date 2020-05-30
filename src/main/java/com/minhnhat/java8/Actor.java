@@ -31,7 +31,7 @@ public class Actor {
     if (obj == null) {
       return false;
     }
-    if(getClass() != obj.getClass()){
+    if (getClass() != obj.getClass()) {
       return false;
     }
     final Actor other = (Actor) obj;
@@ -43,9 +43,6 @@ public class Actor {
 
   @Override
   public String toString() {
-    return "Actor{" +
-            "lastName='" + lastName + '\'' +
-            ", firstName='" + firstName + '\'' +
-            '}';
+    return "Actor{" + "lastName='" + lastName + '\'' + ", firstName='" + firstName + '\'' + '}';
   }
 }

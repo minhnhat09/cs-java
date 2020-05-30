@@ -7,7 +7,6 @@ public class Person {
   public Person(String name) {
 
     this.name = name;
-
   }
 
   public String getName() {
@@ -18,13 +17,13 @@ public class Person {
     this.name = name;
   }
 
-//    @Override
-//    public Person clone() {
-//        try {
-//            return (Person) super.clone();
-//        } catch (CloneNotSupportedException e) {
-//            throw new AssertionError();
-//        }
-//    }
+  //    @Override
+  //    public Person clone() {
+  //        try {
+  //            return (Person) super.clone();
+  //        } catch (CloneNotSupportedException e) {
+  //            throw new AssertionError();
+  //        }
+  //    }
 
 }

@@ -1,41 +1,35 @@
-/******************************************************************************
- *  Compilation:  javac Shell.java
- *  Execution:    java Shell < input.txt
- *  Dependencies: StdOut.java StdIn.java
- *  Data files:   https://algs4.cs.princeton.edu/21elementary/tiny.txt
- *                https://algs4.cs.princeton.edu/21elementary/words3.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * Shell.java Execution: java Shell < input.txt Dependencies: StdOut.java StdIn.java Data files:
+ * https://algs4.cs.princeton.edu/21elementary/tiny.txt
+ * https://algs4.cs.princeton.edu/21elementary/words3.txt
  *
- *  Sorts a sequence of strings from standard input using shellsort.
+ * <p>Sorts a sequence of strings from standard input using shellsort.
  *
- *  Uses increment sequence proposed by Sedgewick and Incerpi.
- *  The nth element of the sequence is the smallest integer >= 2.5^n
- *  that is relatively prime to all previous terms in the sequence.
- *  For example, incs[4] is 41 because 2.5^4 = 39.0625 and 41 is
- *  the next integer that is relatively prime to 3, 7, and 16.
+ * <p>Uses increment sequence proposed by Sedgewick and Incerpi. The nth element of the sequence is
+ * the smallest integer >= 2.5^n that is relatively prime to all previous terms in the sequence. For
+ * example, incs[4] is 41 because 2.5^4 = 39.0625 and 41 is the next integer that is relatively
+ * prime to 3, 7, and 16.
  *
- *  % more tiny.txt
- *  S O R T E X A M P L E
+ * <p>% more tiny.txt S O R T E X A M P L E
  *
- *  % java Shell < tiny.txt
- *  A E E L M O P R S T X                 [ one string per line ]
+ * <p>% java Shell < tiny.txt A E E L M O P R S T X [ one string per line ]
  *
- *  % more words3.txt
- *  bed bug dad yes zoo ... all bad yet
+ * <p>% more words3.txt bed bug dad yes zoo ... all bad yet
  *
- *  % java Shell < words3.txt
- *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
+ * <p>% java Shell < words3.txt all bad bed bug dad ... yes yet zoo [ one string per line ]
  *
- *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code Shell} class provides static methods for sorting an
- * array using Shellsort with Knuth's increment sequence (1, 4, 13, 40, ...).
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Shell} class provides static methods for sorting an array using Shellsort with Knuth's
+ * increment sequence (1, 4, 13, 40, ...).
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of <i>Algorithms, 4th
+ * Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -43,8 +37,7 @@ package com.minhnhat.algs4;
 public class Shell {
 
   // This class should not be instantiated.
-  private Shell() {
-  }
+  private Shell() {}
 
   /**
    * Rearranges the array in ascending order, using the natural order.
@@ -71,10 +64,10 @@ public class Shell {
     assert isSorted(a);
   }
 
-
-  /***************************************************************************
-   *  Helper sorting functions.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Helper sorting
+   * functions. *************************************************************************
+   */
 
   // is v < w ?
   private static boolean less(Comparable v, Comparable w) {
@@ -88,20 +81,19 @@ public class Shell {
     a[j] = swap;
   }
 
-
-  /***************************************************************************
-   *  Check if array is sorted - useful for debugging.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Check if array is
+   * sorted - useful for debugging.
+   * *************************************************************************
+   */
   private static boolean isSorted(Comparable[] a) {
-    for (int i = 1; i < a.length; i++)
-      if (less(a[i], a[i - 1])) return false;
+    for (int i = 1; i < a.length; i++) if (less(a[i], a[i - 1])) return false;
     return true;
   }
 
   // is the array h-sorted?
   private static boolean isHsorted(Comparable[] a, int h) {
-    for (int i = h; i < a.length; i++)
-      if (less(a[i], a[i - h])) return false;
+    for (int i = h; i < a.length; i++) if (less(a[i], a[i - h])) return false;
     return true;
   }
 
@@ -113,8 +105,8 @@ public class Shell {
   }
 
   /**
-   * Reads in a sequence of strings from standard input; Shellsorts them;
-   * and prints them to standard output in ascending order.
+   * Reads in a sequence of strings from standard input; Shellsorts them; and prints them to
+   * standard output in ascending order.
    *
    * @param args the command-line arguments
    */
@@ -123,29 +115,26 @@ public class Shell {
     Shell.sort(a);
     show(a);
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

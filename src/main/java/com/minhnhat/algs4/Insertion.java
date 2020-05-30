@@ -1,47 +1,42 @@
-/******************************************************************************
- *  Compilation:  javac Insertion.java
- *  Execution:    java Insertion < input.txt
- *  Dependencies: StdOut.java StdIn.java
- *  Data files:   https://algs4.cs.princeton.edu/21elementary/tiny.txt
- *                https://algs4.cs.princeton.edu/21elementary/words3.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * Insertion.java Execution: java Insertion < input.txt Dependencies: StdOut.java StdIn.java Data
+ * files: https://algs4.cs.princeton.edu/21elementary/tiny.txt
+ * https://algs4.cs.princeton.edu/21elementary/words3.txt
  *
- *  Sorts a sequence of strings from standard input using insertion sort.
+ * <p>Sorts a sequence of strings from standard input using insertion sort.
  *
- *  % more tiny.txt
- *  S O R T E X A M P L E
+ * <p>% more tiny.txt S O R T E X A M P L E
  *
- *  % java Insertion < tiny.txt
- *  A E E L M O P R S T X                 [ one string per line ]
+ * <p>% java Insertion < tiny.txt A E E L M O P R S T X [ one string per line ]
  *
- *  % more words3.txt
- *  bed bug dad yes zoo ... all bad yet
+ * <p>% more words3.txt bed bug dad yes zoo ... all bad yet
  *
- *  % java Insertion < words3.txt
- *  all bad bed bug dad ... yes yet zoo   [ one string per line ]
+ * <p>% java Insertion < words3.txt all bad bed bug dad ... yes yet zoo [ one string per line ]
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Comparator;
 
 /**
- * The {@code Insertion} class provides static methods for sorting an
- * array using insertion sort.
- * <p>
- * This implementation makes ~ 1/2 n^2 compares and exchanges in
- * the worst case, so it is not suitable for sorting large arbitrary arrays.
- * More precisely, the number of exchanges is exactly equal to the number
- * of inversions. So, for example, it sorts a partially-sorted array
- * in linear time.
- * <p>
- * The sorting algorithm is stable and uses O(1) extra memory.
- * <p>
- * See <a href="https://algs4.cs.princeton.edu/21elementary/InsertionPedantic.java.html">InsertionPedantic.java</a>
+ * The {@code Insertion} class provides static methods for sorting an array using insertion sort.
+ *
+ * <p>This implementation makes ~ 1/2 n^2 compares and exchanges in the worst case, so it is not
+ * suitable for sorting large arbitrary arrays. More precisely, the number of exchanges is exactly
+ * equal to the number of inversions. So, for example, it sorts a partially-sorted array in linear
+ * time.
+ *
+ * <p>The sorting algorithm is stable and uses O(1) extra memory.
+ *
+ * <p>See <a
+ * href="https://algs4.cs.princeton.edu/21elementary/InsertionPedantic.java.html">InsertionPedantic.java</a>
  * for a version that eliminates the compiler warning.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of <i>Algorithms, 4th
+ * Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -49,8 +44,7 @@ import java.util.Comparator;
 public class Insertion {
 
   // This class should not be instantiated.
-  private Insertion() {
-  }
+  private Insertion() {}
 
   /**
    * Rearranges the array in ascending order, using the natural order.
@@ -71,7 +65,7 @@ public class Insertion {
   /**
    * Rearranges the subarray a[lo..hi) in ascending order, using the natural order.
    *
-   * @param a  the array to be sorted
+   * @param a the array to be sorted
    * @param lo left endpoint (inclusive)
    * @param hi right endpoint (exclusive)
    */
@@ -87,7 +81,7 @@ public class Insertion {
   /**
    * Rearranges the array in ascending order, using a comparator.
    *
-   * @param a          the array
+   * @param a the array
    * @param comparator the comparator specifying the order
    */
   public static void sort(Object[] a, Comparator comparator) {
@@ -104,9 +98,9 @@ public class Insertion {
   /**
    * Rearranges the subarray a[lo..hi) in ascending order, using a comparator.
    *
-   * @param a          the array
-   * @param lo         left endpoint (inclusive)
-   * @param hi         right endpoint (exclusive)
+   * @param a the array
+   * @param lo left endpoint (inclusive)
+   * @param hi right endpoint (exclusive)
    * @param comparator the comparator specifying the order
    */
   public static void sort(Object[] a, int lo, int hi, Comparator comparator) {
@@ -118,7 +112,6 @@ public class Insertion {
     assert isSorted(a, lo, hi, comparator);
   }
 
-
   // return a permutation that gives the elements in a[] in ascending order
   // do not change the original array a[]
 
@@ -126,25 +119,24 @@ public class Insertion {
    * Returns a permutation that gives the elements in the array in ascending order.
    *
    * @param a the array
-   * @return a permutation {@code p[]} such that {@code a[p[0]]}, {@code a[p[1]]},
-   * ..., {@code a[p[n-1]]} are in ascending order
+   * @return a permutation {@code p[]} such that {@code a[p[0]]}, {@code a[p[1]]}, ..., {@code
+   *     a[p[n-1]]} are in ascending order
    */
   public static int[] indexSort(Comparable[] a) {
     int n = a.length;
     int[] index = new int[n];
-    for (int i = 0; i < n; i++)
-      index[i] = i;
+    for (int i = 0; i < n; i++) index[i] = i;
 
     for (int i = 1; i < n; i++)
-      for (int j = i; j > 0 && less(a[index[j]], a[index[j - 1]]); j--)
-        exch(index, j, j - 1);
+      for (int j = i; j > 0 && less(a[index[j]], a[index[j - 1]]); j--) exch(index, j, j - 1);
 
     return index;
   }
 
-  /***************************************************************************
-   *  Helper sorting functions.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Helper sorting
+   * functions. *************************************************************************
+   */
 
   // is v < w ?
   private static boolean less(Comparable v, Comparable w) {
@@ -170,17 +162,18 @@ public class Insertion {
     a[j] = swap;
   }
 
-  /***************************************************************************
-   *  Check if array is sorted - useful for debugging.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Check if array is
+   * sorted - useful for debugging.
+   * *************************************************************************
+   */
   private static boolean isSorted(Comparable[] a) {
     return isSorted(a, 0, a.length);
   }
 
   // is the array a[lo..hi) sorted
   private static boolean isSorted(Comparable[] a, int lo, int hi) {
-    for (int i = lo + 1; i < hi; i++)
-      if (less(a[i], a[i - 1])) return false;
+    for (int i = lo + 1; i < hi; i++) if (less(a[i], a[i - 1])) return false;
     return true;
   }
 
@@ -190,8 +183,7 @@ public class Insertion {
 
   // is the array a[lo..hi) sorted
   private static boolean isSorted(Object[] a, int lo, int hi, Comparator comparator) {
-    for (int i = lo + 1; i < hi; i++)
-      if (less(a[i], a[i - 1], comparator)) return false;
+    for (int i = lo + 1; i < hi; i++) if (less(a[i], a[i - 1], comparator)) return false;
     return true;
   }
 
@@ -203,8 +195,8 @@ public class Insertion {
   }
 
   /**
-   * Reads in a sequence of strings from standard input; insertion sorts them;
-   * and prints them to standard output in ascending order.
+   * Reads in a sequence of strings from standard input; insertion sorts them; and prints them to
+   * standard output in ascending order.
    *
    * @param args the command-line arguments
    */
@@ -215,26 +207,24 @@ public class Insertion {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

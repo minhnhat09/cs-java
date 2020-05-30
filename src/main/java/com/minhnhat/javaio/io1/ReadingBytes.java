@@ -21,8 +21,8 @@ public class ReadingBytes {
     }
 
     try (InputStream is = new FileInputStream(new File(fileName));
-         GZIPInputStream gzis = new GZIPInputStream(is);
-         DataInputStream dis = new DataInputStream(gzis);) {
+        GZIPInputStream gzis = new GZIPInputStream(is);
+        DataInputStream dis = new DataInputStream(gzis); ) {
 
       List<Integer> ints = new ArrayList<>();
       try {
@@ -35,6 +35,5 @@ public class ReadingBytes {
 
     } catch (IOException e) {
     }
-
   }
 }

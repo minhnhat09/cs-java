@@ -1,35 +1,29 @@
-/******************************************************************************
- *  Compilation:  javac MergeBU.java
- *  Execution:    java MergeBU < input.txt
- *  Dependencies: StdOut.java StdIn.java
- *  Data files:   https://algs4.cs.princeton.edu/22mergesort/tiny.txt
- *                https://algs4.cs.princeton.edu/22mergesort/words3.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * MergeBU.java Execution: java MergeBU < input.txt Dependencies: StdOut.java StdIn.java Data files:
+ * https://algs4.cs.princeton.edu/22mergesort/tiny.txt
+ * https://algs4.cs.princeton.edu/22mergesort/words3.txt
  *
- *  Sorts a sequence of strings from standard input using
- *  bottom-up mergesort.
+ * <p>Sorts a sequence of strings from standard input using bottom-up mergesort.
  *
- *  % more tiny.txt
- *  S O R T E X A M P L E
+ * <p>% more tiny.txt S O R T E X A M P L E
  *
- *  % java MergeBU < tiny.txt
- *  A E E L M O P R S T X                 [ one string per line ]
+ * <p>% java MergeBU < tiny.txt A E E L M O P R S T X [ one string per line ]
  *
- *  % more words3.txt
- *  bed bug dad yes zoo ... all bad yet
+ * <p>% more words3.txt bed bug dad yes zoo ... all bad yet
  *
- *  % java MergeBU < words3.txt
- *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
+ * <p>% java MergeBU < words3.txt all bad bed bug dad ... yes yet zoo [ one string per line ]
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code MergeBU} class provides static methods for sorting an
- * array using bottom-up mergesort.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code MergeBU} class provides static methods for sorting an array using bottom-up mergesort.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of <i>Algorithms, 4th
+ * Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -37,8 +31,7 @@ package com.minhnhat.algs4;
 public class MergeBU {
 
   // This class should not be instantiated.
-  private MergeBU() {
-  }
+  private MergeBU() {}
 
   // stably merge a[lo..mid] with a[mid+1..hi] using aux[lo..hi]
   private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
@@ -51,12 +44,11 @@ public class MergeBU {
     // merge back to a[]
     int i = lo, j = mid + 1;
     for (int k = lo; k <= hi; k++) {
-      if (i > mid) a[k] = aux[j++];  // this copying is unneccessary
+      if (i > mid) a[k] = aux[j++]; // this copying is unneccessary
       else if (j > hi) a[k] = aux[i++];
       else if (less(aux[j], aux[i])) a[k] = aux[j++];
       else a[k] = aux[i++];
     }
-
   }
 
   /**
@@ -77,22 +69,23 @@ public class MergeBU {
     assert isSorted(a);
   }
 
-  /***********************************************************************
-   *  Helper sorting functions.
-   ***************************************************************************/
+  /**
+   * ********************************************************************* Helper sorting functions.
+   * *************************************************************************
+   */
 
   // is v < w ?
   private static boolean less(Comparable v, Comparable w) {
     return v.compareTo(w) < 0;
   }
 
-
-  /***************************************************************************
-   *  Check if array is sorted - useful for debugging.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Check if array is
+   * sorted - useful for debugging.
+   * *************************************************************************
+   */
   private static boolean isSorted(Comparable[] a) {
-    for (int i = 1; i < a.length; i++)
-      if (less(a[i], a[i - 1])) return false;
+    for (int i = 1; i < a.length; i++) if (less(a[i], a[i - 1])) return false;
     return true;
   }
 
@@ -104,8 +97,8 @@ public class MergeBU {
   }
 
   /**
-   * Reads in a sequence of strings from standard input; bottom-up
-   * mergesorts them; and prints them to standard output in ascending order.
+   * Reads in a sequence of strings from standard input; bottom-up mergesorts them; and prints them
+   * to standard output in ascending order.
    *
    * @param args the command-line arguments
    */
@@ -116,26 +109,24 @@ public class MergeBU {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

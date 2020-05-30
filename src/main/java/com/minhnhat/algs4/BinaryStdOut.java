@@ -1,46 +1,41 @@
-/******************************************************************************
- *  Compilation:  javac BinaryStdOut.java
- *  Execution:    java BinaryStdOut
- *  Dependencies: none
+/**
+ * **************************************************************************** Compilation: javac
+ * BinaryStdOut.java Execution: java BinaryStdOut Dependencies: none
  *
- *  Write binary data to standard output, either one 1-bit boolean,
- *  one 8-bit char, one 32-bit int, one 64-bit double, one 32-bit float,
- *  or one 64-bit long at a time.
+ * <p>Write binary data to standard output, either one 1-bit boolean, one 8-bit char, one 32-bit
+ * int, one 64-bit double, one 32-bit float, or one 64-bit long at a time.
  *
- *  The bytes written are not aligned.
+ * <p>The bytes written are not aligned.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
 /**
- * <i>Binary standard output</i>. This class provides methods for converting
- * primtive type variables ({@code boolean}, {@code byte}, {@code char},
- * {@code int}, {@code long}, {@code float}, and {@code double})
- * to sequences of bits and writing them to standard output.
- * Uses big-endian (most-significant byte first).
- * <p>
- * The client must {@code flush()} the output stream when finished writing bits.
- * <p>
- * The client should not intermix calls to {@code BinaryStdOut} with calls
- * to {@code StdOut} or {@code System.out}; otherwise unexpected behavior
- * will result.
+ * <i>Binary standard output</i>. This class provides methods for converting primtive type variables
+ * ({@code boolean}, {@code byte}, {@code char}, {@code int}, {@code long}, {@code float}, and
+ * {@code double}) to sequences of bits and writing them to standard output. Uses big-endian
+ * (most-significant byte first).
+ *
+ * <p>The client must {@code flush()} the output stream when finished writing bits.
+ *
+ * <p>The client should not intermix calls to {@code BinaryStdOut} with calls to {@code StdOut} or
+ * {@code System.out}; otherwise unexpected behavior will result.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public final class BinaryStdOut {
-  private static BufferedOutputStream out;  // output stream (standard output)
-  private static int buffer;                // 8-bit buffer of bits to write
-  private static int n;                     // number of bits remaining in buffer
-  private static boolean isInitialized;     // has BinaryStdOut been called for first time?
+  private static BufferedOutputStream out; // output stream (standard output)
+  private static int buffer; // 8-bit buffer of bits to write
+  private static int n; // number of bits remaining in buffer
+  private static boolean isInitialized; // has BinaryStdOut been called for first time?
 
   // don't instantiate
-  private BinaryStdOut() {
-  }
+  private BinaryStdOut() {}
 
   // initialize BinaryStdOut
   private static void initialize() {
@@ -50,9 +45,7 @@ public final class BinaryStdOut {
     isInitialized = true;
   }
 
-  /**
-   * Writes the specified bit to standard output.
-   */
+  /** Writes the specified bit to standard output. */
   private static void writeBit(boolean bit) {
     if (!isInitialized) initialize();
 
@@ -65,9 +58,7 @@ public final class BinaryStdOut {
     if (n == 8) clearBuffer();
   }
 
-  /**
-   * Writes the 8-bit byte to standard output.
-   */
+  /** Writes the 8-bit byte to standard output. */
   private static void writeByte(int x) {
     if (!isInitialized) initialize();
 
@@ -106,8 +97,7 @@ public final class BinaryStdOut {
   }
 
   /**
-   * Flushes standard output, padding 0s if number of bits written so far
-   * is not a multiple of 8.
+   * Flushes standard output, padding 0s if number of bits written so far is not a multiple of 8.
    */
   public static void flush() {
     clearBuffer();
@@ -119,8 +109,8 @@ public final class BinaryStdOut {
   }
 
   /**
-   * Flushes and closes standard output. Once standard output is closed, you can no
-   * longer write bits to it.
+   * Flushes and closes standard output. Once standard output is closed, you can no longer write
+   * bits to it.
    */
   public static void close() {
     flush();
@@ -131,7 +121,6 @@ public final class BinaryStdOut {
       e.printStackTrace();
     }
   }
-
 
   /**
    * Writes the specified bit to standard output.
@@ -177,13 +166,13 @@ public final class BinaryStdOut {
       return;
     }
     if (r < 1 || r > 32) throw new IllegalArgumentException("Illegal value for r = " + r);
-    if (x < 0 || x >= (1 << r)) throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
+    if (x < 0 || x >= (1 << r))
+      throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
     for (int i = 0; i < r; i++) {
       boolean bit = ((x >>> (r - i - 1)) & 1) == 1;
       writeBit(bit);
     }
   }
-
 
   /**
    * Writes the 64-bit double to standard output.
@@ -265,12 +254,10 @@ public final class BinaryStdOut {
    * Writes the string of 8-bit characters to standard output.
    *
    * @param s the {@code String} to write.
-   * @throws IllegalArgumentException if any character in the string is not
-   *                                  between 0 and 255.
+   * @throws IllegalArgumentException if any character in the string is not between 0 and 255.
    */
   public static void write(String s) {
-    for (int i = 0; i < s.length(); i++)
-      write(s.charAt(i));
+    for (int i = 0; i < s.length(); i++) write(s.charAt(i));
   }
 
   /**
@@ -279,12 +266,11 @@ public final class BinaryStdOut {
    * @param s the {@code String} to write.
    * @param r the number of relevants bits in each character.
    * @throws IllegalArgumentException if r is not between 1 and 16.
-   * @throws IllegalArgumentException if any character in the string is not
-   *                                  between 0 and 2<sup>r</sup> - 1.
+   * @throws IllegalArgumentException if any character in the string is not between 0 and
+   *     2<sup>r</sup> - 1.
    */
   public static void write(String s, int r) {
-    for (int i = 0; i < s.length(); i++)
-      write(s.charAt(i), r);
+    for (int i = 0; i < s.length(); i++) write(s.charAt(i), r);
   }
 
   /**
@@ -301,29 +287,26 @@ public final class BinaryStdOut {
     }
     BinaryStdOut.flush();
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

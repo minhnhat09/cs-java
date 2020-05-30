@@ -22,12 +22,15 @@ public class MergeSortedFile {
     for (List<Integer> array : sortedArrays) {
       iters.add(array.iterator());
     }
-    PriorityQueue<ArrayEntry> minHeap = new PriorityQueue<>((int) sortedArrays.size(), new Comparator<ArrayEntry>() {
-      @Override
-      public int compare(ArrayEntry o1, ArrayEntry o2) {
-        return Integer.compare(o1.value, o2.value);
-      }
-    });
+    PriorityQueue<ArrayEntry> minHeap =
+        new PriorityQueue<>(
+            (int) sortedArrays.size(),
+            new Comparator<ArrayEntry>() {
+              @Override
+              public int compare(ArrayEntry o1, ArrayEntry o2) {
+                return Integer.compare(o1.value, o2.value);
+              }
+            });
     for (int i = 0; i < iters.size(); i++) {
       if (iters.get(i).hasNext()) {
         minHeap.add(new ArrayEntry(iters.get(i).next(), i));

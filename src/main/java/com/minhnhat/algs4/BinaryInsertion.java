@@ -1,43 +1,39 @@
-/******************************************************************************
- *  Compilation:  javac BinaryInsertion.java
- *  Execution:    java BinaryInsertion < input.txt
- *  Dependencies: StdOut.java StdIn.java
- *  Data files:   https://algs4.cs.princeton.edu/21elementary/tiny.txt
- *                https://algs4.cs.princeton.edu/21elementary/words3.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * BinaryInsertion.java Execution: java BinaryInsertion < input.txt Dependencies: StdOut.java
+ * StdIn.java Data files: https://algs4.cs.princeton.edu/21elementary/tiny.txt
+ * https://algs4.cs.princeton.edu/21elementary/words3.txt
  *
- *  Sorts a sequence of strings from standard input using 
- *  binary insertion sort with half exchanges.
+ * <p>Sorts a sequence of strings from standard input using binary insertion sort with half
+ * exchanges.
  *
- *  % more tiny.txt
- *  S O R T E X A M P L E
+ * <p>% more tiny.txt S O R T E X A M P L E
  *
- *  % java BinaryInsertion < tiny.txt
- *  A E E L M O P R S T X                 [ one string per line ]
+ * <p>% java BinaryInsertion < tiny.txt A E E L M O P R S T X [ one string per line ]
  *
- *  % more words3.txt
- *  bed bug dad yes zoo ... all bad yet
+ * <p>% more words3.txt bed bug dad yes zoo ... all bad yet
  *
- *  % java BinaryInsertion < words3.txt
- *  all bad bed bug dad ... yes yet zoo   [ one string per line ]
+ * <p>% java BinaryInsertion < words3.txt all bad bed bug dad ... yes yet zoo [ one string per line
+ * ]
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code BinaryInsertion} class provides a static method for sorting an
- * array using an optimized binary insertion sort with half exchanges.
- * <p>
- * This implementation makes ~ n lg n compares for any array of length n.
- * However, in the worst case, the running time is quadratic because the
- * number of array accesses can be proportional to n^2 (e.g, if the array
- * is reverse sorted). As such, it is not suitable for sorting large
- * arrays (unless the number of inversions is small).
- * <p>
- * The sorting algorithm is stable and uses O(1) extra memory.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code BinaryInsertion} class provides a static method for sorting an array using an
+ * optimized binary insertion sort with half exchanges.
+ *
+ * <p>This implementation makes ~ n lg n compares for any array of length n. However, in the worst
+ * case, the running time is quadratic because the number of array accesses can be proportional to
+ * n^2 (e.g, if the array is reverse sorted). As such, it is not suitable for sorting large arrays
+ * (unless the number of inversions is small).
+ *
+ * <p>The sorting algorithm is stable and uses O(1) extra memory.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of <i>Algorithms, 4th
+ * Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Ivan Pesin
  * @author Robert Sedgewick
@@ -46,8 +42,7 @@ package com.minhnhat.algs4;
 public class BinaryInsertion {
 
   // This class should not be instantiated.
-  private BinaryInsertion() {
-  }
+  private BinaryInsertion() {}
 
   /**
    * Rearranges the array in ascending order, using the natural order.
@@ -69,34 +64,34 @@ public class BinaryInsertion {
 
       // insetion sort with "half exchanges"
       // (insert a[i] at index j and shift a[j], ..., a[i-1] to right)
-      for (int j = i; j > lo; --j)
-        a[j] = a[j - 1];
+      for (int j = i; j > lo; --j) a[j] = a[j - 1];
       a[lo] = v;
     }
     assert isSorted(a);
   }
 
-
-  /***************************************************************************
-   *  Helper sorting function.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Helper sorting
+   * function. *************************************************************************
+   */
 
   // is v < w ?
   private static boolean less(Comparable v, Comparable w) {
     return v.compareTo(w) < 0;
   }
 
-  /***************************************************************************
-   *  Check if array is sorted - useful for debugging.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Check if array is
+   * sorted - useful for debugging.
+   * *************************************************************************
+   */
   private static boolean isSorted(Comparable[] a) {
     return isSorted(a, 0, a.length - 1);
   }
 
   // is the array sorted from a[lo] to a[hi]
   private static boolean isSorted(Comparable[] a, int lo, int hi) {
-    for (int i = lo + 1; i <= hi; i++)
-      if (less(a[i], a[i - 1])) return false;
+    for (int i = lo + 1; i <= hi; i++) if (less(a[i], a[i - 1])) return false;
     return true;
   }
 
@@ -108,8 +103,8 @@ public class BinaryInsertion {
   }
 
   /**
-   * Reads in a sequence of strings from standard input; insertion sorts them;
-   * and prints them to standard output in ascending order.
+   * Reads in a sequence of strings from standard input; insertion sorts them; and prints them to
+   * standard output in ascending order.
    *
    * @param args the command-line arguments
    */
@@ -120,26 +115,24 @@ public class BinaryInsertion {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

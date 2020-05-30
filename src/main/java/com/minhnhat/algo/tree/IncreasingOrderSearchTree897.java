@@ -31,6 +31,7 @@ public class IncreasingOrderSearchTree897 {
     }
     return l;
   }
+
   public TreeNode increasingBST(TreeNode root) {
     List<Integer> list = treeToList(root);
     System.out.println(list);
@@ -40,11 +41,10 @@ public class IncreasingOrderSearchTree897 {
       for (int i = 1; i < list.size(); i++) {
         insertBinaryStatic(node, list.get(i));
       }
-return node;
+      return node;
     }
     System.out.println(list);
 
     return null;
   }
-
 }

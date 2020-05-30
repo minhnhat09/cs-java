@@ -41,13 +41,15 @@ public class LambdaMapExample {
     System.out.println("Map 2");
     map2.forEach((city, people) -> System.out.println(city + " : " + people));
 
-    map2.forEach((city, people) -> {
-      map1.merge(city, people, (peopleFromMap1, peopleFromMap2) -> {
-        peopleFromMap1.addAll(peopleFromMap2);
-        return peopleFromMap1;
-      });
-    });
-
-
+    map2.forEach(
+        (city, people) -> {
+          map1.merge(
+              city,
+              people,
+              (peopleFromMap1, peopleFromMap2) -> {
+                peopleFromMap1.addAll(peopleFromMap2);
+                return peopleFromMap1;
+              });
+        });
   }
 }

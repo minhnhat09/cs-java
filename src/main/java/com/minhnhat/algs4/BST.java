@@ -1,76 +1,56 @@
-/******************************************************************************
- *  Compilation:  javac BST.java
- *  Execution:    java BST
- *  Dependencies: StdIn.java StdOut.java Queue.java
- *  Data files:   https://algs4.cs.princeton.edu/32bst/tinyST.txt  
+/**
+ * **************************************************************************** Compilation: javac
+ * BST.java Execution: java BST Dependencies: StdIn.java StdOut.java Queue.java Data files:
+ * https://algs4.cs.princeton.edu/32bst/tinyST.txt
  *
- *  A symbol table implemented with a binary search tree.
+ * <p>A symbol table implemented with a binary search tree.
  *
- *  % more tinyST.txt
- *  S E A R C H E X A M P L E
+ * <p>% more tinyST.txt S E A R C H E X A M P L E
  *
- *  % java BST < tinyST.txt
- *  A 8
- *  C 4
- *  E 12
- *  H 5
- *  L 11
- *  M 9
- *  P 10
- *  R 3
- *  S 0
- *  X 7
+ * <p>% java BST < tinyST.txt A 8 C 4 E 12 H 5 L 11 M 9 P 10 R 3 S 0 X 7
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.NoSuchElementException;
 
 /**
- * The {@code BST} class represents an ordered symbol table of generic
- * key-value pairs.
- * It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
- * <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
- * It also provides ordered methods for finding the <em>minimum</em>,
- * <em>maximum</em>, <em>floor</em>, <em>select</em>, <em>ceiling</em>.
- * It also provides a <em>keys</em> method for iterating over all of the keys.
- * A symbol table implements the <em>associative array</em> abstraction:
- * when associating a value with a key that is already in the symbol table,
- * the convention is to replace the old value with the new value.
- * Unlike {@link java.util.Map}, this class uses the convention that
- * values cannot be {@code null}—setting the
- * value associated with a key to {@code null} is equivalent to deleting the key
- * from the symbol table.
- * <p>
- * This implementation uses an (unbalanced) binary search tree. It requires that
- * the key type implements the {@code Comparable} interface and calls the
- * {@code compareTo()} and method to compare two keys. It does not call either
- * {@code equals()} or {@code hashCode()}.
- * The <em>put</em>, <em>contains</em>, <em>remove</em>, <em>minimum</em>,
- * <em>maximum</em>, <em>ceiling</em>, <em>floor</em>, <em>select</em>, and
- * <em>rank</em>  operations each take
- * linear time in the worst case, if the tree becomes unbalanced.
- * The <em>size</em>, and <em>is-empty</em> operations take constant time.
- * Construction takes constant time.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/32bst">Section 3.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- * For other implementations, see {@link ST}, {@link BinarySearchST},
- * {@link SequentialSearchST}, {@link RedBlackBST},
- * {@link SeparateChainingHashST}, and {@link LinearProbingHashST},
+ * The {@code BST} class represents an ordered symbol table of generic key-value pairs. It supports
+ * the usual <em>put</em>, <em>get</em>, <em>contains</em>, <em>delete</em>, <em>size</em>, and
+ * <em>is-empty</em> methods. It also provides ordered methods for finding the <em>minimum</em>,
+ * <em>maximum</em>, <em>floor</em>, <em>select</em>, <em>ceiling</em>. It also provides a
+ * <em>keys</em> method for iterating over all of the keys. A symbol table implements the
+ * <em>associative array</em> abstraction: when associating a value with a key that is already in
+ * the symbol table, the convention is to replace the old value with the new value. Unlike {@link
+ * java.util.Map}, this class uses the convention that values cannot be {@code null}—setting the
+ * value associated with a key to {@code null} is equivalent to deleting the key from the symbol
+ * table.
+ *
+ * <p>This implementation uses an (unbalanced) binary search tree. It requires that the key type
+ * implements the {@code Comparable} interface and calls the {@code compareTo()} and method to
+ * compare two keys. It does not call either {@code equals()} or {@code hashCode()}. The
+ * <em>put</em>, <em>contains</em>, <em>remove</em>, <em>minimum</em>, <em>maximum</em>,
+ * <em>ceiling</em>, <em>floor</em>, <em>select</em>, and <em>rank</em> operations each take linear
+ * time in the worst case, if the tree becomes unbalanced. The <em>size</em>, and <em>is-empty</em>
+ * operations take constant time. Construction takes constant time.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/32bst">Section
+ * 3.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne. For other
+ * implementations, see {@link ST}, {@link BinarySearchST}, {@link SequentialSearchST}, {@link
+ * RedBlackBST}, {@link SeparateChainingHashST}, and {@link LinearProbingHashST},
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class BST<Key extends Comparable<Key>, Value> {
-  private Node root;             // root of BST
+  private Node root; // root of BST
 
   private class Node {
-    private Key key;           // sorted by key
-    private Value val;         // associated data
-    private Node left, right;  // left and right subtrees
-    private int size;          // number of nodes in subtree
+    private Key key; // sorted by key
+    private Value val; // associated data
+    private Node left, right; // left and right subtrees
+    private int size; // number of nodes in subtree
 
     public Node(Key key, Value val, int size) {
       this.key = key;
@@ -79,11 +59,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
   }
 
-  /**
-   * Initializes an empty symbol table.
-   */
-  public BST() {
-  }
+  /** Initializes an empty symbol table. */
+  public BST() {}
 
   /**
    * Returns true if this symbol table is empty.
@@ -113,8 +90,7 @@ public class BST<Key extends Comparable<Key>, Value> {
    * Does this symbol table contain the given key?
    *
    * @param key the key
-   * @return {@code true} if this symbol table contains {@code key} and
-   * {@code false} otherwise
+   * @return {@code true} if this symbol table contains {@code key} and {@code false} otherwise
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   public boolean contains(Key key) {
@@ -126,8 +102,8 @@ public class BST<Key extends Comparable<Key>, Value> {
    * Returns the value associated with the given key.
    *
    * @param key the key
-   * @return the value associated with the given key if the key is in the symbol table
-   * and {@code null} if the key is not in the symbol table
+   * @return the value associated with the given key if the key is in the symbol table and {@code
+   *     null} if the key is not in the symbol table
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   public Value get(Key key) {
@@ -144,10 +120,9 @@ public class BST<Key extends Comparable<Key>, Value> {
   }
 
   /**
-   * Inserts the specified key-value pair into the symbol table, overwriting the old
-   * value with the new value if the symbol table already contains the specified key.
-   * Deletes the specified key (and its associated value) from this symbol table
-   * if the specified value is {@code null}.
+   * Inserts the specified key-value pair into the symbol table, overwriting the old value with the
+   * new value if the symbol table already contains the specified key. Deletes the specified key
+   * (and its associated value) from this symbol table if the specified value is {@code null}.
    *
    * @param key the key
    * @param val the value
@@ -172,7 +147,6 @@ public class BST<Key extends Comparable<Key>, Value> {
     x.size = 1 + size(x.left) + size(x.right);
     return x;
   }
-
 
   /**
    * Removes the smallest key and associated value from the symbol table.
@@ -211,8 +185,8 @@ public class BST<Key extends Comparable<Key>, Value> {
   }
 
   /**
-   * Removes the specified key and its associated value from this symbol table
-   * (if the key is in this symbol table).
+   * Removes the specified key and its associated value from this symbol table (if the key is in
+   * this symbol table).
    *
    * @param key the key
    * @throws IllegalArgumentException if {@code key} is {@code null}
@@ -240,7 +214,6 @@ public class BST<Key extends Comparable<Key>, Value> {
     x.size = size(x.left) + size(x.right) + 1;
     return x;
   }
-
 
   /**
    * Returns the smallest key in the symbol table.
@@ -279,7 +252,7 @@ public class BST<Key extends Comparable<Key>, Value> {
    *
    * @param key the key
    * @return the largest key in the symbol table less than or equal to {@code key}
-   * @throws NoSuchElementException   if there is no such key
+   * @throws NoSuchElementException if there is no such key
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   public Key floor(Key key) {
@@ -317,7 +290,7 @@ public class BST<Key extends Comparable<Key>, Value> {
    *
    * @param key the key
    * @return the smallest key in the symbol table greater than or equal to {@code key}
-   * @throws NoSuchElementException   if there is no such key
+   * @throws NoSuchElementException if there is no such key
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   public Key ceiling(Key key) {
@@ -341,13 +314,12 @@ public class BST<Key extends Comparable<Key>, Value> {
   }
 
   /**
-   * Return the key in the symbol table whose rank is {@code k}.
-   * This is the (k+1)st smallest key in the symbol table.
+   * Return the key in the symbol table whose rank is {@code k}. This is the (k+1)st smallest key in
+   * the symbol table.
    *
    * @param k the order statistic
    * @return the key in the symbol table of rank {@code k}
-   * @throws IllegalArgumentException unless {@code k} is between 0 and
-   *                                  <em>n</em>–1
+   * @throws IllegalArgumentException unless {@code k} is between 0 and <em>n</em>–1
    */
   public Key select(int k) {
     if (k < 0 || k >= size()) {
@@ -388,9 +360,8 @@ public class BST<Key extends Comparable<Key>, Value> {
   }
 
   /**
-   * Returns all keys in the symbol table as an {@code Iterable}.
-   * To iterate over all of the keys in the symbol table named {@code st},
-   * use the foreach notation: {@code for (Key key : st.keys())}.
+   * Returns all keys in the symbol table as an {@code Iterable}. To iterate over all of the keys in
+   * the symbol table named {@code st}, use the foreach notation: {@code for (Key key : st.keys())}.
    *
    * @return all keys in the symbol table
    */
@@ -400,15 +371,12 @@ public class BST<Key extends Comparable<Key>, Value> {
   }
 
   /**
-   * Returns all keys in the symbol table in the given range,
-   * as an {@code Iterable}.
+   * Returns all keys in the symbol table in the given range, as an {@code Iterable}.
    *
    * @param lo minimum endpoint
    * @param hi maximum endpoint
-   * @return all keys in the symbol table between {@code lo}
-   * (inclusive) and {@code hi} (inclusive)
-   * @throws IllegalArgumentException if either {@code lo} or {@code hi}
-   *                                  is {@code null}
+   * @return all keys in the symbol table between {@code lo} (inclusive) and {@code hi} (inclusive)
+   * @throws IllegalArgumentException if either {@code lo} or {@code hi} is {@code null}
    */
   public Iterable<Key> keys(Key lo, Key hi) {
     if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
@@ -433,10 +401,9 @@ public class BST<Key extends Comparable<Key>, Value> {
    *
    * @param lo minimum endpoint
    * @param hi maximum endpoint
-   * @return the number of keys in the symbol table between {@code lo}
-   * (inclusive) and {@code hi} (inclusive)
-   * @throws IllegalArgumentException if either {@code lo} or {@code hi}
-   *                                  is {@code null}
+   * @return the number of keys in the symbol table between {@code lo} (inclusive) and {@code hi}
+   *     (inclusive)
+   * @throws IllegalArgumentException if either {@code lo} or {@code hi} is {@code null}
    */
   public int size(Key lo, Key hi) {
     if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
@@ -480,9 +447,10 @@ public class BST<Key extends Comparable<Key>, Value> {
     return keys;
   }
 
-  /*************************************************************************
-   *  Check integrity of BST data structure.
-   ***************************************************************************/
+  /**
+   * *********************************************************************** Check integrity of BST
+   * data structure. *************************************************************************
+   */
   private boolean check() {
     if (!isBST()) StdOut.println("Not in symmetric order");
     if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
@@ -519,13 +487,10 @@ public class BST<Key extends Comparable<Key>, Value> {
 
   // check that ranks are consistent
   private boolean isRankConsistent() {
-    for (int i = 0; i < size(); i++)
-      if (i != rank(select(i))) return false;
-    for (Key key : keys())
-      if (key.compareTo(select(rank(key))) != 0) return false;
+    for (int i = 0; i < size(); i++) if (i != rank(select(i))) return false;
+    for (Key key : keys()) if (key.compareTo(select(rank(key))) != 0) return false;
     return true;
   }
-
 
   /**
    * Unit tests the {@code BST} data type.
@@ -541,36 +506,32 @@ public class BST<Key extends Comparable<Key>, Value> {
       st.put(key, i);
     }
 
-    for (String s : st.levelOrder())
-      StdOut.println(s + " " + st.get(s));
+    for (String s : st.levelOrder()) StdOut.println(s + " " + st.get(s));
 
     StdOut.println();
 
-    for (String s : st.keys())
-      StdOut.println(s + " " + st.get(s));
+    for (String s : st.keys()) StdOut.println(s + " " + st.get(s));
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

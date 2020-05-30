@@ -1,56 +1,38 @@
-/******************************************************************************
- *  Compilation:  javac LinkedBag.java
- *  Execution:    java LinkedBag < input.txt
- *  Dependencies: StdIn.java StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * LinkedBag.java Execution: java LinkedBag < input.txt Dependencies: StdIn.java StdOut.java
  *
- *  A generic bag or multiset, implemented using a singly linked list.
+ * <p>A generic bag or multiset, implemented using a singly linked list.
  *
- *  % more tobe.txt 
- *  to be or not to - be - - that - - - is
+ * <p>% more tobe.txt to be or not to - be - - that - - - is
  *
- *  % java LinkedBag < tobe.txt
- *  size of bag = 14
- *  is
- *  -
- *  -
- *  -
- *  that
- *  -
- *  -
- *  be
- *  -
- *  to
- *  not
- *  or
- *  be
- *  to
+ * <p>% java LinkedBag < tobe.txt size of bag = 14 is - - - that - - be - to not or be to
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * The {@code LinkedBag} class represents a bag (or multiset) of
- * generic items. It supports insertion and iterating over the
- * items in arbitrary order.
- * <p>
- * This implementation uses a singly linked list with a non-static nested class Node.
- * See {@link Bag} for a version that uses a static nested class.
- * The <em>add</em>, <em>isEmpty</em>, and <em>size</em> operations
- * take constant time. Iteration takes time proportional to the number of items.
- * <p>
- * For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code LinkedBag} class represents a bag (or multiset) of generic items. It supports
+ * insertion and iterating over the items in arbitrary order.
+ *
+ * <p>This implementation uses a singly linked list with a non-static nested class Node. See {@link
+ * Bag} for a version that uses a static nested class. The <em>add</em>, <em>isEmpty</em>, and
+ * <em>size</em> operations take constant time. Iteration takes time proportional to the number of
+ * items.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section
+ * 1.3</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class LinkedBag<Item> implements Iterable<Item> {
-  private Node first;    // beginning of bag
-  private int n;         // number of elements in bag
+  private Node first; // beginning of bag
+  private int n; // number of elements in bag
 
   // helper linked list class
   private class Node {
@@ -58,9 +40,7 @@ public class LinkedBag<Item> implements Iterable<Item> {
     private Node next;
   }
 
-  /**
-   * Initializes an empty bag.
-   */
+  /** Initializes an empty bag. */
   public LinkedBag() {
     first = null;
     n = 0;
@@ -97,10 +77,7 @@ public class LinkedBag<Item> implements Iterable<Item> {
     n++;
   }
 
-
-  /**
-   * Returns an iterator that iterates over the items in the bag.
-   */
+  /** Returns an iterator that iterates over the items in the bag. */
   public Iterator<Item> iterator() {
     return new ListIterator();
   }
@@ -150,30 +127,26 @@ public class LinkedBag<Item> implements Iterable<Item> {
       StdOut.println(s);
     }
   }
-
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

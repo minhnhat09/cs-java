@@ -1,18 +1,13 @@
-/******************************************************************************
- *  Compilation:  javac SET.java
- *  Execution:    java SET
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * SET.java Execution: java SET Dependencies: StdOut.java
  *
- *  Set implementation using Java's TreeSet library.
- *  Does not allow duplicates.
+ * <p>Set implementation using Java's TreeSet library. Does not allow duplicates.
  *
- *  % java SET
- *  128.112.136.11
- *  208.216.181.15
- *  null
+ * <p>% java SET 128.112.136.11 208.216.181.15 null
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Iterator;
@@ -20,40 +15,34 @@ import java.util.NoSuchElementException;
 import java.util.TreeSet;
 
 /**
- * The {@code SET} class represents an ordered set of comparable keys.
- * It supports the usual <em>add</em>, <em>contains</em>, and <em>delete</em>
- * methods. It also provides ordered methods for finding the <em>minimum</em>,
- * <em>maximum</em>, <em>floor</em>, and <em>ceiling</em> and set methods
- * for <em>union</em>, <em>intersection</em>, and <em>equality</em>.
- * <p>
- * Even though this implementation include the method {@code equals()}, it
- * does not support the method {@code hashCode()} because sets are mutable.
- * <p>
- * This implementation uses a balanced binary search tree. It requires that
- * the key type implements the {@code Comparable} interface and calls the
- * {@code compareTo()} and method to compare two keys. It does not call either
- * {@code equals()} or {@code hashCode()}.
- * The <em>add</em>, <em>contains</em>, <em>delete</em>, <em>minimum</em>,
- * <em>maximum</em>, <em>ceiling</em>, and <em>floor</em> methods take
- * logarithmic time in the worst case.
- * The <em>size</em>, and <em>is-empty</em> operations take constant time.
- * Construction takes constant time.
- * <p>
- * For additional documentation, see
- * <a href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
- * <i>Algorithms in Java, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code SET} class represents an ordered set of comparable keys. It supports the usual
+ * <em>add</em>, <em>contains</em>, and <em>delete</em> methods. It also provides ordered methods
+ * for finding the <em>minimum</em>, <em>maximum</em>, <em>floor</em>, and <em>ceiling</em> and set
+ * methods for <em>union</em>, <em>intersection</em>, and <em>equality</em>.
+ *
+ * <p>Even though this implementation include the method {@code equals()}, it does not support the
+ * method {@code hashCode()} because sets are mutable.
+ *
+ * <p>This implementation uses a balanced binary search tree. It requires that the key type
+ * implements the {@code Comparable} interface and calls the {@code compareTo()} and method to
+ * compare two keys. It does not call either {@code equals()} or {@code hashCode()}. The
+ * <em>add</em>, <em>contains</em>, <em>delete</em>, <em>minimum</em>, <em>maximum</em>,
+ * <em>ceiling</em>, and <em>floor</em> methods take logarithmic time in the worst case. The
+ * <em>size</em>, and <em>is-empty</em> operations take constant time. Construction takes constant
+ * time.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of <i>Algorithms in Java,
+ * 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @param <Key> the generic type of a key in this set
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
-
 public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
   private TreeSet<Key> set;
 
-  /**
-   * Initializes an empty set.
-   */
+  /** Initializes an empty set. */
   public SET() {
     set = new TreeSet<Key>();
   }
@@ -78,13 +67,11 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
     set.add(key);
   }
 
-
   /**
    * Returns true if this set contains the given key.
    *
    * @param key the key
-   * @return {@code true} if this set contains {@code key};
-   * {@code false} otherwise
+   * @return {@code true} if this set contains {@code key}; {@code false} otherwise
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   public boolean contains(Key key) {
@@ -115,17 +102,15 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
   /**
    * Returns true if this set is empty.
    *
-   * @return {@code true} if this set is empty;
-   * {@code false} otherwise
+   * @return {@code true} if this set is empty; {@code false} otherwise
    */
   public boolean isEmpty() {
     return size() == 0;
   }
 
   /**
-   * Returns all of the keys in this set, as an iterator.
-   * To iterate over all of the keys in a set named {@code set}, use the
-   * foreach notation: {@code for (Key key : set)}.
+   * Returns all of the keys in this set, as an iterator. To iterate over all of the keys in a set
+   * named {@code set}, use the foreach notation: {@code for (Key key : set)}.
    *
    * @return an iterator to all of the keys in this set
    */
@@ -155,14 +140,13 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
     return set.first();
   }
 
-
   /**
    * Returns the smallest key in this set greater than or equal to {@code key}.
    *
    * @param key the key
    * @return the smallest key in this set greater than or equal to {@code key}
    * @throws IllegalArgumentException if {@code key} is {@code null}
-   * @throws NoSuchElementException   if there is no such key
+   * @throws NoSuchElementException if there is no such key
    */
   public Key ceiling(Key key) {
     if (key == null) throw new IllegalArgumentException("called ceiling() with a null key");
@@ -177,7 +161,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
    * @param key the key
    * @return the largest key in this set table less than or equal to {@code key}
    * @throws IllegalArgumentException if {@code key} is {@code null}
-   * @throws NoSuchElementException   if there is no such key
+   * @throws NoSuchElementException if there is no such key
    */
   public Key floor(Key key) {
     if (key == null) throw new IllegalArgumentException("called floor() with a null key");
@@ -213,7 +197,8 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
    * @throws IllegalArgumentException if {@code that} is {@code null}
    */
   public SET<Key> intersects(SET<Key> that) {
-    if (that == null) throw new IllegalArgumentException("called intersects() with a null argument");
+    if (that == null)
+      throw new IllegalArgumentException("called intersects() with a null argument");
     SET<Key> c = new SET<Key>();
     if (this.size() < that.size()) {
       for (Key x : this) {
@@ -229,15 +214,13 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
 
   /**
    * Compares this set to the specified set.
-   * <p>
-   * Note that this method declares two empty sets to be equal
-   * even if they are parameterized by different generic types.
-   * This is consistent with the behavior of {@code equals()}
-   * within Java's Collections framework.
+   *
+   * <p>Note that this method declares two empty sets to be equal even if they are parameterized by
+   * different generic types. This is consistent with the behavior of {@code equals()} within Java's
+   * Collections framework.
    *
    * @param other the other set
-   * @return {@code true} if this set equals {@code other};
-   * {@code false} otherwise
+   * @return {@code true} if this set equals {@code other}; {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -262,8 +245,8 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
   /**
    * Returns a string representation of this set.
    *
-   * @return a string representation of this set, enclosed in curly braces,
-   * with adjacent keys separated by a comma and a space
+   * @return a string representation of this set, enclosed in curly braces, with adjacent keys
+   *     separated by a comma and a space
    */
   @Override
   public String toString() {
@@ -282,7 +265,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
 
     // insert some keys
     set.add("www.cs.princeton.edu");
-    set.add("www.cs.princeton.edu");    // overwrite old value
+    set.add("www.cs.princeton.edu"); // overwrite old value
     set.add("www.princeton.edu");
     set.add("www.math.princeton.edu");
     set.add("www.yale.edu");
@@ -299,7 +282,6 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
     set.add("www.movies.com");
     set.add("www.cnn.com");
     set.add("www.iitb.ac.in");
-
 
     StdOut.println(set.contains("www.cs.princeton.edu"));
     StdOut.println(!set.contains("www.harvardsucks.com"));
@@ -326,29 +308,26 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
     SET<String> set2 = new SET<String>(set);
     StdOut.println(set.equals(set2));
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

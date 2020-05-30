@@ -9,5 +9,4 @@ public class LeapYear {
   private static boolean isDivisible(int value, int denominator) {
     return value % denominator == 0;
   }
-
 }

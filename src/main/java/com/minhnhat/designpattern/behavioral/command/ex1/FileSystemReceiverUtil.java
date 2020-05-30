@@ -2,14 +2,13 @@ package com.minhnhat.designpattern.behavioral.command.ex1;
 
 public class FileSystemReceiverUtil {
 
-  public static FileSystemReceiver getUnderlyingFileSystem(){
+  public static FileSystemReceiver getUnderlyingFileSystem() {
     String osName = System.getProperty("os.name");
-    System.out.println("Underlying OS is:"+osName);
-    if(osName.contains("Windows")){
+    System.out.println("Underlying OS is:" + osName);
+    if (osName.contains("Windows")) {
       return new WindowsFileSystemReceiver();
-    }else{
+    } else {
       return new UnixFileSystemReceiver();
     }
   }
-
 }

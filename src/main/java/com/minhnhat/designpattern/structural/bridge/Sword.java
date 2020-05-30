@@ -12,7 +12,6 @@ public class Sword implements Weapon {
   public void wield() {
     System.out.println("The sword is wielded.");
     enchantment.onActivate();
-
   }
 
   @Override

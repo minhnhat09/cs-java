@@ -10,7 +10,7 @@ public class Core {
       nodes.addFirst(head.data);
       head = head.next;
     }
-    while(!nodes.isEmpty()){
+    while (!nodes.isEmpty()) {
       System.out.println(nodes.poll());
     }
   }

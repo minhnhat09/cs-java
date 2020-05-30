@@ -5,8 +5,7 @@ import java.util.List;
 
 public class TextFileOperationExecutor {
 
-  public final List<TextFileOperation> textFileOperations
-          = new ArrayList<>();
+  public final List<TextFileOperation> textFileOperations = new ArrayList<>();
 
   public String executeOperation(TextFileOperation textFileOperation) {
     textFileOperations.add(textFileOperation);
