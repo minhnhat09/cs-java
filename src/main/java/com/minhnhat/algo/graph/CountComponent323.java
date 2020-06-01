@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class CountComponent323 {
-  class Edge {
+  public static class Edge {
     int first;
     int second;
   }
@@ -23,5 +23,6 @@ public class CountComponent323 {
       int from = e.first;
       int to = e.second;
     }
+    return 0;
   }
 }
