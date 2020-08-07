@@ -1,18 +1,14 @@
-/******************************************************************************
- *  Compilation:  javac StdAudio.java
- *  Execution:    java StdAudio
- *  Dependencies: none
+/**
+ * **************************************************************************** Compilation: javac
+ * StdAudio.java Execution: java StdAudio Dependencies: none
  *
- *  Simple library for reading, writing, and manipulating .wav files.
+ * <p>Simple library for reading, writing, and manipulating .wav files.
  *
+ * <p>Limitations ----------- - Does not seem to work properly when reading .wav files from a .jar
+ * file. - Assumes the audio is monaural, with sampling rate of 44,100.
  *
- *  Limitations
- *  -----------
- *    - Does not seem to work properly when reading .wav files from a .jar file.
- *    - Assumes the audio is monaural, with sampling rate of 44,100.
- *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import javax.sound.sampled.*;
@@ -28,34 +24,31 @@ import java.net.URL;
 // for playing midi sound files on some older systems
 
 /**
- * <i>Standard audio</i>. This class provides a basic capability for
- * creating, reading, and saving audio.
- * <p>
- * The audio format uses a sampling rate of 44,100 (CD quality audio), 16-bit, monaural.
+ * <i>Standard audio</i>. This class provides a basic capability for creating, reading, and saving
+ * audio.
  *
- * <p>
- * For additional documentation, see <a href="https://introcs.cs.princeton.edu/15inout">Section 1.5</a> of
- * <i>Computer Science: An Interdisciplinary Approach</i> by Robert Sedgewick and Kevin Wayne.
+ * <p>The audio format uses a sampling rate of 44,100 (CD quality audio), 16-bit, monaural.
+ *
+ * <p>For additional documentation, see <a href="https://introcs.cs.princeton.edu/15inout">Section
+ * 1.5</a> of <i>Computer Science: An Interdisciplinary Approach</i> by Robert Sedgewick and Kevin
+ * Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public final class StdAudio {
 
-  /**
-   * The sample rate - 44,100 Hz for CD quality audio.
-   */
+  /** The sample rate - 44,100 Hz for CD quality audio. */
   public static final int SAMPLE_RATE = 44100;
 
-  private static final int BYTES_PER_SAMPLE = 2;                // 16-bit audio
-  private static final int BITS_PER_SAMPLE = 16;                // 16-bit audio
-  private static final double MAX_16_BIT = Short.MAX_VALUE;     // 32,767
+  private static final int BYTES_PER_SAMPLE = 2; // 16-bit audio
+  private static final int BITS_PER_SAMPLE = 16; // 16-bit audio
+  private static final double MAX_16_BIT = Short.MAX_VALUE; // 32,767
   private static final int SAMPLE_BUFFER_SIZE = 4096;
 
-
-  private static SourceDataLine line;   // to play the sound
-  private static byte[] buffer;         // our internal buffer
-  private static int bufferSize = 0;    // number of samples currently in internal buffer
+  private static SourceDataLine line; // to play the sound
+  private static byte[] buffer; // our internal buffer
+  private static int bufferSize = 0; // number of samples currently in internal buffer
 
   private StdAudio() {
     // can not instantiate
@@ -88,18 +81,15 @@ public final class StdAudio {
     line.start();
   }
 
-
-  /**
-   * Closes standard audio.
-   */
+  /** Closes standard audio. */
   public static void close() {
     line.drain();
     line.stop();
   }
 
   /**
-   * Writes one sample (between -1.0 and +1.0) to standard audio.
-   * If the sample is outside the range, it will be clipped.
+   * Writes one sample (between -1.0 and +1.0) to standard audio. If the sample is outside the
+   * range, it will be clipped.
    *
    * @param sample the sample to play
    * @throws IllegalArgumentException if the sample is {@code Double.NaN}
@@ -114,7 +104,7 @@ public final class StdAudio {
     // convert to bytes
     short s = (short) (MAX_16_BIT * sample);
     buffer[bufferSize++] = (byte) s;
-    buffer[bufferSize++] = (byte) (s >> 8);   // little Endian
+    buffer[bufferSize++] = (byte) (s >> 8); // little Endian
 
     // send to sound card if buffer is full
     if (bufferSize >= buffer.length) {
@@ -124,8 +114,8 @@ public final class StdAudio {
   }
 
   /**
-   * Writes the array of samples (between -1.0 and +1.0) to standard audio.
-   * If a sample is outside the range, it will be clipped.
+   * Writes the array of samples (between -1.0 and +1.0) to standard audio. If a sample is outside
+   * the range, it will be clipped.
    *
    * @param samples the array of samples to play
    * @throws IllegalArgumentException if any sample is {@code Double.NaN}
@@ -139,8 +129,8 @@ public final class StdAudio {
   }
 
   /**
-   * Reads audio samples from a file (in .wav or .au format) and returns
-   * them as a double array with values between -1.0 and +1.0.
+   * Reads audio samples from a file (in .wav or .au format) and returns them as a double array with
+   * values between -1.0 and +1.0.
    *
    * @param filename the name of the audio file
    * @return the array of samples
@@ -150,7 +140,9 @@ public final class StdAudio {
     int n = data.length;
     double[] d = new double[n / 2];
     for (int i = 0; i < n / 2; i++) {
-      d[i] = ((short) (((data[2 * i + 1] & 0xFF) << 8) + (data[2 * i] & 0xFF))) / ((double) MAX_16_BIT);
+      d[i] =
+          ((short) (((data[2 * i + 1] & 0xFF) << 8) + (data[2 * i] & 0xFF)))
+              / ((double) MAX_16_BIT);
     }
     return d;
   }
@@ -169,7 +161,8 @@ public final class StdAudio {
         data = new byte[bytesToRead];
         int bytesRead = ais.read(data);
         if (bytesToRead != bytesRead)
-          throw new IllegalStateException("read only " + bytesRead + " of " + bytesToRead + " bytes");
+          throw new IllegalStateException(
+              "read only " + bytesRead + " of " + bytesToRead + " bytes");
       }
 
       // try to read from URL
@@ -180,7 +173,8 @@ public final class StdAudio {
         data = new byte[bytesToRead];
         int bytesRead = ais.read(data);
         if (bytesToRead != bytesRead)
-          throw new IllegalStateException("read only " + bytesRead + " of " + bytesToRead + " bytes");
+          throw new IllegalStateException(
+              "read only " + bytesRead + " of " + bytesToRead + " bytes");
       }
     } catch (IOException e) {
       throw new IllegalArgumentException("could not read '" + filename + "'", e);
@@ -195,7 +189,7 @@ public final class StdAudio {
    * Saves the double array as an audio file (using .wav or .au format).
    *
    * @param filename the name of the audio file
-   * @param samples  the array of samples
+   * @param samples the array of samples
    * @throws IllegalArgumentException if unable to save {@code filename}
    * @throws IllegalArgumentException if {@code samples} is {@code null}
    */
@@ -230,7 +224,6 @@ public final class StdAudio {
     }
   }
 
-
   /**
    * Plays an audio file (in .wav, .mid, or .au format) in a background thread.
    *
@@ -252,12 +245,14 @@ public final class StdAudio {
       // (if not, will throw an UnsupportedAudioFileException)
       AudioSystem.getAudioInputStream(is);
 
-      new Thread(new Runnable() {
-        @Override
-        public void run() {
-          stream(filename);
-        }
-      }).start();
+      new Thread(
+              new Runnable() {
+                @Override
+                public void run() {
+                  stream(filename);
+                }
+              })
+          .start();
     }
 
     // let's try Applet.newAudioClip() instead
@@ -270,9 +265,7 @@ public final class StdAudio {
     catch (IOException ioe) {
       throw new IllegalArgumentException("could not play '" + filename + "'", ioe);
     }
-
   }
-
 
   // play sound file using Applet.newAudioClip();
   private static void playApplet(String filename) {
@@ -352,10 +345,10 @@ public final class StdAudio {
     }
   }
 
-
-  /***************************************************************************
-   * Unit tests {@code StdAudio}.
-   ***************************************************************************/
+  /**
+   * ************************************************************************* Unit tests {@code
+   * StdAudio}. *************************************************************************
+   */
 
   // create a note (sine wave) of the given frequency (Hz), for the given
   // duration (seconds) scaled to the given volume (amplitude)
@@ -392,33 +385,30 @@ public final class StdAudio {
       StdAudio.play(note(hz, 1.0, 0.5));
     }
 
-
     // need to call this in non-interactive stuff so the program doesn't terminate
     // until all the sound leaves the speaker.
     StdAudio.close();
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

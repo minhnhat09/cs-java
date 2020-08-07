@@ -12,11 +12,11 @@ public class GoatLatin824 {
         split[i] += "ma";
       } else {
         if (split[i].length() > 1) {
-          split[i] = split[i].substring(1, split[i].length())+split[i].charAt(0);
+          split[i] = split[i].substring(1, split[i].length()) + split[i].charAt(0);
         }
         split[i] += "ma";
       }
-      for (int j = 0; j < i+1; j++) {
+      for (int j = 0; j < i + 1; j++) {
         split[i] += "a";
       }
     }

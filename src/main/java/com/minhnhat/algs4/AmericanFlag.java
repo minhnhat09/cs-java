@@ -1,59 +1,41 @@
-/******************************************************************************
- *  Compilation:  javac AmericanFlag.java
- *  Execution:    java AmericanFlag < input.txt
- *                java AmericanFlag int < input-non-negative-ints.txt  
- *  Dependencies: StdIn.java StdOut.java Stack.java
- *  Data files:   https://algs4.cs.princeton.edu/51radix/words3.txt
- *                https://algs4.cs.princeton.edu/51radix/shells.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * AmericanFlag.java Execution: java AmericanFlag < input.txt java AmericanFlag int <
+ * input-non-negative-ints.txt Dependencies: StdIn.java StdOut.java Stack.java Data files:
+ * https://algs4.cs.princeton.edu/51radix/words3.txt
+ * https://algs4.cs.princeton.edu/51radix/shells.txt
  *
- *  Sort an array of strings or integers in-place using American flag sort.
+ * <p>Sort an array of strings or integers in-place using American flag sort.
  *
- *  % java AmericanFlag < shells.txt 
- *  are
- *  by
- *  sea
- *  seashells
- *  seashells
- *  sells
- *  sells
- *  she
- *  she
- *  shells
- *  shore
- *  surely
- *  the
- *  the
+ * <p>% java AmericanFlag < shells.txt are by sea seashells seashells sells sells she she shells
+ * shore surely the the
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code AmericanFlag} class provides static methods for sorting an
- * array of extended ASCII strings or integers in-place using
- * American flag sort. This is a non-recursive implementation.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/51radix">Section 5.1</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne
- * and <a href = "http://static.usenix.org/publications/compsystems/1993/win_mcilroy.pdf">
- * Engineering Radix Sort</a> by McIlroy and Bostic.
- * For a version that uses only one auxilary array, see {@link AmericanFlagX}.
+ * The {@code AmericanFlag} class provides static methods for sorting an array of extended ASCII
+ * strings or integers in-place using American flag sort. This is a non-recursive implementation.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/51radix">Section
+ * 5.1</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne and <a href =
+ * "http://static.usenix.org/publications/compsystems/1993/win_mcilroy.pdf"> Engineering Radix
+ * Sort</a> by McIlroy and Bostic. For a version that uses only one auxilary array, see {@link
+ * AmericanFlagX}.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  * @author Ivan Pesin
  */
-
 public class AmericanFlag {
   private static final int BITS_PER_BYTE = 8;
-  private static final int BITS_PER_INT = 32;   // each Java int is 32 bits
-  private static final int R = 256;   // extend ASCII alphabet size
-  private static final int CUTOFF = 15;   // cutoff to insertion sort
+  private static final int BITS_PER_INT = 32; // each Java int is 32 bits
+  private static final int R = 256; // extend ASCII alphabet size
+  private static final int CUTOFF = 15; // cutoff to insertion sort
 
   // do not instantiate
-  private AmericanFlag() {
-  }
+  private AmericanFlag() {}
 
   // return dth character of s, -1 if d = length of string
   private static int charAt(String s, int d) {
@@ -63,8 +45,8 @@ public class AmericanFlag {
   }
 
   /**
-   * Rearranges the array of extended ASCII strings in ascending order.
-   * This is an unstable sorting algorithm.
+   * Rearranges the array of extended ASCII strings in ascending order. This is an unstable sorting
+   * algorithm.
    *
    * @param a the array to be sorted
    */
@@ -114,8 +96,7 @@ public class AmericanFlag {
       }
 
       // next[c] = location to place next string whose dth character = c
-      for (int c = 0; c < R + 2; c++)
-        next[c] = first[c];
+      for (int c = 0; c < R + 2; c++) next[c] = first[c];
 
       // permute data in place
       for (int k = lo; k <= hi; k++) {
@@ -138,8 +119,7 @@ public class AmericanFlag {
   // insertion sort a[lo..hi], starting at dth character
   private static void insertion(String[] a, int lo, int hi, int d) {
     for (int i = lo; i <= hi; i++)
-      for (int j = i; j > lo && less(a[j], a[j - 1], d); j--)
-        exch(a, j, j - 1);
+      for (int j = i; j > lo && less(a[j], a[j - 1], d); j--) exch(a, j, j - 1);
   }
 
   // exchange a[i] and a[j]
@@ -160,8 +140,8 @@ public class AmericanFlag {
   }
 
   /**
-   * Rearranges the array of 32-bit integers in ascending order.
-   * Currently assumes that the integers are nonnegative.
+   * Rearranges the array of 32-bit integers in ascending order. Currently assumes that the integers
+   * are nonnegative.
    *
    * @param a the array to be sorted
    */
@@ -175,8 +155,8 @@ public class AmericanFlag {
     Stack<Integer> st = new Stack<Integer>();
     int[] first = new int[R + 1];
     int[] next = new int[R + 1];
-    int mask = R - 1;   // 0xFF;
-    int d = 0;          // byte to sort by
+    int mask = R - 1; // 0xFF;
+    int d = 0; // byte to sort by
 
     st.push(lo);
     st.push(hi);
@@ -213,8 +193,7 @@ public class AmericanFlag {
       }
 
       // next[c] = location to place next string whose dth byte = c
-      for (int c = 0; c < R + 1; c++)
-        next[c] = first[c];
+      for (int c = 0; c < R + 1; c++) next[c] = first[c];
 
       // permute data in place
       for (int k = lo; k <= hi; k++) {
@@ -237,8 +216,7 @@ public class AmericanFlag {
   // insertion sort a[lo..hi], starting at dth byte
   private static void insertion(int[] a, int lo, int hi, int d) {
     for (int i = lo; i <= hi; i++)
-      for (int j = i; j > lo && less(a[j], a[j - 1], d); j--)
-        exch(a, j, j - 1);
+      for (int j = i; j > lo && less(a[j], a[j - 1], d); j--) exch(a, j, j - 1);
   }
 
   // exchange a[i] and a[j]
@@ -250,7 +228,7 @@ public class AmericanFlag {
 
   // is v less than w, starting at byte d
   private static boolean less(int v, int w, int d) {
-    int mask = R - 1;   // 0xFF;
+    int mask = R - 1; // 0xFF;
     for (int i = d; i < 4; i++) {
       int shift = BITS_PER_INT - BITS_PER_BYTE * i - BITS_PER_BYTE;
       int a = (v >> shift) & mask;
@@ -263,8 +241,7 @@ public class AmericanFlag {
 
   /**
    * Reads in a sequence of extended ASCII strings or non-negative ints from standard input;
-   * American flag sorts them;
-   * and prints them to standard output in ascending order.
+   * American flag sorts them; and prints them to standard output in ascending order.
    *
    * @param args the command-line arguments: "int" to read input as non-negative integers
    */
@@ -274,39 +251,34 @@ public class AmericanFlag {
       sort(a);
 
       // print results
-      for (int i = 0; i < a.length; i++)
-        StdOut.println(a[i]);
+      for (int i = 0; i < a.length; i++) StdOut.println(a[i]);
     } else {
       String[] a = StdIn.readAllStrings();
       sort(a);
       // print results
-      for (int i = 0; i < a.length; i++)
-        StdOut.println(a[i]);
+      for (int i = 0; i < a.length; i++) StdOut.println(a[i]);
     }
   }
 }
 
-
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

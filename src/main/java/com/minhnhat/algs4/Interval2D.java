@@ -1,27 +1,22 @@
-/******************************************************************************
- *  Compilation:  javac Interval2D.java
- *  Execution:    java Interval2D
- *  Dependencies: StdOut.java Interval1D.java StdDraw.java
+/**
+ * **************************************************************************** Compilation: javac
+ * Interval2D.java Execution: java Interval2D Dependencies: StdOut.java Interval1D.java StdDraw.java
  *
- *  2-dimensional interval data type.
+ * <p>2-dimensional interval data type.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code Interval2D} class represents a closed two-dimensional interval,
- * which represents all points (x, y) with both {@code xmin <= x <= xmax} and
- * {@code ymin <= y <= ymax}.
- * Two-dimensional intervals are immutable: their values cannot be changed
- * after they are created.
- * The class {@code Interval2D} includes methods for checking whether
- * a two-dimensional interval contains a point and determining whether
- * two two-dimensional intervals intersect.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Interval2D} class represents a closed two-dimensional interval, which represents all
+ * points (x, y) with both {@code xmin <= x <= xmax} and {@code ymin <= y <= ymax}. Two-dimensional
+ * intervals are immutable: their values cannot be changed after they are created. The class {@code
+ * Interval2D} includes methods for checking whether a two-dimensional interval contains a point and
+ * determining whether two two-dimensional intervals intersect.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section
+ * 1.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -45,8 +40,8 @@ public class Interval2D {
    * Does this two-dimensional interval intersect that two-dimensional interval?
    *
    * @param that the other two-dimensional interval
-   * @return true if this two-dimensional interval intersects
-   * that two-dimensional interval; false otherwise
+   * @return true if this two-dimensional interval intersects that two-dimensional interval; false
+   *     otherwise
    */
   public boolean intersects(Interval2D that) {
     if (!this.x.intersects(that.x)) return false;
@@ -76,8 +71,8 @@ public class Interval2D {
   /**
    * Returns a string representation of this two-dimensional interval.
    *
-   * @return a string representation of this two-dimensional interval
-   * in the form [xmin, xmax] x [ymin, ymax]
+   * @return a string representation of this two-dimensional interval in the form [xmin, xmax] x
+   *     [ymin, ymax]
    */
   public String toString() {
     return x + " x " + y;
@@ -97,7 +92,6 @@ public class Interval2D {
     return this.x.equals(that.x) && this.y.equals(that.y);
   }
 
-
   /**
    * Returns an integer hash code for this interval.
    *
@@ -109,9 +103,7 @@ public class Interval2D {
     return 31 * hash1 + hash2;
   }
 
-  /**
-   * Draws this two-dimensional interval to standard draw.
-   */
+  /** Draws this two-dimensional interval to standard draw. */
   public void draw() {
     double xc = (x.min() + x.max()) / 2.0;
     double yc = (y.min() + y.max()) / 2.0;
@@ -150,26 +142,24 @@ public class Interval2D {
   }
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

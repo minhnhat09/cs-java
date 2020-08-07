@@ -5,7 +5,6 @@ public class CoinChange322 {
     int[] MIN = new int[amount + 1];
     for (int i = 0; i < MIN.length; i++) {
       MIN[i] = Integer.MAX_VALUE;
-
     }
     MIN[0] = 0;
     for (int i = 1; i <= amount; i++) {
@@ -22,6 +21,6 @@ public class CoinChange322 {
   }
 
   public static void main(String[] args) {
-    System.out.println(coinChange(new int[]{186,419,83,408}, 6249));
+    System.out.println(coinChange(new int[] {186, 419, 83, 408}, 6249));
   }
 }

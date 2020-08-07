@@ -30,6 +30,5 @@ public class Flatmap {
     Date date2 = dateFormat.parse("2018-11-15 02:35:11.081");
     Timestamp timestamp2 = new java.sql.Timestamp(date1.getTime());
     System.out.println(timestamp1.equals(timestamp2));
-
   }
 }

@@ -7,17 +7,16 @@ public class LRUCache {
   LinkedHashMap<Integer, Integer> isbnToPrice;
 
   LRUCache(final int capacity) {
-    this.isbnToPrice = new LinkedHashMap<Integer, Integer>(capacity, 1.0f, true) {
-      /**
-       *
-       */
-      private static final long serialVersionUID = 1L;
+    this.isbnToPrice =
+        new LinkedHashMap<Integer, Integer>(capacity, 1.0f, true) {
+          /** */
+          private static final long serialVersionUID = 1L;
 
-      @Override
-      protected boolean removeEldestEntry(Map.Entry<Integer, Integer> entry) {
-        return this.size() > capacity;
-      }
-    };
+          @Override
+          protected boolean removeEldestEntry(Map.Entry<Integer, Integer> entry) {
+            return this.size() > capacity;
+          }
+        };
   }
 
   public Integer lookup(Integer key) {

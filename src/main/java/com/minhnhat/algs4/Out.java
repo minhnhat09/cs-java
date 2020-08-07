@@ -1,27 +1,24 @@
-/******************************************************************************
- *  Compilation:  javac Out.java
- *  Execution:    java Out
- *  Dependencies: none
+/**
+ * **************************************************************************** Compilation: javac
+ * Out.java Execution: java Out Dependencies: none
  *
- *  Writes data of various types to: stdout, file, or socket.
+ * <p>Writes data of various types to: stdout, file, or socket.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
-
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Locale;
 
 /**
- * This class provides methods for writing strings and numbers to
- * various output streams, including standard output, file, and sockets.
- * <p>
- * For additional documentation, see
- * <a href="https://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of
- * <i>Computer Science: An Interdisciplinary Approach</i>
- * by Robert Sedgewick and Kevin Wayne.
+ * This class provides methods for writing strings and numbers to various output streams, including
+ * standard output, file, and sockets.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of <i>Computer Science: An
+ * Interdisciplinary Approach</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -50,9 +47,7 @@ public class Out {
     }
   }
 
-  /**
-   * Initializes an output stream from standard output.
-   */
+  /** Initializes an output stream from standard output. */
   public Out() {
     this(System.out);
   }
@@ -87,16 +82,12 @@ public class Out {
     }
   }
 
-  /**
-   * Closes the output stream.
-   */
+  /** Closes the output stream. */
   public void close() {
     out.close();
   }
 
-  /**
-   * Terminates the current line by printing the line-separator string.
-   */
+  /** Terminates the current line by printing the line-separator string. */
   public void println() {
     out.println();
   }
@@ -166,8 +157,8 @@ public class Out {
 
   /**
    * Prints a byte to this output stream and then terminates the line.
-   * <p>
-   * To write binary data, see {@link BinaryOut}.
+   *
+   * <p>To write binary data, see {@link BinaryOut}.
    *
    * @param x the byte to print
    */
@@ -175,10 +166,7 @@ public class Out {
     out.println(x);
   }
 
-
-  /**
-   * Flushes this output stream.
-   */
+  /** Flushes this output stream. */
   public void print() {
     out.flush();
   }
@@ -264,11 +252,11 @@ public class Out {
   }
 
   /**
-   * Prints a formatted string to this output stream, using the specified format
-   * string and arguments, and then flushes this output stream.
+   * Prints a formatted string to this output stream, using the specified format string and
+   * arguments, and then flushes this output stream.
    *
    * @param format the format string
-   * @param args   the arguments accompanying the format string
+   * @param args the arguments accompanying the format string
    */
   public void printf(String format, Object... args) {
     out.printf(LOCALE, format, args);
@@ -276,18 +264,17 @@ public class Out {
   }
 
   /**
-   * Prints a formatted string to this output stream, using the specified
-   * locale, format string, and arguments, and then flushes this output stream.
+   * Prints a formatted string to this output stream, using the specified locale, format string, and
+   * arguments, and then flushes this output stream.
    *
    * @param locale the locale
    * @param format the format string
-   * @param args   the arguments accompanying the format string
+   * @param args the arguments accompanying the format string
    */
   public void printf(Locale locale, String format, Object... args) {
     out.printf(locale, format, args);
     out.flush();
   }
-
 
   /**
    * A test client.
@@ -307,29 +294,26 @@ public class Out {
     out.println("Test 2");
     out.close();
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

@@ -1,52 +1,50 @@
-/******************************************************************************
- *  Compilation:  javac CollisionSystem.java
- *  Execution:    java CollisionSystem n               (n random particles)
- *                java CollisionSystem < input.txt     (from a file) 
- *  Dependencies: StdDraw.java Particle.java MinPQ.java
- *  Data files:   https://algs4.cs.princeton.edu/61event/diffusion.txt
- *                https://algs4.cs.princeton.edu/61event/diffusion2.txt
- *                https://algs4.cs.princeton.edu/61event/diffusion3.txt
- *                https://algs4.cs.princeton.edu/61event/brownian.txt
- *                https://algs4.cs.princeton.edu/61event/brownian2.txt
- *                https://algs4.cs.princeton.edu/61event/billiards5.txt
- *                https://algs4.cs.princeton.edu/61event/pendulum.txt
+/**
+ * **************************************************************************** Compilation: javac
+ * CollisionSystem.java Execution: java CollisionSystem n (n random particles) java CollisionSystem
+ * < input.txt (from a file) Dependencies: StdDraw.java Particle.java MinPQ.java Data files:
+ * https://algs4.cs.princeton.edu/61event/diffusion.txt
+ * https://algs4.cs.princeton.edu/61event/diffusion2.txt
+ * https://algs4.cs.princeton.edu/61event/diffusion3.txt
+ * https://algs4.cs.princeton.edu/61event/brownian.txt
+ * https://algs4.cs.princeton.edu/61event/brownian2.txt
+ * https://algs4.cs.princeton.edu/61event/billiards5.txt
+ * https://algs4.cs.princeton.edu/61event/pendulum.txt
  *
- *  Creates n random particles and simulates their motion according
- *  to the laws of elastic collisions.
+ * <p>Creates n random particles and simulates their motion according to the laws of elastic
+ * collisions.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.awt.*;
 
 /**
- * The {@code CollisionSystem} class represents a collection of particles
- * moving in the unit box, according to the laws of elastic collision.
- * This event-based simulation relies on a priority queue.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/61event">Section 6.1</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code CollisionSystem} class represents a collection of particles moving in the unit box,
+ * according to the laws of elastic collision. This event-based simulation relies on a priority
+ * queue.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/61event">Section
+ * 6.1</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class CollisionSystem {
-  private static final double HZ = 0.5;    // number of redraw events per clock tick
+  private static final double HZ = 0.5; // number of redraw events per clock tick
 
-  private MinPQ<Event> pq;          // the priority queue
-  private double t = 0.0;          // simulation clock time
-  private Particle[] particles;     // the array of particles
+  private MinPQ<Event> pq; // the priority queue
+  private double t = 0.0; // simulation clock time
+  private Particle[] particles; // the array of particles
 
   /**
-   * Initializes a system with the specified collection of particles.
-   * The individual particles will be mutated during the simulation.
+   * Initializes a system with the specified collection of particles. The individual particles will
+   * be mutated during the simulation.
    *
    * @param particles the array of particles
    */
   public CollisionSystem(Particle[] particles) {
-    this.particles = particles.clone();   // defensive copy
+    this.particles = particles.clone(); // defensive copy
   }
 
   // updates priority queue with all new events for particle a
@@ -56,8 +54,7 @@ public class CollisionSystem {
     // particle-particle collisions
     for (int i = 0; i < particles.length; i++) {
       double dt = a.timeToHit(particles[i]);
-      if (t + dt <= limit)
-        pq.insert(new Event(t + dt, a, particles[i]));
+      if (t + dt <= limit) pq.insert(new Event(t + dt, a, particles[i]));
     }
 
     // particle-wall collisions
@@ -80,7 +77,6 @@ public class CollisionSystem {
     }
   }
 
-
   /**
    * Simulates the system of particles for the specified amount of time.
    *
@@ -93,8 +89,7 @@ public class CollisionSystem {
     for (int i = 0; i < particles.length; i++) {
       predict(particles[i], limit);
     }
-    pq.insert(new Event(0, null, null));        // redraw event
-
+    pq.insert(new Event(0, null, null)); // redraw event
 
     // the main event-driven simulation loop
     while (!pq.isEmpty()) {
@@ -106,15 +101,14 @@ public class CollisionSystem {
       Particle b = e.b;
 
       // physical collision, so update positions, and then simulation clock
-      for (int i = 0; i < particles.length; i++)
-        particles[i].move(e.time - t);
+      for (int i = 0; i < particles.length; i++) particles[i].move(e.time - t);
       t = e.time;
 
       // process event
-      if (a != null && b != null) a.bounceOff(b);              // particle-particle collision
-      else if (a != null && b == null) a.bounceOffVerticalWall();   // particle-wall collision
+      if (a != null && b != null) a.bounceOff(b); // particle-particle collision
+      else if (a != null && b == null) a.bounceOffVerticalWall(); // particle-wall collision
       else if (a == null && b != null) b.bounceOffHorizontalWall(); // particle-wall collision
-      else if (a == null && b == null) redraw(limit);               // redraw event
+      else if (a == null && b == null) redraw(limit); // redraw event
 
       // update the priority queue with new collisions involving a or b
       predict(a, limit);
@@ -122,23 +116,21 @@ public class CollisionSystem {
     }
   }
 
-
-  /***************************************************************************
-   *  An event during a particle collision simulation. Each event contains
-   *  the time at which it will occur (assuming no supervening actions)
-   *  and the particles a and b involved.
+  /**
+   * ************************************************************************* An event during a
+   * particle collision simulation. Each event contains the time at which it will occur (assuming no
+   * supervening actions) and the particles a and b involved.
    *
-   *    -  a and b both null:      redraw event
-   *    -  a null, b not null:     collision with vertical wall
-   *    -  a not null, b null:     collision with horizontal wall
-   *    -  a and b both not null:  binary collision between a and b
+   * <p>- a and b both null: redraw event - a null, b not null: collision with vertical wall - a not
+   * null, b null: collision with horizontal wall - a and b both not null: binary collision between
+   * a and b
    *
-   ***************************************************************************/
+   * <p>*************************************************************************
+   */
   private static class Event implements Comparable<Event> {
-    private final double time;         // time that event is scheduled to occur
-    private final Particle a, b;       // particles involved in event, possibly null
-    private final int countA, countB;  // collision counts at event creation
-
+    private final double time; // time that event is scheduled to occur
+    private final Particle a, b; // particles involved in event, possibly null
+    private final int countA, countB; // collision counts at event creation
 
     // create a new event to occur at time t involving a and b
     public Event(double t, Particle a, Particle b) {
@@ -162,15 +154,12 @@ public class CollisionSystem {
       if (b != null && b.count() != countB) return false;
       return true;
     }
-
   }
 
-
   /**
-   * Unit tests the {@code CollisionSystem} data type.
-   * Reads in the particle collision system from a standard input
-   * (or generates {@code N} random particles if a command-line integer
-   * is specified); simulates the system.
+   * Unit tests the {@code CollisionSystem} data type. Reads in the particle collision system from a
+   * standard input (or generates {@code N} random particles if a command-line integer is
+   * specified); simulates the system.
    *
    * @param args the command-line arguments
    */
@@ -188,8 +177,7 @@ public class CollisionSystem {
     if (args.length == 1) {
       int n = Integer.parseInt(args[0]);
       particles = new Particle[n];
-      for (int i = 0; i < n; i++)
-        particles[i] = new Particle();
+      for (int i = 0; i < n; i++) particles[i] = new Particle();
     }
 
     // or read from standard input
@@ -215,29 +203,26 @@ public class CollisionSystem {
     CollisionSystem system = new CollisionSystem(particles);
     system.simulate(10000);
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

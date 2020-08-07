@@ -8,12 +8,14 @@ public class InstanceMethodReference {
     final Mechanic mechanic = new Mechanic();
     Car car = new Car();
 
-    execute(car, new Consumer<Car>() {
-      @Override
-      public void accept(Car car) {
-        mechanic.fix(car);
-      }
-    });
+    execute(
+        car,
+        new Consumer<Car>() {
+          @Override
+          public void accept(Car car) {
+            mechanic.fix(car);
+          }
+        });
 
     execute(car, c -> mechanic.fix(c));
     execute(car, mechanic::fix);

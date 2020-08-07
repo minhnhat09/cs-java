@@ -1,8 +1,6 @@
 package com.minhnhat.designpattern.creational.prototype;
 
-/**
- * @author bethan
- */
+/** @author bethan */
 public class Main {
 
   public static void main(String[] args) {
@@ -15,6 +13,4 @@ public class Main {
     System.out.println(rabbit.getOwner().getName());
     System.out.println(rabbitCopy.getOwner().getName());
   }
-
 }
-

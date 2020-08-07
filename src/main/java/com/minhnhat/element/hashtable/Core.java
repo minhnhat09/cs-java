@@ -42,7 +42,9 @@ public class Core {
       if (obj == null || !(obj instanceof ContactList)) {
         return false;
       }
-      return this == obj ? true : new HashSet<>(names).equals(new HashSet<>(((ContactList) obj).names));
+      return this == obj
+          ? true
+          : new HashSet<>(names).equals(new HashSet<>(((ContactList) obj).names));
     }
 
     @Override
@@ -54,5 +56,4 @@ public class Core {
   public static List<ContactList> mergeContactLists(List<ContactList> contacts) {
     return new ArrayList<>(new HashSet<>(contacts));
   }
-
 }

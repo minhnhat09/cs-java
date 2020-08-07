@@ -9,7 +9,8 @@ public class SudokuSolver169 {
     return solvePartialSudoku(0, 0, partialAssignment);
   }
 
-  private static boolean validToAddVal(List<List<Integer>> partialAssignment, int i, int j, int val) {
+  private static boolean validToAddVal(
+      List<List<Integer>> partialAssignment, int i, int j, int val) {
     for (List<Integer> element : partialAssignment) {
       if (val == element.get(j)) {
         return false;
@@ -32,11 +33,9 @@ public class SudokuSolver169 {
       }
     }
     return true;
-
   }
 
   private static boolean solvePartialSudoku(int i, int i1, List<List<Integer>> partialAssignment) {
     return true;
   }
-
 }

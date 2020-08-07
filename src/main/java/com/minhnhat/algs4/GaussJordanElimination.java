@@ -1,58 +1,41 @@
-/******************************************************************************
- *  Compilation:  javac GaussJordanElimination.java
- *  Execution:    java GaussJordanElimination n
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * GaussJordanElimination.java Execution: java GaussJordanElimination n Dependencies: StdOut.java
  *
- *  Finds a solutions to Ax = b using Gauss-Jordan elimination with partial
- *  pivoting. If no solution exists, find a solution to yA = 0, yb != 0,
- *  which serves as a certificate of infeasibility.
+ * <p>Finds a solutions to Ax = b using Gauss-Jordan elimination with partial pivoting. If no
+ * solution exists, find a solution to yA = 0, yb != 0, which serves as a certificate of
+ * infeasibility.
  *
- *  % java GaussJordanElimination
- *  -1.000000
- *  2.000000
- *  2.000000
+ * <p>% java GaussJordanElimination -1.000000 2.000000 2.000000
  *
- *  3.000000
- *  -1.000000
- *  -2.000000
+ * <p>3.000000 -1.000000 -2.000000
  *
- *  System is infeasible
+ * <p>System is infeasible
  *
- *  -6.250000
- *  -4.500000
- *  0.000000
- *  0.000000
- *  1.000000
+ * <p>-6.250000 -4.500000 0.000000 0.000000 1.000000
  *
- *  System is infeasible
+ * <p>System is infeasible
  *
- *  -1.375000
- *  1.625000
- *  0.000000
+ * <p>-1.375000 1.625000 0.000000
  *
- *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 /**
- * The {@code GaussJordanElimination} data type provides methods
- * to solve a linear system of equations <em>Ax</em> = <em>b</em>,
- * where <em>A</em> is an <em>n</em>-by-<em>n</em> matrix
- * and <em>b</em> is a length <em>n</em> vector.
- * If no solution exists, it finds a solution <em>y</em> to
- * <em>yA</em> = 0, <em>yb</em> &ne; 0, which
- * which serves as a certificate of infeasibility.
- * <p>
- * This implementation uses Gauss-Jordan elimination with partial pivoting.
- * See {@link GaussianElimination} for an implementation that uses
- * Gaussian elimination (but does not provide the certificate of infeasibility).
- * For an industrial-strength numerical linear algebra library,
+ * The {@code GaussJordanElimination} data type provides methods to solve a linear system of
+ * equations <em>Ax</em> = <em>b</em>, where <em>A</em> is an <em>n</em>-by-<em>n</em> matrix and
+ * <em>b</em> is a length <em>n</em> vector. If no solution exists, it finds a solution <em>y</em>
+ * to <em>yA</em> = 0, <em>yb</em> &ne; 0, which which serves as a certificate of infeasibility.
+ *
+ * <p>This implementation uses Gauss-Jordan elimination with partial pivoting. See {@link
+ * GaussianElimination} for an implementation that uses Gaussian elimination (but does not provide
+ * the certificate of infeasibility). For an industrial-strength numerical linear algebra library,
  * see <a href = "http://math.nist.gov/javanumerics/jama/">JAMA</a>.
- * <p>
- * For additional documentation, see
- * <a href="https://algs4.cs.princeton.edu/99scientific">Section 9.9</a>
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ * <p>For additional documentation, see <a
+ * href="https://algs4.cs.princeton.edu/99scientific">Section 9.9</a> <i>Algorithms, 4th Edition</i>
+ * by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -60,15 +43,14 @@ package com.minhnhat.algs4;
 public class GaussJordanElimination {
   private static final double EPSILON = 1e-8;
 
-  private final int n;      // n-by-n system
-  private double[][] a;     // n-by-(n+1) augmented matrix
+  private final int n; // n-by-n system
+  private double[][] a; // n-by-(n+1) augmented matrix
 
   // Gauss-Jordan elimination with partial pivoting
 
   /**
-   * Solves the linear system of equations <em>Ax</em> = <em>b</em>,
-   * where <em>A</em> is an <em>n</em>-by-<em>n</em> matrix and <em>b</em>
-   * is a length <em>n</em> vector.
+   * Solves the linear system of equations <em>Ax</em> = <em>b</em>, where <em>A</em> is an
+   * <em>n</em>-by-<em>n</em> matrix and <em>b</em> is a length <em>n</em> vector.
    *
    * @param A the <em>n</em>-by-<em>n</em> constraint matrix
    * @param b the length <em>n</em> right-hand-side vector
@@ -78,16 +60,12 @@ public class GaussJordanElimination {
 
     // build augmented matrix
     a = new double[n][n + n + 1];
-    for (int i = 0; i < n; i++)
-      for (int j = 0; j < n; j++)
-        a[i][j] = A[i][j];
+    for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) a[i][j] = A[i][j];
 
     // only needed if you want to find certificate of infeasibility (or compute inverse)
-    for (int i = 0; i < n; i++)
-      a[i][n + i] = 1.0;
+    for (int i = 0; i < n; i++) a[i][n + i] = 1.0;
 
-    for (int i = 0; i < n; i++)
-      a[i][n + n] = b[i];
+    for (int i = 0; i < n; i++) a[i][n + n] = b[i];
 
     solve();
 
@@ -130,7 +108,6 @@ public class GaussJordanElimination {
     a[row2] = temp;
   }
 
-
   // pivot on entry (p, q) using Gauss-Jordan elimination
   private void pivot(int p, int q) {
 
@@ -143,45 +120,39 @@ public class GaussJordanElimination {
     }
 
     // zero out column q
-    for (int i = 0; i < n; i++)
-      if (i != p) a[i][q] = 0.0;
+    for (int i = 0; i < n; i++) if (i != p) a[i][q] = 0.0;
 
     // scale row p (ok to go from q+1 to n, but do this for consistency with simplex pivot)
-    for (int j = 0; j <= n + n; j++)
-      if (j != q) a[p][j] /= a[p][q];
+    for (int j = 0; j <= n + n; j++) if (j != q) a[p][j] /= a[p][q];
     a[p][q] = 1.0;
   }
 
   /**
    * Returns a solution to the linear system of equations <em>Ax</em> = <em>b</em>.
    *
-   * @return a solution <em>x</em> to the linear system of equations
-   * <em>Ax</em> = <em>b</em>; {@code null} if no such solution
+   * @return a solution <em>x</em> to the linear system of equations <em>Ax</em> = <em>b</em>;
+   *     {@code null} if no such solution
    */
   public double[] primal() {
     double[] x = new double[n];
     for (int i = 0; i < n; i++) {
-      if (Math.abs(a[i][i]) > EPSILON)
-        x[i] = a[i][n + n] / a[i][i];
-      else if (Math.abs(a[i][n + n]) > EPSILON)
-        return null;
+      if (Math.abs(a[i][i]) > EPSILON) x[i] = a[i][n + n] / a[i][i];
+      else if (Math.abs(a[i][n + n]) > EPSILON) return null;
     }
     return x;
   }
 
   /**
-   * Returns a solution to the linear system of equations <em>yA</em> = 0,
-   * <em>yb</em> &ne; 0.
+   * Returns a solution to the linear system of equations <em>yA</em> = 0, <em>yb</em> &ne; 0.
    *
-   * @return a solution <em>y</em> to the linear system of equations
-   * <em>yA</em> = 0, <em>yb</em> &ne; 0; {@code null} if no such solution
+   * @return a solution <em>y</em> to the linear system of equations <em>yA</em> = 0, <em>yb</em>
+   *     &ne; 0; {@code null} if no such solution
    */
   public double[] dual() {
     double[] y = new double[n];
     for (int i = 0; i < n; i++) {
       if ((Math.abs(a[i][i]) <= EPSILON) && (Math.abs(a[i][n + n]) > EPSILON)) {
-        for (int j = 0; j < n; j++)
-          y[j] = a[i][n + j];
+        for (int j = 0; j < n; j++) y[j] = a[i][n + j];
         return y;
       }
     }
@@ -189,11 +160,11 @@ public class GaussJordanElimination {
   }
 
   /**
-   * Returns true if there exists a solution to the linear system of
-   * equations <em>Ax</em> = <em>b</em>.
+   * Returns true if there exists a solution to the linear system of equations <em>Ax</em> =
+   * <em>b</em>.
    *
-   * @return {@code true} if there exists a solution to the linear system
-   * of equations <em>Ax</em> = <em>b</em>; {@code false} otherwise
+   * @return {@code true} if there exists a solution to the linear system of equations <em>Ax</em> =
+   *     <em>b</em>; {@code false} otherwise
    */
   public boolean isFeasible() {
     return primal() != null;
@@ -213,7 +184,6 @@ public class GaussJordanElimination {
     }
     StdOut.println();
   }
-
 
   // check that Ax = b or yA = 0, yb != 0
   private boolean certifySolution(double[][] A, double[] b) {
@@ -262,7 +232,6 @@ public class GaussJordanElimination {
     }
   }
 
-
   private static void test(String name, double[][] A, double[] b) {
     StdOut.println("----------------------------------------------------");
     StdOut.println(name);
@@ -285,13 +254,12 @@ public class GaussJordanElimination {
     StdOut.println();
   }
 
-
   // 3-by-3 nonsingular system
   private static void test1() {
     double[][] A = {
-            {0, 1, 1},
-            {2, 4, -2},
-            {0, 3, 15}
+      {0, 1, 1},
+      {2, 4, -2},
+      {0, 3, 15}
     };
     double[] b = {4, 2, 36};
     test("test 1", A, b);
@@ -300,9 +268,9 @@ public class GaussJordanElimination {
   // 3-by-3 nonsingular system
   private static void test2() {
     double[][] A = {
-            {1, -3, 1},
-            {2, -8, 8},
-            {-6, 3, -15}
+      {1, -3, 1},
+      {2, -8, 8},
+      {-6, 3, -15}
     };
     double[] b = {4, -2, 9};
     test("test 2", A, b);
@@ -312,11 +280,11 @@ public class GaussJordanElimination {
   // y = [ -1, 0, 1, 1, 0 ]
   private static void test3() {
     double[][] A = {
-            {2, -3, -1, 2, 3},
-            {4, -4, -1, 4, 11},
-            {2, -5, -2, 2, -1},
-            {0, 2, 1, 0, 4},
-            {-4, 6, 0, 0, 7},
+      {2, -3, -1, 2, 3},
+      {4, -4, -1, 4, 11},
+      {2, -5, -2, 2, -1},
+      {0, 2, 1, 0, 4},
+      {-4, 6, 0, 0, 7},
     };
     double[] b = {4, 4, 9, -6, 5};
     test("test 3", A, b);
@@ -325,11 +293,11 @@ public class GaussJordanElimination {
   // 5-by-5 singluar: infinitely many solutions
   private static void test4() {
     double[][] A = {
-            {2, -3, -1, 2, 3},
-            {4, -4, -1, 4, 11},
-            {2, -5, -2, 2, -1},
-            {0, 2, 1, 0, 4},
-            {-4, 6, 0, 0, 7},
+      {2, -3, -1, 2, 3},
+      {4, -4, -1, 4, 11},
+      {2, -5, -2, 2, -1},
+      {0, 2, 1, 0, 4},
+      {-4, 6, 0, 0, 7},
     };
     double[] b = {4, 4, 9, -5, 5};
     test("test 4", A, b);
@@ -339,9 +307,9 @@ public class GaussJordanElimination {
   // y = [ 1, 0, 1/3 ]
   private static void test5() {
     double[][] A = {
-            {2, -1, 1},
-            {3, 2, -4},
-            {-6, 3, -3},
+      {2, -1, 1},
+      {3, 2, -4},
+      {-6, 3, -3},
     };
     double[] b = {1, 4, 2};
     test("test 5", A, b);
@@ -350,9 +318,9 @@ public class GaussJordanElimination {
   // 3-by-3 singular: infinitely many solutions
   private static void test6() {
     double[][] A = {
-            {1, -1, 2},
-            {4, 4, -2},
-            {-2, 2, -4},
+      {1, -1, 2},
+      {4, 4, -2},
+      {-2, 2, -4},
     };
     double[] b = {-3, 1, 6};
     test("test 6 (infinitely many solutions)", A, b);
@@ -375,20 +343,14 @@ public class GaussJordanElimination {
     // n-by-n random system (likely full rank)
     int n = Integer.parseInt(args[0]);
     double[][] A = new double[n][n];
-    for (int i = 0; i < n; i++)
-      for (int j = 0; j < n; j++)
-        A[i][j] = StdRandom.uniform(1000);
+    for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) A[i][j] = StdRandom.uniform(1000);
     double[] b = new double[n];
-    for (int i = 0; i < n; i++)
-      b[i] = StdRandom.uniform(1000);
+    for (int i = 0; i < n; i++) b[i] = StdRandom.uniform(1000);
     test("random " + n + "-by-" + n + " (likely full rank)", A, b);
-
 
     // n-by-n random system (likely infeasible)
     A = new double[n][n];
-    for (int i = 0; i < n - 1; i++)
-      for (int j = 0; j < n; j++)
-        A[i][j] = StdRandom.uniform(1000);
+    for (int i = 0; i < n - 1; i++) for (int j = 0; j < n; j++) A[i][j] = StdRandom.uniform(1000);
     for (int i = 0; i < n - 1; i++) {
       double alpha = StdRandom.uniform(11) - 5.0;
       for (int j = 0; j < n; j++) {
@@ -396,33 +358,29 @@ public class GaussJordanElimination {
       }
     }
     b = new double[n];
-    for (int i = 0; i < n; i++)
-      b[i] = StdRandom.uniform(1000);
+    for (int i = 0; i < n; i++) b[i] = StdRandom.uniform(1000);
     test("random " + n + "-by-" + n + " (likely infeasible)", A, b);
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

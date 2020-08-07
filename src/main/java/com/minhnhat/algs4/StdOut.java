@@ -1,12 +1,11 @@
-/******************************************************************************
- *  Compilation:  javac StdOut.java
- *  Execution:    java StdOut
- *  Dependencies: none
+/**
+ * **************************************************************************** Compilation: javac
+ * StdOut.java Execution: java StdOut Dependencies: none
  *
- *  Writes data of various types to standard output.
+ * <p>Writes data of various types to standard output.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.io.OutputStreamWriter;
@@ -16,17 +15,16 @@ import java.util.Locale;
 
 /**
  * This class provides methods for printing strings and numbers to standard output.
- * <p>
- * <b>Getting started.</b>
- * To use this class, you must have {@code StdOut.class} in your
- * Java classpath. If you used our autoinstaller, you should be all set.
- * Otherwise, either download
- * <a href = "https://introcs.cs.princeton.edu/java/code/stdlib.jar">stdlib.jar</a>
- * and add to your Java classpath or download
- * <a href = "https://introcs.cs.princeton.edu/java/stdlib/StdOut.java">StdOut.java</a>
- * and put a copy in your working directory.
- * <p>
- * Here is an example program that uses {@code StdOut}:
+ *
+ * <p><b>Getting started.</b> To use this class, you must have {@code StdOut.class} in your Java
+ * classpath. If you used our autoinstaller, you should be all set. Otherwise, either download <a
+ * href = "https://introcs.cs.princeton.edu/java/code/stdlib.jar">stdlib.jar</a> and add to your
+ * Java classpath or download <a href =
+ * "https://introcs.cs.princeton.edu/java/stdlib/StdOut.java">StdOut.java</a> and put a copy in your
+ * working directory.
+ *
+ * <p>Here is an example program that uses {@code StdOut}:
+ *
  * <pre>
  *   public class TestStdOut {
  *       public static void main(String[] args) {
@@ -38,25 +36,22 @@ import java.util.Locale;
  *       }
  *   }
  *  </pre>
- * <p>
- * <b>Differences with System.out.</b>
- * The behavior of {@code StdOut} is similar to that of {@link System#out},
- * but there are a few technical differences:
+ *
+ * <p><b>Differences with System.out.</b> The behavior of {@code StdOut} is similar to that of
+ * {@link System#out}, but there are a few technical differences:
+ *
  * <ul>
- * <li> {@code StdOut} coerces the character-set encoding to UTF-8,
- * which is a standard character encoding for Unicode.
- * <li> {@code StdOut} coerces the locale to {@link Locale#US},
- * for consistency with {@link StdIn}, {@link Double#parseDouble(String)},
- * and floating-point literals.
- * <li> {@code StdOut} <em>flushes</em> standard output after each call to
- * {@code print()} so that text will appear immediately in the terminal.
+ *   <li>{@code StdOut} coerces the character-set encoding to UTF-8, which is a standard character
+ *       encoding for Unicode.
+ *   <li>{@code StdOut} coerces the locale to {@link Locale#US}, for consistency with {@link StdIn},
+ *       {@link Double#parseDouble(String)}, and floating-point literals.
+ *   <li>{@code StdOut} <em>flushes</em> standard output after each call to {@code print()} so that
+ *       text will appear immediately in the terminal.
  * </ul>
- * <p>
- * <b>Reference.</b>
- * For additional documentation,
- * see <a href="https://introcs.cs.princeton.edu/15inout">Section 1.5</a> of
- * <em>Computer Science: An Interdisciplinary Approach</em>
- * by Robert Sedgewick and Kevin Wayne.
+ *
+ * <p><b>Reference.</b> For additional documentation, see <a
+ * href="https://introcs.cs.princeton.edu/15inout">Section 1.5</a> of <em>Computer Science: An
+ * Interdisciplinary Approach</em> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -82,24 +77,20 @@ public final class StdOut {
   }
 
   // don't instantiate
-  private StdOut() {
-  }
+  private StdOut() {}
 
   /**
    * Closes standard output.
    *
-   * @deprecated Calling close() permanently disables standard output;
-   * subsequent calls to StdOut.println() or System.out.println()
-   * will no longer produce output on standard output.
+   * @deprecated Calling close() permanently disables standard output; subsequent calls to
+   *     StdOut.println() or System.out.println() will no longer produce output on standard output.
    */
   @Deprecated
   public static void close() {
     out.close();
   }
 
-  /**
-   * Terminates the current line by printing the line-separator string.
-   */
+  /** Terminates the current line by printing the line-separator string. */
   public static void println() {
     out.println();
   }
@@ -178,8 +169,8 @@ public final class StdOut {
 
   /**
    * Prints a byte to standard output and then terminates the line.
-   * <p>
-   * To write binary data, see {@link BinaryStdOut}.
+   *
+   * <p>To write binary data, see {@link BinaryStdOut}.
    *
    * @param x the byte to print
    */
@@ -187,9 +178,7 @@ public final class StdOut {
     out.println(x);
   }
 
-  /**
-   * Flushes standard output.
-   */
+  /** Flushes standard output. */
   public static void print() {
     out.flush();
   }
@@ -285,11 +274,13 @@ public final class StdOut {
   }
 
   /**
-   * Prints a formatted string to standard output, using the specified format
-   * string and arguments, and then flushes standard output.
+   * Prints a formatted string to standard output, using the specified format string and arguments,
+   * and then flushes standard output.
    *
-   * @param format the <a href = "http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax">format string</a>
-   * @param args   the arguments accompanying the format string
+   * @param format the <a href =
+   *     "http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax">format
+   *     string</a>
+   * @param args the arguments accompanying the format string
    */
   public static void printf(String format, Object... args) {
     out.printf(LOCALE, format, args);
@@ -297,12 +288,14 @@ public final class StdOut {
   }
 
   /**
-   * Prints a formatted string to standard output, using the locale and
-   * the specified format string and arguments; then flushes standard output.
+   * Prints a formatted string to standard output, using the locale and the specified format string
+   * and arguments; then flushes standard output.
    *
    * @param locale the locale
-   * @param format the <a href = "http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax">format string</a>
-   * @param args   the arguments accompanying the format string
+   * @param format the <a href =
+   *     "http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax">format
+   *     string</a>
+   * @param args the arguments accompanying the format string
    */
   public static void printf(Locale locale, String format, Object... args) {
     out.printf(locale, format, args);
@@ -322,29 +315,26 @@ public final class StdOut {
     StdOut.println(true);
     StdOut.printf("%.6f\n", 1.0 / 7.0);
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

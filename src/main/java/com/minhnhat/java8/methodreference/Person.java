@@ -22,7 +22,6 @@ public class Person {
     System.out.println(Arrays.toString(people.toArray()));
     people.sort(Comparator.comparing(Person::getName).thenComparing(Person::getAge));
     System.out.println(Arrays.toString(people.toArray()));
-
   }
 
   public String getName() {
@@ -43,9 +42,6 @@ public class Person {
 
   @Override
   public String toString() {
-    return "Person{" +
-            "name='" + name + '\'' +
-            ", age=" + age +
-            '}';
+    return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
   }
 }

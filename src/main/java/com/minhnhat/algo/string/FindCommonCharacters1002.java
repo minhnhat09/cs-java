@@ -16,6 +16,4 @@ public class FindCommonCharacters1002 {
 
     return null;
   }
-
-
 }

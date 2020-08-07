@@ -23,7 +23,7 @@ public class Bits {
     binary = new StringBuilder(binary).reverse().toString();
     int total = 0;
     List<String> s = new ArrayList<>(Arrays.asList(binary.split("")));
-    for (int i = 0;  i < s.size(); i++) {
+    for (int i = 0; i < s.size(); i++) {
       if ("1".equals(s.get(i))) {
         total += Math.pow(2, i);
       }
@@ -32,15 +32,17 @@ public class Bits {
   }
 
   public static String addBinary(String a, String b) {
-    int total = binaryToNum(a)+binaryToNum(b);
-    if(total == 0){
+    int total = binaryToNum(a) + binaryToNum(b);
+    if (total == 0) {
       return "0";
     }
     return numtoBinary(total);
   }
 
   public static void main(String[] args) {
-    System.out.println(addBinary("10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101", "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011"));
-
+    System.out.println(
+        addBinary(
+            "10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101",
+            "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011"));
   }
 }

@@ -1,43 +1,39 @@
-/******************************************************************************
- *  Compilation:  javac Transaction.java
- *  Execution:    java Transaction
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * Transaction.java Execution: java Transaction Dependencies: StdOut.java
  *
- *  Data type for commercial transactions.
+ * <p>Data type for commercial transactions.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * The {@code Transaction} class is an immutable data type to encapsulate a
- * commercial transaction with a customer name, date, and amount.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/12oop">Section 1.2</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Transaction} class is an immutable data type to encapsulate a commercial transaction
+ * with a customer name, date, and amount.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/12oop">Section
+ * 1.2</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
 public class Transaction implements Comparable<Transaction> {
-  private final String who;      // customer
-  private final Date when;     // date
-  private final double amount;   // amount
-
+  private final String who; // customer
+  private final Date when; // date
+  private final double amount; // amount
 
   /**
    * Initializes a new transaction from the given arguments.
    *
-   * @param who    the person involved in this transaction
-   * @param when   the date of this transaction
+   * @param who the person involved in this transaction
+   * @param when the date of this transaction
    * @param amount the amount of this transaction
-   * @throws IllegalArgumentException if {@code amount}
-   *                                  is {@code Double.NaN}, {@code Double.POSITIVE_INFINITY},
-   *                                  or {@code Double.NEGATIVE_INFINITY}
+   * @throws IllegalArgumentException if {@code amount} is {@code Double.NaN}, {@code
+   *     Double.POSITIVE_INFINITY}, or {@code Double.NEGATIVE_INFINITY}
    */
   public Transaction(String who, Date when, double amount) {
     if (Double.isNaN(amount) || Double.isInfinite(amount))
@@ -51,9 +47,8 @@ public class Transaction implements Comparable<Transaction> {
    * Initializes a new transaction by parsing a string of the form NAME DATE AMOUNT.
    *
    * @param transaction the string to parse
-   * @throws IllegalArgumentException if {@code amount}
-   *                                  is {@code Double.NaN}, {@code Double.POSITIVE_INFINITY},
-   *                                  or {@code Double.NEGATIVE_INFINITY}
+   * @throws IllegalArgumentException if {@code amount} is {@code Double.NaN}, {@code
+   *     Double.POSITIVE_INFINITY}, or {@code Double.NEGATIVE_INFINITY}
    */
   public Transaction(String transaction) {
     String[] a = transaction.split("\\s+");
@@ -105,9 +100,8 @@ public class Transaction implements Comparable<Transaction> {
    * Compares two transactions by amount.
    *
    * @param that the other transaction
-   * @return { a negative integer, zero, a positive integer}, depending
-   * on whether the amount of this transaction is { less than,
-   * equal to, or greater than } the amount of that transaction
+   * @return { a negative integer, zero, a positive integer}, depending on whether the amount of
+   *     this transaction is { less than, equal to, or greater than } the amount of that transaction
    */
   public int compareTo(Transaction that) {
     return Double.compare(this.amount, that.amount);
@@ -125,10 +119,10 @@ public class Transaction implements Comparable<Transaction> {
     if (other == null) return false;
     if (other.getClass() != this.getClass()) return false;
     Transaction that = (Transaction) other;
-    return (this.amount == that.amount) && (this.who.equals(that.who))
-            && (this.when.equals(that.when));
+    return (this.amount == that.amount)
+        && (this.who.equals(that.who))
+        && (this.when.equals(that.when));
   }
-
 
   /**
    * Returns a hash code for this transaction.
@@ -144,9 +138,7 @@ public class Transaction implements Comparable<Transaction> {
     // return Objects.hash(who, when, amount);
   }
 
-  /**
-   * Compares two transactions by customer name.
-   */
+  /** Compares two transactions by customer name. */
   public static class WhoOrder implements Comparator<Transaction> {
 
     @Override
@@ -155,9 +147,7 @@ public class Transaction implements Comparable<Transaction> {
     }
   }
 
-  /**
-   * Compares two transactions by date.
-   */
+  /** Compares two transactions by date. */
   public static class WhenOrder implements Comparator<Transaction> {
 
     @Override
@@ -166,9 +156,7 @@ public class Transaction implements Comparable<Transaction> {
     }
   }
 
-  /**
-   * Compares two transactions by amount.
-   */
+  /** Compares two transactions by amount. */
   public static class HowMuchOrder implements Comparator<Transaction> {
 
     @Override
@@ -176,7 +164,6 @@ public class Transaction implements Comparable<Transaction> {
       return Double.compare(v.amount, w.amount);
     }
   }
-
 
   /**
    * Unit tests the {@code Transaction} data type.
@@ -191,52 +178,44 @@ public class Transaction implements Comparable<Transaction> {
     a[3] = new Transaction("Dijkstra 8/22/2007 2678.40");
 
     StdOut.println("Unsorted");
-    for (int i = 0; i < a.length; i++)
-      StdOut.println(a[i]);
+    for (int i = 0; i < a.length; i++) StdOut.println(a[i]);
     StdOut.println();
 
     StdOut.println("Sort by date");
     Arrays.sort(a, new Transaction.WhenOrder());
-    for (int i = 0; i < a.length; i++)
-      StdOut.println(a[i]);
+    for (int i = 0; i < a.length; i++) StdOut.println(a[i]);
     StdOut.println();
 
     StdOut.println("Sort by customer");
     Arrays.sort(a, new Transaction.WhoOrder());
-    for (int i = 0; i < a.length; i++)
-      StdOut.println(a[i]);
+    for (int i = 0; i < a.length; i++) StdOut.println(a[i]);
     StdOut.println();
 
     StdOut.println("Sort by amount");
     Arrays.sort(a, new Transaction.HowMuchOrder());
-    for (int i = 0; i < a.length; i++)
-      StdOut.println(a[i]);
+    for (int i = 0; i < a.length; i++) StdOut.println(a[i]);
     StdOut.println();
   }
-
 }
 
-
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

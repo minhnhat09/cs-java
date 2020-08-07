@@ -13,4 +13,3 @@ public abstract class User {
 
   public abstract void receive(String msg);
 }
-

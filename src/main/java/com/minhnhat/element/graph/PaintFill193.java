@@ -7,7 +7,8 @@ import java.util.Queue;
 
 public class PaintFill193 {
 
-  private static void markBoudaryRegion(int i, int j, List<List<CharsetEncoder>> board, List<List<Boolean>> visited) {
+  private static void markBoudaryRegion(
+      int i, int j, List<List<CharsetEncoder>> board, List<List<Boolean>> visited) {
     Queue<Coordinate> q = new LinkedList<>();
     q.add(new Coordinate(i, j));
     visited.get(i).set(j, true);

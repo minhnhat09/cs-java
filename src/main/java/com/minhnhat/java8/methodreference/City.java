@@ -1,10 +1,9 @@
 package com.minhnhat.java8.methodreference;
 
 public class City {
-  private String name ;
+  private String name;
 
-  public City() {
-  }
+  public City() {}
 
   public City(String name) {
     this.name = name;

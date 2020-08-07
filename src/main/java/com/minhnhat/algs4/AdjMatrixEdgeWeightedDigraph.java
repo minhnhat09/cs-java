@@ -1,36 +1,32 @@
-/******************************************************************************
- *  Compilation:  javac AdjMatrixEdgeWeightedDigraph.java
- *  Execution:    java AdjMatrixEdgeWeightedDigraph V E
- *  Dependencies: StdOut.java
+/**
+ * **************************************************************************** Compilation: javac
+ * AdjMatrixEdgeWeightedDigraph.java Execution: java AdjMatrixEdgeWeightedDigraph V E Dependencies:
+ * StdOut.java
  *
- *  An edge-weighted digraph, implemented using an adjacency matrix.
- *  Parallel edges are disallowed; self-loops are allowed.
+ * <p>An edge-weighted digraph, implemented using an adjacency matrix. Parallel edges are
+ * disallowed; self-loops are allowed.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * The {@code AdjMatrixEdgeWeightedDigraph} class represents a edge-weighted
- * digraph of vertices named 0 through <em>V</em> - 1, where each
- * directed edge is of type {@link DirectedEdge} and has a real-valued weight.
- * It supports the following two primary operations: add a directed edge
- * to the digraph and iterate over all of edges incident from a given vertex.
- * It also provides
- * methods for returning the number of vertices <em>V</em> and the number
- * of edges <em>E</em>. Parallel edges are disallowed; self-loops are permitted.
- * <p>
- * This implementation uses an adjacency-matrix representation.
- * All operations take constant time (in the worst case) except
- * iterating over the edges incident from a given vertex, which takes
+ * The {@code AdjMatrixEdgeWeightedDigraph} class represents a edge-weighted digraph of vertices
+ * named 0 through <em>V</em> - 1, where each directed edge is of type {@link DirectedEdge} and has
+ * a real-valued weight. It supports the following two primary operations: add a directed edge to
+ * the digraph and iterate over all of edges incident from a given vertex. It also provides methods
+ * for returning the number of vertices <em>V</em> and the number of edges <em>E</em>. Parallel
+ * edges are disallowed; self-loops are permitted.
+ *
+ * <p>This implementation uses an adjacency-matrix representation. All operations take constant time
+ * (in the worst case) except iterating over the edges incident from a given vertex, which takes
  * time proportional to <em>V</em>.
- * <p>
- * For additional documentation,
- * see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
- * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ * <p>For additional documentation, see <a href="https://algs4.cs.princeton.edu/44sp">Section
+ * 4.4</a> of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne
@@ -96,8 +92,8 @@ public class AdjMatrixEdgeWeightedDigraph {
   }
 
   /**
-   * Adds the directed edge {@code e} to the edge-weighted digraph (if there
-   * is not already an edge with the same endpoints).
+   * Adds the directed edge {@code e} to the edge-weighted digraph (if there is not already an edge
+   * with the same endpoints).
    *
    * @param e the edge
    */
@@ -158,11 +154,11 @@ public class AdjMatrixEdgeWeightedDigraph {
   }
 
   /**
-   * Returns a string representation of the edge-weighted digraph. This method takes
-   * time proportional to <em>V</em><sup>2</sup>.
+   * Returns a string representation of the edge-weighted digraph. This method takes time
+   * proportional to <em>V</em><sup>2</sup>.
    *
-   * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
-   * followed by the <em>V</em> adjacency lists of edges
+   * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>, followed
+   *     by the <em>V</em> adjacency lists of edges
    */
   public String toString() {
     StringBuilder s = new StringBuilder();
@@ -183,7 +179,6 @@ public class AdjMatrixEdgeWeightedDigraph {
       throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
   }
 
-
   /**
    * Unit tests the {@code AdjMatrixEdgeWeightedDigraph} data type.
    *
@@ -195,29 +190,26 @@ public class AdjMatrixEdgeWeightedDigraph {
     AdjMatrixEdgeWeightedDigraph G = new AdjMatrixEdgeWeightedDigraph(V, E);
     StdOut.println(G);
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

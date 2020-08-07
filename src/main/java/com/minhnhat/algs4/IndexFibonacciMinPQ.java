@@ -1,11 +1,11 @@
-/******************************************************************************
- *  Compilation: javac IndexFibonacciMinPQ.java
- *  Execution:
+/**
+ * **************************************************************************** Compilation: javac
+ * IndexFibonacciMinPQ.java Execution:
  *
- *  An index Fibonacci heap.
+ * <p>An index Fibonacci heap.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Comparator;
@@ -35,22 +35,23 @@ import java.util.NoSuchElementException;
  *  @author Tristan Claverie
  */
 public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
-  private Node<Key>[] nodes;      //Array of Nodes in the heap
-  private Node<Key> head;        //Head of the circular root list
-  private Node<Key> min;        //Minimum Node in the heap
-  private int size;          //Number of keys in the heap
-  private int n;            //Maximum number of elements in the heap
-  private final Comparator<Key> comp; //Comparator over the keys
-  private HashMap<Integer, Node<Key>> table = new HashMap<Integer, Node<Key>>(); //Used for the consolidate operation
+  private Node<Key>[] nodes; // Array of Nodes in the heap
+  private Node<Key> head; // Head of the circular root list
+  private Node<Key> min; // Minimum Node in the heap
+  private int size; // Number of keys in the heap
+  private int n; // Maximum number of elements in the heap
+  private final Comparator<Key> comp; // Comparator over the keys
+  private HashMap<Integer, Node<Key>> table =
+      new HashMap<Integer, Node<Key>>(); // Used for the consolidate operation
 
-  //Represents a Node of a tree
+  // Represents a Node of a tree
   private class Node<Key> {
-    Key key;            //Key of the Node
-    int order;            //The order of the tree rooted by this Node
-    int index;            //Index associated with the key
-    Node<Key> prev, next;      //siblings of the Node
-    Node<Key> parent, child;    //parent and child of this Node
-    boolean mark;          //Indicates if this Node already lost a child
+    Key key; // Key of the Node
+    int order; // The order of the tree rooted by this Node
+    int index; // Index associated with the key
+    Node<Key> prev, next; // siblings of the Node
+    Node<Key> parent, child; // parent and child of this Node
+    boolean mark; // Indicates if this Node already lost a child
   }
 
   /**
@@ -61,7 +62,8 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
    * @throws java.lang.IllegalArgumentException if {@code N < 0}
    */
   public IndexFibonacciMinPQ(int N) {
-    if (N < 0) throw new IllegalArgumentException("Cannot create a priority queue of negative size");
+    if (N < 0)
+      throw new IllegalArgumentException("Cannot create a priority queue of negative size");
     n = N;
     nodes = (Node<Key>[]) new Node[n];
     comp = new MyComparator();
@@ -76,58 +78,51 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
    * @throws java.lang.IllegalArgumentException if {@code N < 0}
    */
   public IndexFibonacciMinPQ(Comparator<Key> C, int N) {
-    if (N < 0) throw new IllegalArgumentException("Cannot create a priority queue of negative size");
+    if (N < 0)
+      throw new IllegalArgumentException("Cannot create a priority queue of negative size");
     n = N;
     nodes = (Node<Key>[]) new Node[n];
     comp = C;
   }
 
   /**
-   * Whether the priority queue is empty
-   * Worst case is O(1)
+   * Whether the priority queue is empty Worst case is O(1)
    *
    * @return true if the priority queue is empty, false if not
    */
-
   public boolean isEmpty() {
     return size == 0;
   }
 
   /**
-   * Does the priority queue contains the index i ?
-   * Worst case is O(1)
+   * Does the priority queue contains the index i ? Worst case is O(1)
    *
    * @param i an index
    * @return true if i is on the priority queue, false if not
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
    */
-
   public boolean contains(int i) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     else return nodes[i] != null;
   }
 
   /**
-   * Number of elements currently on the priority queue
-   * Worst case is O(1)
+   * Number of elements currently on the priority queue Worst case is O(1)
    *
    * @return the number of elements on the priority queue
    */
-
   public int size() {
     return size;
   }
 
   /**
-   * Associates a key with an index
-   * Worst case is O(1)
+   * Associates a key with an index Worst case is O(1)
    *
-   * @param i   an index
+   * @param i an index
    * @param key a Key associated with i
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
    * @throws java.lang.IllegalArgumentException if the index is already in the queue
    */
-
   public void insert(int i, Key key) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     if (contains(i)) throw new IllegalArgumentException("Specified index is already in the queue");
@@ -142,52 +137,46 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   }
 
   /**
-   * Get the index associated with the minimum key
-   * Worst case is O(1)
+   * Get the index associated with the minimum key Worst case is O(1)
    *
    * @return the index associated with the minimum key
    * @throws java.util.NoSuchElementException if the priority queue is empty
    */
-
   public int minIndex() {
     if (isEmpty()) throw new NoSuchElementException("Priority queue is empty");
     return min.index;
   }
 
   /**
-   * Get the minimum key currently in the queue
-   * Worst case is O(1)
+   * Get the minimum key currently in the queue Worst case is O(1)
    *
    * @return the minimum key currently in the priority queue
    * @throws java.util.NoSuchElementException if the priority queue is empty
    */
-
   public Key minKey() {
     if (isEmpty()) throw new NoSuchElementException("Priority queue is empty");
     return min.key;
   }
 
   /**
-   * Delete the minimum key
-   * Worst case is O(log(n)) (amortized)
+   * Delete the minimum key Worst case is O(log(n)) (amortized)
    *
    * @return the index associated with the minimum key
    * @throws java.util.NoSuchElementException if the priority queue is empty
    */
-
   public int delMin() {
     if (isEmpty()) throw new NoSuchElementException("Priority queue is empty");
     head = cut(min, head);
     Node<Key> x = min.child;
     int index = min.index;
-    min.key = null;          //For garbage collection
+    min.key = null; // For garbage collection
     if (x != null) {
       do {
         x.parent = null;
         x = x.next;
       } while (x != min.child);
       head = meld(head, x);
-      min.child = null;      //For garbage collection
+      min.child = null; // For garbage collection
     }
     size--;
     if (!isEmpty()) consolidate();
@@ -197,15 +186,13 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   }
 
   /**
-   * Get the key associated with index i
-   * Worst case is O(1)
+   * Get the key associated with index i Worst case is O(1)
    *
    * @param i an index
    * @return the key associated with index i
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
-   * @throws java.util.NoSuchElementException   if the index is not in the queue
+   * @throws java.util.NoSuchElementException if the index is not in the queue
    */
-
   public Key keyOf(int i) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     if (!contains(i)) throw new NoSuchElementException("Specified index is not in the queue");
@@ -213,16 +200,14 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   }
 
   /**
-   * Changes the key associated with index i to the given key
-   * If the given key is greater, Worst case is O(log(n))
-   * If the given key is lower, Worst case is O(1) (amortized)
+   * Changes the key associated with index i to the given key If the given key is greater, Worst
+   * case is O(log(n)) If the given key is lower, Worst case is O(1) (amortized)
    *
-   * @param i   an index
+   * @param i an index
    * @param key the key to associate with i
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
-   * @throws java.util.NoSuchElementException   if the index has no key associated with
+   * @throws java.util.NoSuchElementException if the index has no key associated with
    */
-
   public void changeKey(int i, Key key) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     if (!contains(i)) throw new NoSuchElementException("Specified index is not in the queue");
@@ -231,16 +216,14 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   }
 
   /**
-   * Decreases the key associated with index i to the given key
-   * Worst case is O(1) (amortized).
+   * Decreases the key associated with index i to the given key Worst case is O(1) (amortized).
    *
-   * @param i   an index
+   * @param i an index
    * @param key the key to associate with i
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
-   * @throws java.util.NoSuchElementException   if the index has no key associated with
+   * @throws java.util.NoSuchElementException if the index has no key associated with
    * @throws java.lang.IllegalArgumentException if the given key is greater than the current key
    */
-
   public void decreaseKey(int i, Key key) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     if (!contains(i)) throw new NoSuchElementException("Specified index is not in the queue");
@@ -255,16 +238,14 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   }
 
   /**
-   * Increases the key associated with index i to the given key
-   * Worst case is O(log(n))
+   * Increases the key associated with index i to the given key Worst case is O(log(n))
    *
-   * @param i   an index
+   * @param i an index
    * @param key the key to associate with i
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
-   * @throws java.util.NoSuchElementException   if the index has no key associated with
+   * @throws java.util.NoSuchElementException if the index has no key associated with
    * @throws java.lang.IllegalArgumentException if the given key is lower than the current key
    */
-
   public void increaseKey(int i, Key key) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     if (!contains(i)) throw new NoSuchElementException("Specified index is not in the queue");
@@ -275,26 +256,24 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   }
 
   /**
-   * Deletes the key associated the given index
-   * Worst case is O(log(n)) (amortized)
+   * Deletes the key associated the given index Worst case is O(log(n)) (amortized)
    *
    * @param i an index
    * @throws java.lang.IllegalArgumentException if the specified index is invalid
-   * @throws java.util.NoSuchElementException   if the given index has no key associated with
+   * @throws java.util.NoSuchElementException if the given index has no key associated with
    */
-
   public void delete(int i) {
     if (i < 0 || i >= n) throw new IllegalArgumentException();
     if (!contains(i)) throw new NoSuchElementException("Specified index is not in the queue");
     Node<Key> x = nodes[i];
-    x.key = null;        //For garbage collection
+    x.key = null; // For garbage collection
     if (x.parent != null) {
       cut(i);
     }
     head = cut(x, head);
     if (x.child != null) {
       Node<Key> child = x.child;
-      x.child = null;      //For garbage collection
+      x.child = null; // For garbage collection
       x = child;
       do {
         child.parent = null;
@@ -308,30 +287,31 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     size--;
   }
 
-  /*************************************
-   * General helper functions
-   ************************************/
+  /**
+   * *********************************** General helper functions **********************************
+   */
 
-  //Compares two keys
+  // Compares two keys
   private boolean greater(Key n, Key m) {
     if (n == null) return false;
     if (m == null) return true;
     return comp.compare(n, m) > 0;
   }
 
-  //Assuming root1 holds a greater key than root2, root2 becomes the new root
+  // Assuming root1 holds a greater key than root2, root2 becomes the new root
   private void link(Node<Key> root1, Node<Key> root2) {
     root1.parent = root2;
     root2.child = insert(root1, root2.child);
     root2.order++;
   }
 
-  /*************************************
-   * Function for decreasing a key
-   ************************************/
+  /**
+   * *********************************** Function for decreasing a key
+   * **********************************
+   */
 
-  //Removes a Node from its parent's child list and insert it in the root list
-  //If the parent Node already lost a child, reshapes the heap accordingly
+  // Removes a Node from its parent's child list and insert it in the root list
+  // If the parent Node already lost a child, reshapes the heap accordingly
   private void cut(int i) {
     Node<Key> x = nodes[i];
     Node<Key> parent = x.parent;
@@ -345,12 +325,13 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     }
   }
 
-  /*************************************
-   * Function for consolidating all trees in the root list
-   ************************************/
+  /**
+   * *********************************** Function for consolidating all trees in the root list
+   * **********************************
+   */
 
-  //Coalesces the roots, thus reshapes the heap
-  //Caching a HashMap improves greatly performances
+  // Coalesces the roots, thus reshapes the heap
+  // Caching a HashMap improves greatly performances
   private void consolidate() {
     table.clear();
     Node<Key> x = head;
@@ -381,11 +362,12 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     }
   }
 
-  /*************************************
-   * General helper functions for manipulating circular lists
-   ************************************/
+  /**
+   * *********************************** General helper functions for manipulating circular lists
+   * **********************************
+   */
 
-  //Inserts a Node in a circular list containing head, returns a new head
+  // Inserts a Node in a circular list containing head, returns a new head
   private Node<Key> insert(Node<Key> x, Node<Key> head) {
     if (head == null) {
       x.prev = x;
@@ -399,7 +381,7 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     return x;
   }
 
-  //Removes a tree from the list defined by the head pointer
+  // Removes a tree from the list defined by the head pointer
   private Node<Key> cut(Node<Key> x, Node<Key> head) {
     if (x.next == x) {
       x.next = null;
@@ -416,7 +398,7 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     }
   }
 
-  //Merges two lists together.
+  // Merges two lists together.
   private Node<Key> meld(Node<Key> x, Node<Key> y) {
     if (x == null) return y;
     if (y == null) return x;
@@ -427,20 +409,15 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
     return x;
   }
 
-  /*************************************
-   * Iterator
-   ************************************/
+  /** *********************************** Iterator ********************************** */
 
   /**
-   * Get an Iterator over the indexes in the priority queue in ascending order
-   * The Iterator does not implement the remove() method
-   * iterator() : Worst case is O(n)
-   * next() : 	Worst case is O(log(n)) (amortized)
-   * hasNext() : 	Worst case is O(1)
+   * Get an Iterator over the indexes in the priority queue in ascending order The Iterator does not
+   * implement the remove() method iterator() : Worst case is O(n) next() : Worst case is O(log(n))
+   * (amortized) hasNext() : Worst case is O(1)
    *
    * @return an Iterator over the indexes in the priority queue in ascending order
    */
-
   public Iterator<Integer> iterator() {
     return new MyIterator();
   }
@@ -448,8 +425,7 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
   private class MyIterator implements Iterator<Integer> {
     private IndexFibonacciMinPQ<Key> copy;
 
-
-    //Constructor takes linear time
+    // Constructor takes linear time
     public MyIterator() {
       copy = new IndexFibonacciMinPQ<Key>(comp, n);
       for (Node<Key> x : nodes) {
@@ -465,47 +441,42 @@ public class IndexFibonacciMinPQ<Key> implements Iterable<Integer> {
       return !copy.isEmpty();
     }
 
-    //Takes amortized logarithmic time
+    // Takes amortized logarithmic time
     public Integer next() {
       if (!hasNext()) throw new NoSuchElementException();
       return copy.delMin();
     }
   }
 
-  /***************************
-   * Comparator
-   **************************/
+  /** ************************* Comparator ************************ */
 
-  //default Comparator
+  // default Comparator
   private class MyComparator implements Comparator<Key> {
     @Override
     public int compare(Key key1, Key key2) {
       return ((Comparable<Key>) key1).compareTo(key2);
     }
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

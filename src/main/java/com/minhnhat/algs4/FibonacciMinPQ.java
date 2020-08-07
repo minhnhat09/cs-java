@@ -1,11 +1,11 @@
-/******************************************************************************
- *  Compilation: javac FibonacciMinPQ.java
- *  Execution:
+/**
+ * **************************************************************************** Compilation: javac
+ * FibonacciMinPQ.java Execution:
  *
- *  A Fibonacci heap.
+ * <p>A Fibonacci heap.
  *
- ******************************************************************************/
-
+ * <p>****************************************************************************
+ */
 package com.minhnhat.algs4;
 
 import java.util.Comparator;
@@ -30,23 +30,23 @@ import java.util.NoSuchElementException;
  *  @author Tristan Claverie
  */
 public class FibonacciMinPQ<Key> implements Iterable<Key> {
-  private Node head;          //Head of the circular root list
-  private Node min;          //Minimum Node of the root list
-  private int size;          //Number of keys in the heap
-  private final Comparator<Key> comp;  //Comparator over the keys
-  private HashMap<Integer, Node> table = new HashMap<Integer, Node>(); //Used for the consolidate operation
+  private Node head; // Head of the circular root list
+  private Node min; // Minimum Node of the root list
+  private int size; // Number of keys in the heap
+  private final Comparator<Key> comp; // Comparator over the keys
+  private HashMap<Integer, Node> table =
+      new HashMap<Integer, Node>(); // Used for the consolidate operation
 
-  //Represents a Node of a tree
+  // Represents a Node of a tree
   private class Node {
-    Key key;            //Key of this Node
-    int order;            //Order of the tree rooted by this Node
-    Node prev, next;        //Siblings of this Node
-    Node child;            //Child of this Node
+    Key key; // Key of this Node
+    int order; // Order of the tree rooted by this Node
+    Node prev, next; // Siblings of this Node
+    Node child; // Child of this Node
   }
 
   /**
-   * Initializes an empty priority queue
-   * Worst case is O(1)
+   * Initializes an empty priority queue Worst case is O(1)
    *
    * @param C a Comparator over the Keys
    */
@@ -54,17 +54,13 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
     comp = C;
   }
 
-  /**
-   * Initializes an empty priority queue
-   * Worst case is O(1)
-   */
+  /** Initializes an empty priority queue Worst case is O(1) */
   public FibonacciMinPQ() {
     comp = new MyComparator();
   }
 
   /**
-   * Initializes a priority queue with given keys
-   * Worst case is O(n)
+   * Initializes a priority queue with given keys Worst case is O(n)
    *
    * @param a an array of keys
    */
@@ -74,8 +70,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Initializes a priority queue with given keys
-   * Worst case is O(n)
+   * Initializes a priority queue with given keys Worst case is O(n)
    *
    * @param C a comparator over the keys
    * @param a an array of keys
@@ -86,8 +81,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Whether the priority queue is empty
-   * Worst case is O(1)
+   * Whether the priority queue is empty Worst case is O(1)
    *
    * @return true if the priority queue is empty, false if not
    */
@@ -96,8 +90,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Number of elements currently on the priority queue
-   * Worst case is O(1)
+   * Number of elements currently on the priority queue Worst case is O(1)
    *
    * @return the number of elements on the priority queue
    */
@@ -106,8 +99,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Insert a key in the queue
-   * Worst case is O(1)
+   * Insert a key in the queue Worst case is O(1)
    *
    * @param key a Key
    */
@@ -121,8 +113,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Gets the minimum key currently in the queue
-   * Worst case is O(1)
+   * Gets the minimum key currently in the queue Worst case is O(1)
    *
    * @return the minimum key currently in the priority queue
    * @throws java.util.NoSuchElementException if the priority queue is empty
@@ -133,8 +124,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Deletes the minimum key
-   * Worst case is O(log(n)) (amortized)
+   * Deletes the minimum key Worst case is O(log(n)) (amortized)
    *
    * @return the minimum key
    * @throws java.util.NoSuchElementException if the priority queue is empty
@@ -156,9 +146,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   }
 
   /**
-   * Merges two heaps together
-   * This operation is destructive
-   * Worst case is O(1)
+   * Merges two heaps together This operation is destructive Worst case is O(1)
    *
    * @param that a Fibonacci heap
    * @return the union of the two heaps
@@ -170,28 +158,29 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
     return this;
   }
 
-  /*************************************
-   * General helper functions
-   ************************************/
+  /**
+   * *********************************** General helper functions **********************************
+   */
 
-  //Compares two keys
+  // Compares two keys
   private boolean greater(Key n, Key m) {
     if (n == null) return false;
     if (m == null) return true;
     return comp.compare(n, m) > 0;
   }
 
-  //Assuming root1 holds a greater key than root2, root2 becomes the new root
+  // Assuming root1 holds a greater key than root2, root2 becomes the new root
   private void link(Node root1, Node root2) {
     root2.child = insert(root1, root2.child);
     root2.order++;
   }
 
-  /*************************************
-   * Function for consolidating all trees in the root list
-   ************************************/
+  /**
+   * *********************************** Function for consolidating all trees in the root list
+   * **********************************
+   */
 
-  //Coalesce the roots, thus reshapes the tree
+  // Coalesce the roots, thus reshapes the tree
   private void consolidate() {
     table.clear();
     Node x = head;
@@ -225,11 +214,12 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
     }
   }
 
-  /*************************************
-   * General helper functions for manipulating circular lists
-   ************************************/
+  /**
+   * *********************************** General helper functions for manipulating circular lists
+   * **********************************
+   */
 
-  //Inserts a Node in a circular list containing head, returns a new head
+  // Inserts a Node in a circular list containing head, returns a new head
   private Node insert(Node x, Node head) {
     if (head == null) {
       x.prev = x;
@@ -243,7 +233,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
     return x;
   }
 
-  //Removes a tree from the list defined by the head pointer
+  // Removes a tree from the list defined by the head pointer
   private Node cut(Node x, Node head) {
     if (x.next == x) {
       x.next = null;
@@ -260,7 +250,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
     }
   }
 
-  //Merges two root lists together
+  // Merges two root lists together
   private Node meld(Node x, Node y) {
     if (x == null) return y;
     if (y == null) return x;
@@ -271,20 +261,15 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
     return x;
   }
 
-  /*************************************
-   * Iterator
-   ************************************/
+  /** *********************************** Iterator ********************************** */
 
   /**
-   * Gets an Iterator over the Keys in the priority queue in ascending order
-   * The Iterator does not implement the remove() method
-   * iterator() : Worst case is O(n)
-   * next() : 	Worst case is O(log(n)) (amortized)
-   * hasNext() : 	Worst case is O(1)
+   * Gets an Iterator over the Keys in the priority queue in ascending order The Iterator does not
+   * implement the remove() method iterator() : Worst case is O(n) next() : Worst case is O(log(n))
+   * (amortized) hasNext() : Worst case is O(1)
    *
    * @return an Iterator over the Keys in the priority queue in ascending order
    */
-
   public Iterator<Key> iterator() {
     return new MyIterator();
   }
@@ -292,8 +277,7 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
   private class MyIterator implements Iterator<Key> {
     private FibonacciMinPQ<Key> copy;
 
-
-    //Constructor takes linear time
+    // Constructor takes linear time
     public MyIterator() {
       copy = new FibonacciMinPQ<Key>(comp);
       insertAll(head);
@@ -317,47 +301,42 @@ public class FibonacciMinPQ<Key> implements Iterable<Key> {
       return !copy.isEmpty();
     }
 
-    //Takes amortized logarithmic time
+    // Takes amortized logarithmic time
     public Key next() {
       if (!hasNext()) throw new NoSuchElementException();
       return copy.delMin();
     }
   }
 
-  /*************************************
-   * Comparator
-   ************************************/
+  /** *********************************** Comparator ********************************** */
 
-  //default Comparator
+  // default Comparator
   private class MyComparator implements Comparator<Key> {
     @Override
     public int compare(Key key1, Key key2) {
       return ((Comparable<Key>) key1).compareTo(key2);
     }
   }
-
 }
 
-/******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+/**
+ * **************************************************************************** Copyright 2002-2018,
+ * Robert Sedgewick and Kevin Wayne.
  *
- *  This file is part of algs4.jar, which accompanies the textbook
+ * <p>This file is part of algs4.jar, which accompanies the textbook
  *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
+ * <p>Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley Professional,
+ * 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
  *
+ * <p>algs4.jar is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * <p>algs4.jar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ * <p>You should have received a copy of the GNU General Public License along with algs4.jar. If
+ * not, see http://www.gnu.org/licenses.
+ * ****************************************************************************
+ */

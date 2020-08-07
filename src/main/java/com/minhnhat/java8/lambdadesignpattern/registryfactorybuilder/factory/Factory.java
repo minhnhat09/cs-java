@@ -12,9 +12,7 @@ public interface Factory<T> extends Supplier<T> {
   }
 
   default List<T> create5() {
-    return IntStream.range(0, 5)
-            .mapToObj(index -> newInstance())
-            .collect(Collectors.toList());
+    return IntStream.range(0, 5).mapToObj(index -> newInstance()).collect(Collectors.toList());
   }
 
   static <T> Factory<T> createFactory(Supplier<T> supplier) {
@@ -25,5 +23,4 @@ public interface Factory<T> extends Supplier<T> {
   static <T, P> Factory<T> createFactory(Function<P, T> constructor, P color) {
     return () -> constructor.apply(color);
   }
-
 }

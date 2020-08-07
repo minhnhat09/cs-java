@@ -33,15 +33,12 @@ public class FindModeinBinarySearchTree501 {
   public static int[] findMode(TreeNode root) {
     Map<Integer, Integer> map = new HashMap<>();
     map = countNode(root, map);
-    if (map.isEmpty())
-      return new int[0];
-    Integer max = map.values().stream()
-            .max(Comparator.naturalOrder()).get();
+    if (map.isEmpty()) return new int[0];
+    Integer max = map.values().stream().max(Comparator.naturalOrder()).get();
     return map.entrySet().stream()
-            .filter(e -> e.getValue() == max)
-            .map(Map.Entry::getKey)
-            .mapToInt(Integer::intValue)
-            .toArray();
+        .filter(e -> e.getValue() == max)
+        .map(Map.Entry::getKey)
+        .mapToInt(Integer::intValue)
+        .toArray();
   }
-
 }

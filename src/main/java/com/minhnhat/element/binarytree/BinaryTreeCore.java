@@ -19,11 +19,10 @@ public class BinaryTreeCore {
   }
 
   public static void postOrderTraversal(BinaryTreeNode<Integer> root) {
-    if(root != null){
+    if (root != null) {
       postOrderTraversal(root.left);
       postOrderTraversal(root.right);
       System.out.println(root.data);
     }
   }
-
 }

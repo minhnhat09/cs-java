@@ -1,3 +1,4 @@
+package com.minhnhat.element.stackqueue;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -10,7 +11,7 @@ public class Core {
       nodes.addFirst(head.val);
       head = head.next;
     }
-    while(!nodes.isEmpty()){
+    while (!nodes.isEmpty()) {
       System.out.println(nodes.poll());
     }
   }

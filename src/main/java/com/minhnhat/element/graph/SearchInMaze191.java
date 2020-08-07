@@ -6,8 +6,7 @@ import java.util.Objects;
 
 public class SearchInMaze191 {
 
-  public static List<Coordinate> searchMaze(List<List<Color>> maze,
-                                            Coordinate s, Coordinate e) {
+  public static List<Coordinate> searchMaze(List<List<Color>> maze, Coordinate s, Coordinate e) {
     List<Coordinate> path = new ArrayList<>();
     List<Color> colors = maze.get(s.x);
     colors.set(s.y, Color.BLACK);
@@ -18,7 +17,8 @@ public class SearchInMaze191 {
     return path;
   }
 
-  private static boolean searchMazeHelper(List<List<Color>> maze, Coordinate cur, Coordinate e, List<Coordinate> path) {
+  private static boolean searchMazeHelper(
+      List<List<Color>> maze, Coordinate cur, Coordinate e, List<Coordinate> path) {
     if (cur.equals(e)) {
       return true;
     }
@@ -38,10 +38,17 @@ public class SearchInMaze191 {
   }
 
   private static boolean isFeasible(Coordinate cur, List<List<Color>> maze) {
-    return cur.x >= 0 && cur.x < maze.size() && cur.y >= 0 && cur.y < maze.get(cur.x).size() && maze.get(cur.x).get(cur.y) == Color.WHITE;
+    return cur.x >= 0
+        && cur.x < maze.size()
+        && cur.y >= 0
+        && cur.y < maze.get(cur.x).size()
+        && maze.get(cur.x).get(cur.y) == Color.WHITE;
   }
 
-  public enum Color {WHITE, BLACK}
+  public enum Color {
+    WHITE,
+    BLACK
+  }
 
   public static class Coordinate {
     int x, y;
@@ -56,8 +63,7 @@ public class SearchInMaze191 {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       Coordinate that = (Coordinate) o;
-      return x == that.x &&
-              y == that.y;
+      return x == that.x && y == that.y;
     }
 
     @Override

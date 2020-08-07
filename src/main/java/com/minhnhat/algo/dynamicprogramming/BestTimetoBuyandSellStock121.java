@@ -18,11 +18,11 @@ public class BestTimetoBuyandSellStock121 {
   }
 
   public static void main(String[] args) {
-    int[] ints = new int[]{7, 1, 5, 3, 6};
-    int[] ints1 = new int[]{8, 5, 1};
-    int[] ints2 = new int[]{1, 8, 5};
-    int[] ints3 = new int[]{5, 8, 1};
-    int[] ints4 = new int[]{};
+    int[] ints = new int[] {7, 1, 5, 3, 6};
+    int[] ints1 = new int[] {8, 5, 1};
+    int[] ints2 = new int[] {1, 8, 5};
+    int[] ints3 = new int[] {5, 8, 1};
+    int[] ints4 = new int[] {};
     System.out.println(maxProfit(ints));
     /*System.out.println(maxProfit(ints));
     System.out.println(maxProfit(ints1));
@@ -39,7 +39,7 @@ public class BestTimetoBuyandSellStock121 {
     count++;
     if (prices.length > 0) {
       int[] subPrices = subArray(prices, 1, prices.length - 1);
-      System.out.println("First value " + prices[0] + " rest " +Arrays.toString(subPrices));
+      System.out.println("First value " + prices[0] + " rest " + Arrays.toString(subPrices));
       if (canBuy) {
         // System.out.println("can buy");
         int buy = -1 * prices[0] + buyOrSell(!canBuy, subPrices);

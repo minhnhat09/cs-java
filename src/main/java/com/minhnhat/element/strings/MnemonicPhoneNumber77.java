@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MnemonicPhoneNumber77 {
-  private static final String[] MAPPING = {"0", "1", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
+  private static final String[] MAPPING = {
+    "0", "1", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"
+  };
 
   public static List<String> phoneMnemonic(String phoneNumber) {
     char[] partialMnemonic = new char[phoneNumber.length()];
@@ -13,7 +15,8 @@ public class MnemonicPhoneNumber77 {
     return mnemonics;
   }
 
-  private static void phoneMnemonicHelper(String phoneNumber, int digit, char[] partialMnemonic, List<String> mnemonics) {
+  private static void phoneMnemonicHelper(
+      String phoneNumber, int digit, char[] partialMnemonic, List<String> mnemonics) {
     if (digit == phoneNumber.length()) {
       mnemonics.add(new String(partialMnemonic));
     } else {
@@ -29,4 +32,3 @@ public class MnemonicPhoneNumber77 {
     System.out.println(phoneMnemonic("227"));
   }
 }
-

@@ -18,9 +18,7 @@ public class DesignHashSet705 {
 class MyHashSet {
   public List<Integer> nodes;
 
-  /**
-   * Initialize your data structure here.
-   */
+  /** Initialize your data structure here. */
   public MyHashSet() {
     this.nodes = new ArrayList<>();
   }
@@ -37,18 +35,13 @@ class MyHashSet {
     }
   }
 
-  /**
-   * Returns true if this set contains the specified element
-   */
+  /** Returns true if this set contains the specified element */
   public boolean contains(int key) {
     return this.nodes.contains(key);
   }
 
   @Override
   public String toString() {
-    return "MyHashSet{" +
-            "nodes=" + nodes +
-            '}';
+    return "MyHashSet{" + "nodes=" + nodes + '}';
   }
 }
-

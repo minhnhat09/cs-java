@@ -97,7 +97,6 @@ public class Heap {
     }
   }
 
-
   private void heapifyUp() {
     int index = size - 1;
     while (hasParent(index) && parent(index) > items[index]) {
@@ -105,45 +104,4 @@ public class Heap {
       index = getParentIndex(index);
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

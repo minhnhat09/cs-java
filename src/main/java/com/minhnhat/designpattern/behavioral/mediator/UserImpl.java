@@ -16,6 +16,4 @@ public class UserImpl extends User {
   public void receive(String msg) {
     System.out.println(this.name + ": Received Message:" + msg);
   }
-
 }
-

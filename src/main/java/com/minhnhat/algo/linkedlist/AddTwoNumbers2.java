@@ -16,9 +16,7 @@ public class AddTwoNumbers2 {
   }
 
   /**
-   * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-   * Output: 7 -> 0 -> 8
-   * Explanation: 342 + 465 = 807.
+   * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4) Output: 7 -> 0 -> 8 Explanation: 342 + 465 = 807.
    *
    * @param n
    * @return
@@ -43,7 +41,6 @@ public class AddTwoNumbers2 {
     System.out.println(bi1);
     return numberToListNodeReverse(listNodeToNumberReverse(l1).add(listNodeToNumberReverse(l2)));
   }
-
 
   public static void main(String[] args) {
 
