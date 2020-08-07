@@ -10,31 +10,27 @@ import java.util.zip.GZIPInputStream;
 
 public class ReadingBytes {
   public static void main(String[] args) {
-
     String fileName = "files/ints.bin.gz";
-
     try {
       Path path = Paths.get(fileName);
       long size = Files.size(path);
-      System.out.println(path + " size: " + size);
+      System.out.println(path + " " + size);
     } catch (IOException e) {
     }
-
     try (InputStream is = new FileInputStream(new File(fileName));
-         GZIPInputStream gzis = new GZIPInputStream(is);
-         DataInputStream dis = new DataInputStream(gzis);) {
+         GZIPInputStream gzipInputStream = new GZIPInputStream(is);
+         DataInputStream dataInputStream = new DataInputStream(gzipInputStream);) {
 
-      List<Integer> ints = new ArrayList<>();
+      List<Integer> integers = new ArrayList<>();
       try {
         while (true) {
-          ints.add(dis.readInt());
+          integers.add(dataInputStream.readInt());
         }
       } catch (EOFException e) {
       }
-      System.out.println("ints: " + ints.size());
-
+      System.out.println("integers: " + integers.size());
     } catch (IOException e) {
+      e.printStackTrace();
     }
-
   }
 }
